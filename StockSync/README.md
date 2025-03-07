@@ -28,7 +28,7 @@ Your browser does not support the video tag.
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/yourusername/velt-examples.git
+git clone https://github.com/Studio1HQ/Velt-Examples.git
 cd velt-examples/project-9
 ```
 
