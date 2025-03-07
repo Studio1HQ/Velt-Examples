@@ -2,6 +2,11 @@
 
 A modern, real-time inventory management system with collaborative commenting features. Built with Next.js and powered by Velt for seamless team communication.
 
+<video width="100%" controls>
+  <source src="https://github.com/user-attachments/assets/3caffb48-4ecd-455d-abb6-393b3597ab86" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
 ## Tech Stack
 
 - **Framework**: Next.js 14 with TypeScript
