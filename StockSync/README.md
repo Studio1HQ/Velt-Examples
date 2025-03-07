@@ -29,7 +29,7 @@ Your browser does not support the video tag.
 
 ```bash
 git clone https://github.com/Studio1HQ/Velt-Examples.git
-cd velt-examples/project-9
+cd velt-examples/StockSync
 ```
 
 2. Install dependencies:
