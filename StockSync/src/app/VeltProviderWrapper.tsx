@@ -1,6 +1,6 @@
 'use client';
 
-import { VeltProvider } from "@veltdev/react";
+import { VeltComments, VeltProvider } from "@veltdev/react";
 
 
 export default function VeltProviderWrapper({
@@ -16,6 +16,7 @@ export default function VeltProviderWrapper({
 
     return (
         <VeltProvider apiKey={process.env.NEXT_PUBLIC_VELT_API_KEY!}>
+            <VeltComments />
             {children}
         </VeltProvider>
     );

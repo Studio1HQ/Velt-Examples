@@ -67,7 +67,7 @@ npm run dev
 │   │   ├── MetricsCard.tsx
 │   │   ├── Navigation.tsx
 │   │   ├── QuickFilters.tsx
-│   │   └── VeltClientWrapper.tsx
+│   │
 │   ├── data
 │   │   └── inventory.ts
 │   ├── types
