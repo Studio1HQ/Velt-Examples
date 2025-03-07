@@ -29,7 +29,7 @@ export default function Home() {
   useSetDocumentId('inventory-page');
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-950 via-indigo-950 to-slate-950">
+    <div className="min-h-screen bg-white dark:bg-black">
       <VeltComments />
       <Navigation />
 
@@ -37,16 +37,16 @@ export default function Home() {
         <div className="mb-8">
           <div className="flex justify-between items-start">
             <div>
-              <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-200 to-indigo-200 text-transparent bg-clip-text">
+              <h1 className="text-3xl font-bold text-black dark:text-white">
                 Inventory Dashboard
               </h1>
-              <p className="mt-2 text-blue-200/70">Real-time inventory management and team collaboration</p>
+              <p className="mt-2 text-gray-600 dark:text-gray-400">Real-time inventory management and team collaboration</p>
             </div>
             <div className="flex space-x-3">
-              <button className="px-4 py-2 rounded-lg backdrop-blur-md bg-white/10 text-blue-100 hover:bg-white/20 transition-all border border-white/10">
+              <button className="px-4 py-2 rounded-lg bg-white dark:bg-black text-black dark:text-white hover:bg-gray-100 dark:hover:bg-gray-900 transition-all border border-gray-200 dark:border-gray-800">
                 Export
               </button>
-              <button className="px-4 py-2 rounded-lg bg-gradient-to-r from-blue-500 to-indigo-500 text-white hover:from-blue-600 hover:to-indigo-600 transition-all">
+              <button className="px-4 py-2 rounded-lg bg-black dark:bg-white text-white dark:text-black hover:bg-gray-900 dark:hover:bg-gray-100 transition-all">
                 + Add Item
               </button>
             </div>

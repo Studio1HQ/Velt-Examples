@@ -2,7 +2,12 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #000000;
+  --primary: #000000;
+  --secondary: #ffffff;
+  --accent: #666666;
+  --text-primary: #000000;
+  --text-secondary: #666666;
 }
 
 @theme inline {
@@ -14,8 +19,13 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #000000;
+    --foreground: #ffffff;
+    --primary: #ffffff;
+    --secondary: #000000;
+    --accent: #999999;
+    --text-primary: #ffffff;
+    --text-secondary: #999999;
   }
 }
 

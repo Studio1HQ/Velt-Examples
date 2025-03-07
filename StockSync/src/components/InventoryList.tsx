@@ -11,40 +11,40 @@ export default function InventoryList({ inventory }: InventoryListProps) {
         <div
             id="inventory-list"
             data-velt-comment-container
-            className="rounded-xl backdrop-blur-md bg-white/10 border border-white/10 overflow-hidden"
+            className="rounded-xl bg-white dark:bg-black border border-gray-200 dark:border-gray-800 overflow-hidden"
         >
-            <div className="px-6 py-4 border-b border-white/10">
+            <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-800">
                 <div className="flex items-center justify-between">
-                    <h2 className="text-lg font-medium text-blue-100">Inventory Items</h2>
+                    <h2 className="text-lg font-medium text-black dark:text-white">Inventory Items</h2>
                     <div className="flex items-center space-x-4">
-                        <div className="text-sm text-blue-200/70">
+                        <div className="text-sm text-gray-600 dark:text-gray-400">
                             Select any item to comment
                         </div>
                         <input
                             type="text"
                             placeholder="Search inventory..."
-                            className="bg-white/5 text-blue-100 px-4 py-1 rounded-lg border border-white/10 focus:outline-none focus:border-blue-400 placeholder-blue-200/50"
+                            className="bg-gray-50 dark:bg-gray-900 text-black dark:text-white px-4 py-1 rounded-lg border border-gray-200 dark:border-gray-800 focus:outline-none focus:border-gray-400 dark:focus:border-gray-600 placeholder-gray-400 dark:placeholder-gray-500"
                         />
                     </div>
                 </div>
             </div>
 
-            <div className="divide-y divide-white/10">
+            <div className="divide-y divide-gray-200 dark:divide-gray-800">
                 {inventory.map((item) => (
                     <div
                         key={item.id}
-                        className="p-6 hover:bg-white/5 transition-colors"
+                        className="p-6 hover:bg-gray-50 dark:hover:bg-gray-900 transition-colors"
                         data-velt-comment-target={`item-${item.id}`}
                     >
                         <div className="flex items-center justify-between">
                             <div className="flex-1">
                                 <div className="flex items-center space-x-3">
-                                    <h3 className="text-lg font-medium text-blue-100">{item.name}</h3>
-                                    <span className="text-xs text-blue-200/70 bg-white/5 px-2 py-1 rounded-lg border border-white/10">
+                                    <h3 className="text-lg font-medium text-black dark:text-white">{item.name}</h3>
+                                    <span className="text-xs text-gray-600 dark:text-gray-400 bg-gray-50 dark:bg-gray-900 px-2 py-1 rounded-lg border border-gray-200 dark:border-gray-800">
                                         {item.sku}
                                     </span>
                                 </div>
-                                <div className="mt-2 grid grid-cols-2 gap-4 text-sm text-blue-200/70">
+                                <div className="mt-2 grid grid-cols-2 gap-4 text-sm text-gray-600 dark:text-gray-400">
                                     <div>Category: {item.category}</div>
                                     <div>Location: {item.location}</div>
                                     <div>Supplier: {item.supplier}</div>
@@ -54,7 +54,7 @@ export default function InventoryList({ inventory }: InventoryListProps) {
                                     {item.tags.map((tag, index) => (
                                         <span
                                             key={index}
-                                            className="text-xs px-2 py-1 rounded-full bg-blue-500/10 text-blue-300 border border-blue-500/20"
+                                            className="text-xs px-2 py-1 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 border border-gray-200 dark:border-gray-700"
                                         >
                                             {tag}
                                         </span>
@@ -62,19 +62,19 @@ export default function InventoryList({ inventory }: InventoryListProps) {
                                 </div>
                             </div>
                             <div className="text-right ml-8">
-                                <div className="text-2xl font-semibold text-blue-100">
+                                <div className="text-2xl font-semibold text-black dark:text-white">
                                     {item.quantity}
-                                    <span className="text-sm text-blue-200/70 ml-1">units</span>
+                                    <span className="text-sm text-gray-600 dark:text-gray-400 ml-1">units</span>
                                 </div>
-                                <div className="text-lg font-medium text-emerald-400 mt-1">
+                                <div className="text-lg font-medium text-black dark:text-white mt-1">
                                     ${item.price}
                                 </div>
                                 <div className={`mt-2 text-sm px-3 py-1 rounded-full inline-block border
                   ${item.status === 'In Stock'
-                                        ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20'
+                                        ? 'bg-green-50 dark:bg-green-900/20 text-green-600 dark:text-green-400 border-green-200 dark:border-green-800'
                                         : item.status === 'Low Stock'
-                                            ? 'bg-amber-500/10 text-amber-400 border-amber-500/20'
-                                            : 'bg-rose-500/10 text-rose-400 border-rose-500/20'}`}>
+                                            ? 'bg-yellow-50 dark:bg-yellow-900/20 text-yellow-600 dark:text-yellow-400 border-yellow-200 dark:border-yellow-800'
+                                            : 'bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 border-red-200 dark:border-red-800'}`}>
                                     {item.status}
                                 </div>
                             </div>

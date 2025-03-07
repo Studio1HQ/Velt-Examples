@@ -8,30 +8,30 @@ interface MetricsCardProps {
 
 export default function MetricsCard({ metrics }: MetricsCardProps) {
     return (
-        <div className="rounded-xl backdrop-blur-md bg-white/10 border border-white/10 p-6">
-            <h2 className="text-lg font-medium text-blue-100 mb-4">Inventory Metrics</h2>
+        <div className="rounded-xl bg-white dark:bg-black border border-gray-200 dark:border-gray-800 p-6">
+            <h2 className="text-lg font-medium text-black dark:text-white mb-4">Inventory Metrics</h2>
             <div className="space-y-4">
                 <div>
-                    <div className="text-sm text-blue-200/70">Total Products</div>
-                    <div className="text-2xl font-bold text-blue-100">{metrics.totalItems}</div>
+                    <div className="text-sm text-gray-600 dark:text-gray-400">Total Products</div>
+                    <div className="text-2xl font-bold text-black dark:text-white">{metrics.totalItems}</div>
                 </div>
                 <div>
-                    <div className="text-sm text-blue-200/70">Total Value</div>
-                    <div className="text-2xl font-bold text-emerald-400">
+                    <div className="text-sm text-gray-600 dark:text-gray-400">Total Value</div>
+                    <div className="text-2xl font-bold text-black dark:text-white">
                         ${metrics.totalValue.toLocaleString()}
                     </div>
                 </div>
                 <div>
-                    <div className="text-sm text-blue-200/70">Categories</div>
-                    <div className="text-2xl font-bold text-blue-400">{metrics.categories}</div>
+                    <div className="text-sm text-gray-600 dark:text-gray-400">Categories</div>
+                    <div className="text-2xl font-bold text-black dark:text-white">{metrics.categories}</div>
                 </div>
                 <div>
-                    <div className="text-sm text-blue-200/70">Low Stock Items</div>
-                    <div className="text-2xl font-bold text-amber-400">{metrics.lowStock}</div>
+                    <div className="text-sm text-gray-600 dark:text-gray-400">Low Stock Items</div>
+                    <div className="text-2xl font-bold text-black dark:text-white">{metrics.lowStock}</div>
                 </div>
                 <div>
-                    <div className="text-sm text-blue-200/70">Critical Stock</div>
-                    <div className="text-2xl font-bold text-rose-400">{metrics.criticalStock}</div>
+                    <div className="text-sm text-gray-600 dark:text-gray-400">Critical Stock</div>
+                    <div className="text-2xl font-bold text-black dark:text-white">{metrics.criticalStock}</div>
                 </div>
             </div>
         </div>
