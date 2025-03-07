@@ -1,6 +1,19 @@
 'use client';
 
-export default function Navigation() {
+interface UserData {
+    name: string;
+    photoUrl: string;
+    email: string;
+}
+
+interface NavigationProps {
+    userData: UserData | null;
+}
+
+export default function Navigation({ userData }: NavigationProps) {
+    const displayName = userData?.name || 'Loading...';
+    const avatarUrl = userData?.photoUrl || 'https://api.dicebear.com/7.x/avataaars/svg?seed=loading';
+
     return (
         <nav className="bg-white dark:bg-black border-b border-gray-200 dark:border-gray-800">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -19,10 +32,12 @@ export default function Navigation() {
                             <span className="text-gray-600 dark:text-gray-400">Online</span>
                         </div>
                         <div className="flex items-center space-x-2">
-                            <span className="text-gray-600 dark:text-gray-400">John Manager</span>
-                            <div className="w-8 h-8 rounded-full bg-gray-200 dark:bg-gray-800 flex items-center justify-center">
-                                <span className="text-black dark:text-white text-sm">JM</span>
-                            </div>
+                            <span className="text-gray-600 dark:text-gray-400">{displayName}</span>
+                            <img
+                                src={avatarUrl}
+                                alt={displayName}
+                                className="w-8 h-8 rounded-full"
+                            />
                         </div>
                     </div>
                 </div>

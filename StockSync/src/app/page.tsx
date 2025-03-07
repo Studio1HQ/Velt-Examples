@@ -6,32 +6,43 @@ import {
   VeltComments,
   VeltCommentTool,
 } from '@veltdev/react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import InventoryList from '../components/InventoryList';
 import MetricsCard from '../components/MetricsCard';
 import Navigation from '../components/Navigation';
 import QuickFilters from '../components/QuickFilters';
 import { initialInventory } from '../data/inventory';
 import { getInventoryMetrics } from '../utils/inventory';
+import { getOrCreateRandomUser } from '../utils/randomUser';
 
 export default function Home() {
   const [inventory] = useState(initialInventory);
+  const [userData, setUserData] = useState({
+    userId: 'loading',
+    name: 'Loading...',
+    email: 'loading@example.com',
+    photoUrl: 'https://api.dicebear.com/7.x/avataaars/svg?seed=loading',
+    organizationId: 'inventory-org'
+  });
   const metrics = getInventoryMetrics(inventory);
 
-  useIdentify({
-    userId: 'inventory-manager',
-    name: 'Inventory Manager',
-    email: 'manager@inventory.com',
-    photoUrl: 'https://placekitten.com/100/100',
-    organizationId: 'inventory-org',
-  });
-
+  useIdentify(userData);
   useSetDocumentId('inventory-page');
+
+  useEffect(() => {
+    const initializeUser = async () => {
+      const user = await getOrCreateRandomUser();
+      if (user) {
+        setUserData(user);
+      }
+    };
+    initializeUser();
+  }, []);
 
   return (
     <div className="min-h-screen bg-white dark:bg-black">
       <VeltComments />
-      <Navigation />
+      <Navigation userData={userData} />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="mb-8">
