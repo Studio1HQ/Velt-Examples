@@ -1,5 +1,6 @@
 'use client';
 
+import { VeltInlineCommentsSection } from '@veltdev/react';
 import { InventoryItem } from '../types/inventory';
 
 interface InventoryListProps {
@@ -8,9 +9,10 @@ interface InventoryListProps {
 
 export default function InventoryList({ inventory }: InventoryListProps) {
     return (
-        <div
+        <section
             id="inventory-list"
             data-velt-comment-container
+            data-velt-target-inline-comment-element-id="inventory-list"
             className="rounded-xl bg-white dark:bg-black border border-gray-200 dark:border-gray-800 overflow-hidden"
         >
             <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-800">
@@ -33,8 +35,9 @@ export default function InventoryList({ inventory }: InventoryListProps) {
                 {inventory.map((item) => (
                     <div
                         key={item.id}
-                        className="p-6 hover:bg-gray-50 dark:hover:bg-gray-900 transition-colors"
+                        className="p-6 hover:bg-gray-50 dark:hover:bg-gray-900 transition-colors relative"
                         data-velt-comment-target={`item-${item.id}`}
+                        data-velt-target-inline-comment-element-id={`item-${item.id}`}
                     >
                         <div className="flex items-center justify-between">
                             <div className="flex-1">
@@ -79,9 +82,14 @@ export default function InventoryList({ inventory }: InventoryListProps) {
                                 </div>
                             </div>
                         </div>
+                        <VeltInlineCommentsSection
+                            targetElementId={`item-${item.id}`}
+                            shadowDom={false}
+                            darkMode={true}
+                        />
                     </div>
                 ))}
             </div>
-        </div>
+        </section>
     );
 } 
