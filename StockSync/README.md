@@ -55,7 +55,7 @@ npm run dev
 ## Project Structure
 
 ```
-project-9/
+StockSync/
 ├── src/
 │   ├── app/                    # Next.js app directory
 │   ├── components/             # Reusable UI components
