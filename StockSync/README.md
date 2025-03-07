@@ -55,18 +55,27 @@ npm run dev
 ## Project Structure
 
 ```
-StockSync/
-├── src/
-│   ├── app/                    # Next.js app directory
-│   ├── components/             # Reusable UI components
-│   │   ├── Navigation.tsx      # Top navigation bar
-│   │   ├── MetricsCard.tsx     # Inventory metrics display
-│   │   ├── QuickFilters.tsx    # Filter buttons
-│   │   └── InventoryList.tsx   # Main inventory list
-│   ├── data/                   # Sample inventory data
-│   ├── types/                  # TypeScript interfaces
-│   └── utils/                  # Utility functions
-└── public/                     # Static assets
+── src
+│   ├── app
+│   │   ├── favicon.ico
+│   │   ├── globals.css
+│   │   ├── layout.tsx
+│   │   ├── page.tsx
+│   │   └── VeltProviderWrapper.tsx
+│   ├── components
+│   │   ├── InventoryList.tsx
+│   │   ├── MetricsCard.tsx
+│   │   ├── Navigation.tsx
+│   │   ├── QuickFilters.tsx
+│   │   └── VeltClientWrapper.tsx
+│   ├── data
+│   │   └── inventory.ts
+│   ├── types
+│   │   └── inventory.ts
+│   └── utils
+│       ├── inventory.ts
+│       └── randomUser.ts
+└── tsconfig.json
 ```
 
 ## Velt Integration

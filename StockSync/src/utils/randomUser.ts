@@ -1,11 +1,9 @@
-// Function to generate a random user from the Random User API
 export async function fetchRandomUser() {
     try {
         const response = await fetch('https://randomuser.me/api/');
         const data = await response.json();
         const user = data.results[0];
 
-        // Generate a random avatar using DiceBear
         const seed = Math.random().toString(36).substring(7);
         const styles = ['adventurer', 'adventurer-neutral', 'avataaars', 'big-ears', 'bottts', 'personas'];
         const randomStyle = styles[Math.floor(Math.random() * styles.length)];
@@ -24,7 +22,6 @@ export async function fetchRandomUser() {
     }
 }
 
-// Function to get or create random user data
 export async function getOrCreateRandomUser() {
     // Try to get existing user data from localStorage
     const storedUser = localStorage.getItem('randomUser');
