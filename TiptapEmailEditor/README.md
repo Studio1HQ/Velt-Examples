@@ -26,12 +26,12 @@ Each example is a standalone application with its own setup and configuration. F
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/YashChopra25/Velt-Examples
+   git clone https://github.com/Studio1HQ/Velt-Examples.git
    ```
 
 2. Choose an example project and navigate to its directory:
    ```bash
-   cd Tiptap\ Email\ Editor/  # for TipTap Commenting Example
+   cd TiptapEmailEditor  # for TipTap Commenting Example
    ```
 
 3. Install dependencies:
