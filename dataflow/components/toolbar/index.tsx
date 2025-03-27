@@ -102,8 +102,8 @@ export default function Toolbar() {
                 }`}
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
             />
-            <VeltSidebarButton />
-            <VeltCommentsSidebar />
+            <VeltSidebarButton darkMode={theme === "dark"} />
+            <VeltCommentsSidebar darkMode={theme === "dark"} />
           </div>
 
           {/* Dropdown Menu */}
