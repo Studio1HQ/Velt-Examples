@@ -93,30 +93,30 @@ export default function Toolbar() {
 
           {/* Dropdown Menu */}
           {isDropdownOpen && (
-            <div className="absolute right-0 mt-2 w-48 bg-black dark:bg-black bg-white border border-gray-800 rounded-lg shadow-lg py-1 z-50">
-              <div className="px-3 py-2 hover:bg-gray-800 dark:hover:bg-gray-800 hover:bg-gray-100">
+            <div className="absolute right-0 mt-2 w-48 dark:bg-black bg-white border border-gray-800 rounded-lg shadow-lg py-1 z-50">
+              <div className="px-3 py-2">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <Avatar className="h-6 w-6">
                       <AvatarFallback className="bg-pink-500 text-white">B</AvatarFallback>
                     </Avatar>
-                    <span className="text-sm text-gray-400 dark:text-gray-400 text-gray-600">Bread</span>
+                    <span className="text-sm text-gray-400 dark:text-gray-400">Bread</span>
                   </div>
                   <button className="text-red-500 text-xs px-2 py-1 rounded hover:bg-red-500/10">
                     LOGOUT
                   </button>
                 </div>
               </div>
-              <div className="px-3 py-2 hover:bg-gray-800 dark:hover:bg-gray-800 hover:bg-gray-100">
+              <div className="px-3 py-2 ">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <Avatar className="h-6 w-6">
                       <AvatarImage src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" />
                       <AvatarFallback className="bg-pink-500 text-white text-xs">🎮</AvatarFallback>
                     </Avatar>
-                    <span className="text-sm text-gray-400 dark:text-gray-400 text-gray-600">Felix</span>
+                    <span className="text-sm text-gray-400 dark:text-gray-400">Felix</span>
                   </div>
-                  <button className="text-gray-400 dark:text-gray-400 text-gray-600 text-xs px-2 py-1 rounded hover:bg-gray-700 dark:hover:bg-gray-700 hover:bg-gray-200">
+                  <button className="text-gray-400 dark:text-gray-400 text-xs px-2 py-1 rounded dark:hover:bg-gray-700 hover:bg-gray-200">
                     LOGIN
                   </button>
                 </div>
