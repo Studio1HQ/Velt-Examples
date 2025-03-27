@@ -24,7 +24,7 @@ export default function Sidebar() {
           {/* Toggle Button */}
           <button
             onClick={toggleSidebar}
-            className="p-2 rounded-lg hover:bg-gray-800 transition-all duration-200"
+            className="p-2 rounded-lg transition-all duration-200"
           >
             <svg
               stroke="currentColor"
@@ -73,7 +73,7 @@ export default function Sidebar() {
       {/* Mobile Toggle Button - Only visible when sidebar is closed on mobile */}
       <button
         onClick={toggleSidebar}
-        className={`fixed lg:hidden top-4 left-4 z-50 p-2 rounded-lg hover:bg-gray-800 transition-all duration-200 ${isSidebarOpen ? 'opacity-0' : 'opacity-100'
+        className={`fixed lg:hidden top-4 left-4 z-50 p-2 rounded-lg transition-all duration-200 ${isSidebarOpen ? 'opacity-0' : 'opacity-100'
           }`}
       >
         <svg
