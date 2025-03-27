@@ -1,37 +1,76 @@
 import { useVeltClient } from '@veltdev/react';
 import { useEffect, useState } from 'react';
 
-// Generate random user data
-const generateRandomUser = () => {
-    const randomId = Math.random().toString(36).substring(2, 15);
-    const randomName = `User ${Math.floor(Math.random() * 1000)}`;
-    const randomEmail = `user${Math.floor(Math.random() * 1000)}@example.com`;
-    const randomOrgId = `org-${Math.random().toString(36).substring(2, 15)}`;
+interface RandomUser {
+    userId: string;
+    name: string;
+    email: string;
+    color: string;
+    textColor: string;
+    organizationId: string;
+}
 
-    return {
-        userId: `user-${randomId}`,
-        name: randomName,
-        email: randomEmail,
-        organizationId: randomOrgId
-    };
-};
-
-// [VELT] Initializes the current signed in user in Velt.
+// [VELT] Initializes the current signed in user in Velt with random user data
 export default function VeltInitializeUser() {
     const { client } = useVeltClient();
-    const [randomUser] = useState(generateRandomUser());
+    const [user, setUser] = useState<RandomUser | null>(null);
 
-    // Initialize Velt with random user info
+    // Generate a random color
+    const getRandomColor = () => {
+        const letters = '0123456789ABCDEF';
+        let color = '#';
+        for (let i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+    };
+
+    // Fetch random user data
     useEffect(() => {
-        if (randomUser && client) {
+        const fetchRandomUser = async () => {
+            try {
+                const response = await fetch('https://randomuser.me/api/');
+                const data = await response.json();
+                const randomUser = data.results[0];
+
+                const newUser: RandomUser = {
+                    userId: `user-${Math.floor(Math.random() * 1000)}`,
+                    name: `${randomUser.name.first} ${randomUser.name.last}`,
+                    email: randomUser.email,
+                    color: getRandomColor(),
+                    textColor: '#FFFFFF',
+                    organizationId: 'space-org-1'
+                };
+
+                setUser(newUser);
+            } catch (error) {
+                console.error('Error fetching random user:', error);
+                // Fallback to a default user if API fails
+                setUser({
+                    userId: 'user-1',
+                    name: 'John Doe',
+                    email: 'john.doe@example.com',
+                    color: '#FF5733',
+                    textColor: '#FFFFFF',
+                    organizationId: 'space-org-1'
+                });
+            }
+        };
+
+        fetchRandomUser();
+    }, []);
+
+    // Initialize Velt with user info and token
+    useEffect(() => {
+        if (user && client) {
             client.identify({
-                userId: randomUser.userId,
-                name: randomUser.name,
-                email: randomUser.email,
-                organizationId: randomUser.organizationId,
+                userId: user.userId,
+                name: user.name,
+                email: user.email,
+                organizationId: user.organizationId,
             });
         }
-    }, [randomUser, client]);
+    }, [user, client]);
 
     return null;
 }

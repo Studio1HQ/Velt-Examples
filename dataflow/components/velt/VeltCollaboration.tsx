@@ -1,26 +1,31 @@
 import {
     VeltComments,
-    VeltCursor
+    VeltCursor,
 } from '@veltdev/react';
-// [VELT] Installs Velt's root feature components with config, authenticates the user, initializes the document.
+import VeltInitializeDocument from './VeltInitializeDocument';
+import VeltInitializeUser from './VeltInitializeUser';
+// [VELT] initializes the document.
 
 export default function VeltCollaboration() {
     return (
         <div className="fixed bottom-4 right-4 z-50 flex items-center gap-2">
             <VeltCursor />
+            <VeltInitializeUser />
             <VeltComments
-                popoverMode={true}
                 recordings="audio"
-                ghostCommentsIndicator={true}
-                deleteOnBackspace={true}
-                commentPinHighlighter={true}
-                dialogOnHover={true}
-                popoverTriangleComponent={true}
-                textMode={true}
+                ghostCommentsIndicator={false}
+                deleteOnBackspace={false}
+                popoverMode={true}
+                commentPinHighlighter={false}
+                dialogOnHover={false}
+                popoverTriangleComponent={false}
+                textMode={false}
                 enterKeyToSubmit={true}
                 shadowDom={false}
-                resolveButton={true}
+                resolveButton={false}
             />
+            <VeltInitializeDocument />
+
         </div>
     );
 }

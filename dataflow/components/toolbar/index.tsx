@@ -24,11 +24,17 @@ import {
   Sun,
 } from "lucide-react";
 import { useTheme } from "next-themes";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Toolbar() {
   const { theme, setTheme } = useTheme();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  // Wait until mounted to avoid hydration mismatch
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const toggleTheme = () => {
     setTheme(theme === "dark" ? "light" : "dark");
@@ -135,10 +141,13 @@ export default function Toolbar() {
         </div>
         <div className="h-8 w-8 flex items-center justify-center">
           <VeltNotificationsTool />
+
         </div>
-        <Button variant="ghost" size="icon" className="h-8 w-8" onClick={toggleTheme}>
-          {theme === "dark" ? <Sun size={16} /> : <Moon size={16} />}
-        </Button>
+        {mounted && (
+          <Button variant="ghost" size="icon" className="h-8 w-8" onClick={toggleTheme}>
+            {theme === "dark" ? <Sun size={16} /> : <Moon size={16} />}
+          </Button>
+        )}
       </div>
     </div>
   );

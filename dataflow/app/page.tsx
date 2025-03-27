@@ -16,7 +16,7 @@ interface MissionData {
 
 export default function SpreadsheetApp() {
   return (
-    <VeltProvider apiKey={process.env.NEXT_PUBLIC_VELT_API_KEY || ""} >
+    <VeltProvider apiKey={process.env.NEXT_PUBLIC_VELT_API_KEY || "KOPmS7LYt8jOtmeWw03r"} >
       <VeltCollaboration />
       <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
         <div className="flex h-screen w-full flex-col">
