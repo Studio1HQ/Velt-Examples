@@ -3,12 +3,16 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
+  VeltCommentsSidebar,
+  VeltNotificationsTool, VeltPresence,
+  VeltSidebarButton,
+} from "@veltdev/react";
+import {
   AlignCenter,
   AlignLeft,
   AlignRight,
   ArrowLeft,
   ArrowRight,
-  Bell,
   Bold,
   ChevronUp,
   ImageIcon,
@@ -77,18 +81,23 @@ export default function Toolbar() {
       <div className="flex items-center gap-2">
         <div className="relative">
           <div className="flex items-center gap-1">
+            <VeltPresence />
+
             <Avatar
               className="h-8 w-8 cursor-pointer hover:opacity-80"
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
             >
               <AvatarFallback className="bg-pink-500 text-white">B</AvatarFallback>
             </Avatar>
+
             <ChevronUp
               size={16}
               className={`text-gray-400 transition-transform duration-200 ${isDropdownOpen ? 'rotate-180' : ''
                 }`}
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
             />
+            <VeltSidebarButton />
+            <VeltCommentsSidebar />
           </div>
 
           {/* Dropdown Menu */}
@@ -124,12 +133,8 @@ export default function Toolbar() {
             </div>
           )}
         </div>
-        <Button variant="ghost" size="icon" className="h-8 w-8 relative">
-          <Bell size={16} />
-          <span className="absolute top-1 right-1 h-2 w-2 rounded-full bg-amber-500"></span>
-        </Button>
-        <div className="flex items-center gap-1 bg-muted rounded-md px-2 py-1">
-          <span className="text-sm">19</span>
+        <div className="h-8 w-8 flex items-center justify-center">
+          <VeltNotificationsTool />
         </div>
         <Button variant="ghost" size="icon" className="h-8 w-8" onClick={toggleTheme}>
           {theme === "dark" ? <Sun size={16} /> : <Moon size={16} />}
