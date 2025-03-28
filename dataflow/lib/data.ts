@@ -1,6 +1,8 @@
-import type { SpreadsheetData } from "./types"
+import type { SpreadsheetData } from "./types";
 
 export const missionData: SpreadsheetData[] = [
+  // these are the missions hardcoded data that are currently in the spreadsheet
+
   { id: 1, mission: "Mission", destination: "Destination", missionType: "Manned" },
   { id: 2, mission: "Proxima Probe", destination: "Alpha Centauri", missionType: "Unmanned" },
   { id: 3, mission: "Mars Colony", destination: "Mars", missionType: "Manned" },

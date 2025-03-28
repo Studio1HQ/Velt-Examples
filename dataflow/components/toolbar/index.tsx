@@ -87,6 +87,7 @@ export default function Toolbar() {
       <div className="flex items-center gap-2">
         <div className="relative">
           <div className="flex items-center gap-1">
+            {/* [VELT] Add a presence tool to the toolbar */}
             <VeltPresence />
 
             <Avatar
@@ -102,7 +103,9 @@ export default function Toolbar() {
                 }`}
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
             />
+            {/* [VELT] Add a sidebar button to the toolbar */}
             <VeltSidebarButton darkMode={theme === "dark"} />
+            {/* [VELT] Add a comments sidebar to the toolbar */}
             <VeltCommentsSidebar darkMode={theme === "dark"} />
           </div>
 
@@ -140,6 +143,7 @@ export default function Toolbar() {
           )}
         </div>
         <div className="h-8 w-8 flex items-center justify-center">
+          {/* [VELT] Add a notifications tool to the toolbar */}
           <VeltNotificationsTool />
 
         </div>

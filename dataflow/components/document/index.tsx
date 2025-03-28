@@ -6,27 +6,26 @@ import {
   VeltCommentBubble,
   VeltCommentTool,
   VeltComments,
-  VeltCursor,
-  useSetDocument
+  VeltCursor
 } from "@veltdev/react";
 import { useState } from "react";
+import VeltInitializeDocument from "../velt/VeltInitializeDocument";
 
 export default function Document() {
   const [missions, setMissions] = useState<SpreadsheetData[]>(missionData);
   const [selectedCell, setSelectedCell] = useState<string | null>(null);
 
-  useSetDocument('space-missions-spreadsheet', {
-    documentName: 'Space Missions Spreadsheet'
-  });
+  // [VELT] Initialize the document with a unique identifier and metadata.
+
+  <VeltInitializeDocument />;
 
   return (
     <>
-      {/* Enable Velt features */}
+      {/* / [VELT] Initialize velt comment  */}
       <VeltComments popoverMode={true} popoverTriangleComponent={true} />
       <VeltCursor />
 
 
-      {/* Main content */}
       <div className="flex-1 overflow-auto relative">
         <table className="w-full border-separate border-spacing-0">
           <thead>
@@ -55,7 +54,9 @@ export default function Document() {
                   <div className="flex items-center justify-between">
                     <span>{mission.mission}</span>
                     <div className="opacity-0 group-hover:opacity-100 transition-opacity">
+                      {/* [VELT] Add a comment tool to the mission cell */}
                       <VeltCommentTool targetElementId={`cell-${mission.id}-mission`} />
+                      {/* [VELT] Add a comment bubble to the mission cell */}
                       <VeltCommentBubble
                         targetElementId={`cell-${mission.id}-mission`}
                         commentCountType="total"
@@ -72,7 +73,9 @@ export default function Document() {
                   <div className="flex items-center justify-between">
                     <span>{mission.destination}</span>
                     <div className="opacity-0 group-hover:opacity-100 transition-opacity">
+                      {/* [VELT] Add a comment tool to the destination cell */}
                       <VeltCommentTool targetElementId={`cell-${mission.id}-destination`} />
+                      {/* [VELT] Add a comment bubble to the destination cell */}
                       <VeltCommentBubble
                         targetElementId={`cell-${mission.id}-destination`}
                         commentCountType="total"
@@ -89,7 +92,9 @@ export default function Document() {
                   <div className="flex items-center justify-between">
                     <span>{mission.missionType}</span>
                     <div className="opacity-0 group-hover:opacity-100 transition-opacity">
+                      {/* [VELT] Add a comment tool to the type cell */}
                       <VeltCommentTool targetElementId={`cell-${mission.id}-type`} />
+                      {/* [VELT] Add a comment bubble to the type cell */}
                       <VeltCommentBubble
                         targetElementId={`cell-${mission.id}-type`}
                         commentCountType="total"
@@ -108,7 +113,9 @@ export default function Document() {
                     <div className="flex items-center justify-between">
                       <span></span>
                       <div className="opacity-0 group-hover:opacity-100 transition-opacity">
+                        {/* [VELT] Add a comment tool to the cell */}
                         <VeltCommentTool targetElementId={`cell-${mission.id}-${col}`} />
+                        {/* [VELT] Add a comment bubble to the cell */}
                         <VeltCommentBubble
                           targetElementId={`cell-${mission.id}-${col}`}
                           commentCountType="total"

@@ -4,7 +4,8 @@ import {
 } from '@veltdev/react';
 import VeltInitializeDocument from './VeltInitializeDocument';
 import VeltInitializeUser from './VeltInitializeUser';
-// [VELT] initializes the document.
+
+// [VELT] initializes the collaboration features.
 
 export default function VeltCollaboration() {
     return (

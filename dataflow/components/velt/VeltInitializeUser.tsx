@@ -45,7 +45,6 @@ export default function VeltInitializeUser() {
                 setUser(newUser);
             } catch (error) {
                 console.error('Error fetching random user:', error);
-                // Fallback to a default user if API fails
                 setUser({
                     userId: 'user-1',
                     name: 'John Doe',
@@ -60,7 +59,7 @@ export default function VeltInitializeUser() {
         fetchRandomUser();
     }, []);
 
-    // Initialize Velt with user info and token
+    // [Velt] Initialize Velt with user info and token
     useEffect(() => {
         if (user && client) {
             client.identify({

@@ -8,7 +8,6 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Space Mission Spreadsheet",
   description: "A spreadsheet application for space mission planning",
-  generator: 'v0.dev'
 };
 
 export default function RootLayout({

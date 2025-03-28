@@ -1,8 +1,9 @@
-import { useSetDocuments } from '@veltdev/react';
+import { useSetDocument } from '@veltdev/react';
 
-// [VELT] Initializes the Velt document .
+
+// [VELT] Initialize the document with a unique identifier and metadata.
+
 export default function VeltInitializeDocument() {
-    const { setDocuments } = useSetDocuments();
-
+    useSetDocument('space-missions-spreadsheet', { documentName: 'space-missions-spreadsheet' });
     return null;
 }
