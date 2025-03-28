@@ -43,14 +43,16 @@ export default function Toolbar() {
   return (
     <div className="border-b flex items-center justify-between p-2">
       <div className="flex items-center gap-2">
-        <Button variant="ghost" size="icon" className="h-8 w-8">
-          <ArrowLeft size={16} />
-        </Button>
-        <Button variant="ghost" size="icon" className="h-8 w-8">
-          <ArrowRight size={16} />
-        </Button>
-        <div className="ml-4">
-          <span className="font-medium">Planets</span>
+        <div className="pl-9 flex items-center gap-2">
+          <Button variant="ghost" size="icon" className="h-8 w-8">
+            <ArrowLeft size={16} className="mt-0.5" />
+          </Button>
+          <Button variant="ghost" size="icon" className="h-8 w-8">
+            <ArrowRight size={16} className="mt-0.5" />
+          </Button>
+          <div className="ml-1">
+            <span className="font-medium">Planets</span>
+          </div>
         </div>
       </div>
 

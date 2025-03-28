@@ -62,9 +62,12 @@ export default function Sidebar() {
         </div>
         <div className="p-4 mt-auto border-t">
           <span className="text-xs text-gray-500 flex items-center gap-2">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-gray-500">
-              <path d="M8 0L14.9282 4V12L8 16L1.07179 12V4L8 0Z" fill="currentColor" />
-            </svg>
+            <Image
+              src="https://framerusercontent.com/images/mZnuKQkkE6FYylkNvDslI3RdCcA.png"
+              alt="New Icon"
+              width={20}
+              height={20}
+            />
             <span className="whitespace-nowrap">MADE WITH VELT.DEV</span>
           </span>
         </div>
