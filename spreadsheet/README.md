@@ -3,7 +3,7 @@
 A modern, collaborative spreadsheet application built with Next.js and Velt for real-time collaboration features.
 
 <video controls>
-  <source src="https://github.com/user-attachments/assets/39d15389-8c8b-49fd-a769-b1233a15da38" type="video/mp4">
+  <source src="https://github.com/user-attachments/assets/a55c56d4-a36c-422c-89f3-db0da92e5425" type="video/mp4">
 </video>
 
 ## Features
