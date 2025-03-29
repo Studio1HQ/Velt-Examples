@@ -1,4 +1,4 @@
-# Dataflow - Collaborative Spreadsheet Application
+# Spreadsheet - Collaborative Spreadsheet Application
 
 A modern, collaborative spreadsheet application built with Next.js and Velt for real-time collaboration features.
 
@@ -59,7 +59,7 @@ A modern, collaborative spreadsheet application built with Next.js and Velt for 
 ## Project Structure
 
 ```
-dataflow/
+spreadsheet/
 ├── app/                    # Next.js app directory
 ├── components/            # React components
 │   ├── document/         # Spreadsheet document component
