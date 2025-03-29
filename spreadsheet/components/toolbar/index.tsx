@@ -1,6 +1,6 @@
 "use client";
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
   VeltCommentsSidebar,
@@ -15,29 +15,41 @@ import {
   ArrowRight,
   Bold,
   ChevronUp,
+  Circle,
+  CircleDot,
   ImageIcon,
   Italic,
   Link,
   Moon,
   Pencil,
   Strikethrough,
-  Sun,
+  Sun
 } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
+import { useVeltUser } from "../velt/VeltInitializeUser";
 
 export default function Toolbar() {
   const { theme, setTheme } = useTheme();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const { currentUser, switchUser, users } = useVeltUser();
 
-  // Wait until mounted to avoid hydration mismatch
   useEffect(() => {
     setMounted(true);
   }, []);
 
   const toggleTheme = () => {
     setTheme(theme === "dark" ? "light" : "dark");
+  };
+
+  const handleSwitchUser = (user: typeof currentUser) => {
+    switchUser(user);
+    setIsDropdownOpen(false);
+  };
+
+  const getUserColor = (userId: string) => {
+    return userId === 'user-bread' ? 'var(--bread-color)' : 'var(--felix-color)';
   };
 
   return (
@@ -89,65 +101,87 @@ export default function Toolbar() {
       <div className="flex items-center gap-2">
         <div className="relative">
           <div className="flex items-center gap-1">
-            {/* [VELT] Add a presence tool to the toolbar */}
-            <VeltPresence />
+            <div data-user-id={currentUser.userId}>
+              <VeltPresence
+                // @ts-ignore
+                userAvatars={{
+                  [currentUser.userId]: currentUser.profileUrl
+                }}
+              />
+            </div>
 
-            <Avatar
-              className="h-8 w-8 cursor-pointer hover:opacity-80"
-              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-            >
-              <AvatarFallback className="bg-pink-500 text-white">B</AvatarFallback>
-            </Avatar>
+            <div className="relative flex items-center gap-1 bg-black/10 dark:bg-white/10 rounded-full p-1 pr-2">
+              <Avatar
+                className="h-8 w-8 cursor-pointer hover:opacity-80"
+                onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+              >
+                <AvatarFallback
+                  style={{
+                    backgroundImage: `url(${currentUser.profileUrl})`,
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center'
+                  }}
+                  className="text-white"
+                />
+              </Avatar>
 
-            <ChevronUp
-              size={16}
-              className={`text-gray-400 transition-transform duration-200 ${isDropdownOpen ? 'rotate-180' : ''
-                }`}
-              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-            />
-            {/* [VELT] Add a sidebar button to the toolbar */}
+              <ChevronUp
+                size={16}
+                className={`text-gray-600 dark:text-gray-300 transition-transform duration-200 cursor-pointer ${isDropdownOpen ? 'rotate-180' : ''}`}
+                onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+              />
+            </div>
+
+            {/* [VELT] Sidebar Button */}
             <VeltSidebarButton darkMode={theme === "dark"} />
-            {/* [VELT] Add a comments sidebar to the toolbar */}
+            {/* [VELT] Comments Sidebar */}
             <VeltCommentsSidebar darkMode={theme === "dark"} />
           </div>
 
           {/* Dropdown Menu */}
           {isDropdownOpen && (
-            <div className="absolute right-0 mt-2 w-48 dark:bg-black bg-white border border-gray-800 rounded-lg shadow-lg py-1 z-50">
-              <div className="px-3 py-2">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <Avatar className="h-6 w-6">
-                      <AvatarFallback className="bg-pink-500 text-white">B</AvatarFallback>
-                    </Avatar>
-                    <span className="text-sm text-gray-400 dark:text-gray-400">Bread</span>
+            <div className="absolute right-0 mt-2 w-48 dark:bg-black/90 bg-white/90 backdrop-blur-sm border border-gray-800 rounded-lg shadow-lg py-1 z-50">
+              {users.map((user) => (
+                <div key={user.userId} className="px-3 py-2 hover:bg-black/5 dark:hover:bg-white/5">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <div className="relative">
+                        <Avatar className="h-6 w-6">
+                          <AvatarFallback
+                            style={{
+                              backgroundImage: `url(${user.profileUrl})`,
+                              backgroundSize: 'cover',
+                              backgroundPosition: 'center'
+                            }}
+                            className="text-white"
+                          />
+                        </Avatar>
+                        <div className="absolute -top-0.5 -right-0.5 w-2 h-2 bg-green-500 rounded-full border-2 border-white dark:border-black z-10" />
+                      </div>
+                      <span className="text-sm text-gray-600 dark:text-gray-300">{user.name}</span>
+                    </div>
+                    <div
+                      onClick={() => handleSwitchUser(user)}
+                      className={`flex items-center justify-center w-5 h-5 rounded-full cursor-pointer ${currentUser.userId === user.userId
+                        ? 'text-green-500'
+                        : 'text-gray-400 hover:text-gray-600 dark:hover:text-gray-300'
+                        }`}
+                    >
+                      {currentUser.userId === user.userId ? (
+                        <CircleDot size={16} />
+                      ) : (
+                        <Circle size={16} />
+                      )}
+                    </div>
                   </div>
-                  <button className="text-red-500 text-xs px-2 py-1 rounded hover:bg-red-500/10">
-                    LOGOUT
-                  </button>
                 </div>
-              </div>
-              <div className="px-3 py-2 ">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <Avatar className="h-6 w-6">
-                      <AvatarImage src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" />
-                      <AvatarFallback className="bg-pink-500 text-white text-xs">🎮</AvatarFallback>
-                    </Avatar>
-                    <span className="text-sm text-gray-400 dark:text-gray-400">Felix</span>
-                  </div>
-                  <button className="text-gray-400 dark:text-gray-400 text-xs px-2 py-1 rounded dark:hover:bg-gray-700 hover:bg-gray-200">
-                    LOGIN
-                  </button>
-                </div>
-              </div>
+              ))}
             </div>
           )}
         </div>
         <div className="h-8 w-8 flex items-center justify-center">
-          {/* [VELT] Add a notifications tool to the toolbar */}
+          {/* [VELT] Notifications Tool */}
           <VeltNotificationsTool />
-
         </div>
         {mounted && (
           <Button variant="ghost" size="icon" className="h-8 w-8" onClick={toggleTheme}>
@@ -155,7 +189,7 @@ export default function Toolbar() {
           </Button>
         )}
       </div>
-    </div>
+    </div >
   );
 }
 

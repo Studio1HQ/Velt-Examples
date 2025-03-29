@@ -3,7 +3,6 @@ import {
     VeltCursor,
 } from '@veltdev/react';
 import VeltInitializeDocument from './VeltInitializeDocument';
-import VeltInitializeUser from './VeltInitializeUser';
 
 // [VELT] initializes the collaboration features.
 
@@ -11,7 +10,6 @@ export default function VeltCollaboration() {
     return (
         <div className="fixed bottom-4 right-4 z-50 flex items-center gap-2">
             <VeltCursor />
-            <VeltInitializeUser />
             <VeltComments
                 recordings="audio"
                 ghostCommentsIndicator={false}
@@ -26,7 +24,6 @@ export default function VeltCollaboration() {
                 resolveButton={false}
             />
             <VeltInitializeDocument />
-
         </div>
     );
 }

@@ -1,75 +1,84 @@
 import { useVeltClient } from '@veltdev/react';
 import { useEffect, useState } from 'react';
+import { User } from '../../lib/types';
 
-interface RandomUser {
-    userId: string;
-    name: string;
-    email: string;
-    color: string;
-    textColor: string;
-    organizationId: string;
-}
+export const USERS: User[] = [
+    {
+        userId: 'user-bread',
+        name: 'Bread',
+        email: 'bread@example.com',
+        profileUrl: 'https://randomuser.me/api/portraits/men/6.jpg',
+        organizationId: 'space-org-2'
+    },
+    {
+        userId: 'user-felix',
+        name: 'Felix',
+        email: 'felix@example.com',
+        profileUrl: 'https://randomuser.me/api/portraits/men/62.jpg',
+        organizationId: 'space-org-2'
+    }
+];
 
-// [VELT] Initializes the current signed in user in Velt with random user data
+// [VELT] Initializes the current signed in user in Velt with predefined users
 export default function VeltInitializeUser() {
     const { client } = useVeltClient();
-    const [user, setUser] = useState<RandomUser | null>(null);
+    const [currentUser, setCurrentUser] = useState<User>(USERS[0]);
 
-    // Generate a random color
-    const getRandomColor = () => {
-        const letters = '0123456789ABCDEF';
-        let color = '#';
-        for (let i = 0; i < 6; i++) {
-            color += letters[Math.floor(Math.random() * 16)];
-        }
-        return color;
-    };
-
-    // Fetch random user data
+    // [VELT] Initialize Velt with user info
     useEffect(() => {
-        const fetchRandomUser = async () => {
-            try {
-                const response = await fetch('https://randomuser.me/api/');
-                const data = await response.json();
-                const randomUser = data.results[0];
-
-                const newUser: RandomUser = {
-                    userId: `user-${Math.floor(Math.random() * 1000)}`,
-                    name: `${randomUser.name.first} ${randomUser.name.last}`,
-                    email: randomUser.email,
-                    color: getRandomColor(),
-                    textColor: '#FFFFFF',
-                    organizationId: 'space-org-1'
-                };
-
-                setUser(newUser);
-            } catch (error) {
-                console.error('Error fetching random user:', error);
-                setUser({
-                    userId: 'user-1',
-                    name: 'John Doe',
-                    email: 'john.doe@example.com',
-                    color: '#FF5733',
-                    textColor: '#FFFFFF',
-                    organizationId: 'space-org-1'
-                });
-            }
-        };
-
-        fetchRandomUser();
-    }, []);
-
-    // [Velt] Initialize Velt with user info and token
-    useEffect(() => {
-        if (user && client) {
+        if (client) {
             client.identify({
-                userId: user.userId,
-                name: user.name,
-                email: user.email,
-                organizationId: user.organizationId,
+                userId: currentUser.userId,
+                name: currentUser.name,
+                email: currentUser.email,
+                organizationId: currentUser.organizationId,
+                photoUrl: currentUser.profileUrl
             });
         }
-    }, [user, client]);
+    }, [currentUser, client]);
 
-    return null;
+    // Function to switch users
+    const switchUser = () => {
+        setCurrentUser(prevUser =>
+            prevUser.userId === 'user-bread' ? USERS[1] : USERS[0]
+        );
+    };
+
+    return (
+        <div className="fixed bottom-4 right-4 z-50">
+            <button
+                onClick={switchUser}
+                className="px-4 py-2 bg-primary text-primary-foreground rounded-md shadow-md hover:bg-primary/90 transition-colors"
+            >
+                Switch to {currentUser.name === 'Bread' ? 'Felix' : 'Bread'}
+            </button>
+        </div>
+    );
 }
+
+export function useVeltUser() {
+    const { client } = useVeltClient();
+    const [currentUser, setCurrentUser] = useState<User>(USERS[0]);
+
+    useEffect(() => {
+        if (client) {
+            client.identify({
+                userId: currentUser.userId,
+                name: currentUser.name,
+                email: currentUser.email,
+                organizationId: currentUser.organizationId,
+                photoUrl: currentUser.profileUrl
+            });
+        }
+    }, [currentUser, client]);
+
+    const switchUser = (user: User) => {
+        setCurrentUser(user);
+    };
+
+    return {
+        currentUser,
+        switchUser,
+        users: USERS
+    };
+} 

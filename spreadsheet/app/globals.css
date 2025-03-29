@@ -82,3 +82,23 @@ td[class*='outline'] {
   position: relative;
   z-index: 10;
 }
+
+/* [Velt] presence styles */
+[data-velt-presence] [data-velt-presence-avatar] {
+  width: 24px !important;
+  height: 24px !important;
+  border-radius: 50% !important;
+  overflow: hidden !important;
+  background-size: cover !important;
+  background-position: center !important;
+}
+
+[data-velt-presence] [data-velt-presence-indicator] {
+  width: 10px !important;
+  height: 10px !important;
+  border-radius: 50% !important;
+  background: #44b700 !important;
+  border: 2px solid #fff !important;
+  bottom: -1px !important;
+  right: -1px !important;
+}
