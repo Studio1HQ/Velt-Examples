@@ -31,19 +31,30 @@ A modern, collaborative spreadsheet application built with Next.js and Velt for 
 ## Getting Started
 
 1. Clone the repository
-2. Install dependencies:
+
+   ```bash
+   git clone https://github.com/Studio1HQ/Velt-Examples
+   ```
+
+2. Navigate to the `spreadsheet` directory
+
+   ```bash
+   cd spreadsheet
+   ```
+
+3. Install dependencies:
    ```bash
    pnpm install
    ```
-3. Create a `.env.local` file with your Velt API key:
+4. Create a `.env.local` file with your Velt API key:
    ```
    NEXT_PUBLIC_VELT_API_KEY=your_api_key_here
    ```
-4. Run the development server:
+5. Run the development server:
    ```bash
    pnpm run dev
    ```
-5. Open [http://localhost:3000](http://localhost:3000) in your browser
+6. Open [http://localhost:3000](http://localhost:3000) in your browser
 
 ## Project Structure
 
