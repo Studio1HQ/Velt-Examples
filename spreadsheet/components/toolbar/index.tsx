@@ -133,9 +133,9 @@ export default function Toolbar() {
             </div>
 
             {/* [VELT] Sidebar Button */}
-            <VeltSidebarButton darkMode={theme === "dark"} />
+            {mounted && <VeltSidebarButton darkMode={theme === "dark"} />}
             {/* [VELT] Comments Sidebar */}
-            <VeltCommentsSidebar darkMode={theme === "dark"} />
+            {mounted && <VeltCommentsSidebar darkMode={theme === "dark"} />}
           </div>
 
           {/* Dropdown Menu */}
@@ -181,7 +181,7 @@ export default function Toolbar() {
         </div>
         <div className="h-8 w-8 flex items-center justify-center">
           {/* [VELT] Notifications Tool */}
-          <VeltNotificationsTool />
+          {mounted && <VeltNotificationsTool />}
         </div>
         {mounted && (
           <Button variant="ghost" size="icon" className="h-8 w-8" onClick={toggleTheme}>
