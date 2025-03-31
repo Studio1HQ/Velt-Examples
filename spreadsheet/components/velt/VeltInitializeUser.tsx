@@ -2,6 +2,7 @@ import { useVeltClient } from '@veltdev/react';
 import { useEffect, useState } from 'react';
 import { User } from '../../lib/types';
 
+// [VELT] Predefined users for the app 
 export const USERS: User[] = [
     {
         userId: 'user-bread',

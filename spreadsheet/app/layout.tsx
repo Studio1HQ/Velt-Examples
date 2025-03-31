@@ -1,13 +1,13 @@
-import "@/styles/globals.css";
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import type React from "react";
+import '@/styles/globals.css';
+import type { Metadata } from 'next';
+import { Inter } from 'next/font/google';
+import type React from 'react';
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: "Space Mission Spreadsheet",
-  description: "A spreadsheet application for space mission planning",
+  title: 'Space Mission Spreadsheet',
+  description: 'A spreadsheet application for space mission planning',
 };
 
 export default function RootLayout({
@@ -17,13 +17,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={inter.className}>
-        {children}
-      </body>
+      <body className={inter.className}>{children}</body>
     </html>
   );
 }
 
 import './globals.css';
-
-

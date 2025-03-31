@@ -102,6 +102,7 @@ export default function Toolbar() {
         <div className="relative">
           <div className="flex items-center gap-1">
             <div data-user-id={currentUser.userId}>
+              {/* [VELT] Presence for cursor */}
               <VeltPresence
                 // @ts-ignore
                 userAvatars={{
