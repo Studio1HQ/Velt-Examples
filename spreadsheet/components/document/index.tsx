@@ -26,26 +26,26 @@ export default function Document() {
       <VeltCursor />
 
       <div className="flex-1 overflow-auto relative">
-        <table className="w-full border-separate border-spacing-0">
+        <table className="w-full border-separate border-spacing-0 ">
           <thead>
-            <tr className="text-left">
-              <th className="w-12 border-r border-b p-2 bg-background sticky top-0"></th>
-              <th className="p-2 border-r border-b bg-background sticky top-0 min-w-[200px] text-center">
+            <tr className="text-left ">
+              <th className="w-12 border-r border-b p-2 bg-background  sticky top-0"></th>
+              <th className="p-2 border-r border-b bg-background top-0 min-w-[200px] text-center">
                 A
               </th>
-              <th className="p-2 border-r border-b bg-background sticky top-0 min-w-[200px] text-center">
+              <th className="p-2 border-r border-b bg-background  min-w-[200px] text-center">
                 B
               </th>
-              <th className="p-2 border-r border-b bg-background sticky top-0 min-w-[200px] text-center">
+              <th className="p-2 border-r border-b bg-background  min-w-[200px] text-center">
                 C
               </th>
-              <th className="p-2 border-r border-b bg-background sticky top-0 min-w-[200px] text-center">
+              <th className="p-2 border-r border-b bg-background  min-w-[200px] text-center">
                 D
               </th>
-              <th className="p-2 border-r border-b bg-background sticky top-0 min-w-[200px] text-center">
+              <th className="p-2 border-r border-b bg-background  min-w-[200px] text-center">
                 E
               </th>
-              <th className="p-2 border-r border-b bg-background sticky top-0 min-w-[200px] text-center">
+              <th className="p-2 border-r border-b bg-background  min-w-[200px] text-center">
                 F
               </th>
             </tr>
@@ -57,11 +57,10 @@ export default function Document() {
                   {mission.id}
                 </td>
                 <td
-                  className={`p-2 relative group  border hover:bg-muted/80 ${
-                    selectedCell === `cell-${mission.id}-mission`
-                      ? "outline outline-2 outline-yellow-400 rounded-md"
-                      : ""
-                  }`}
+                  className={`p-2 relative group  border hover:bg-muted/80 ${selectedCell === `cell-${mission.id}-mission`
+                    ? "outline outline-2 outline-yellow-400 rounded-md"
+                    : ""
+                    }`}
                   id={`cell-${mission.id}-mission`}
                   data-velt-comment-target={`cell-${mission.id}-mission`}
                   onClick={() => setSelectedCell(`cell-${mission.id}-mission`)}
@@ -82,11 +81,10 @@ export default function Document() {
                   </div>
                 </td>
                 <td
-                  className={`p-2 relative group  border hover:bg-muted/80 ${
-                    selectedCell === `cell-${mission.id}-destination`
-                      ? "outline outline-2 outline-yellow-400 rounded-md"
-                      : ""
-                  }`}
+                  className={`p-2 relative group  border hover:bg-muted/80 ${selectedCell === `cell-${mission.id}-destination`
+                    ? "outline outline-2 outline-yellow-400 rounded-md"
+                    : ""
+                    }`}
                   id={`cell-${mission.id}-destination`}
                   data-velt-comment-target={`cell-${mission.id}-destination`}
                   onClick={() =>
@@ -109,11 +107,10 @@ export default function Document() {
                   </div>
                 </td>
                 <td
-                  className={`p-2 relative group  border hover:bg-muted/80 ${
-                    selectedCell === `cell-${mission.id}-type`
-                      ? "outline outline-2 outline-yellow-400 rounded-md"
-                      : ""
-                  }`}
+                  className={`p-2 relative group  border hover:bg-muted/80 ${selectedCell === `cell-${mission.id}-type`
+                    ? "outline outline-2 outline-yellow-400 rounded-md"
+                    : ""
+                    }`}
                   id={`cell-${mission.id}-type`}
                   data-velt-comment-target={`cell-${mission.id}-type`}
                   onClick={() => setSelectedCell(`cell-${mission.id}-type`)}
@@ -136,11 +133,10 @@ export default function Document() {
                 {["D", "E", "F"].map((col) => (
                   <td
                     key={col}
-                    className={`p-2 relative group  border hover:bg-muted/80 ${
-                      selectedCell === `cell-${mission.id}-${col}`
-                        ? "outline outline-2 outline-yellow-400 rounded-md"
-                        : ""
-                    }`}
+                    className={`p-2 relative group  border hover:bg-muted/80 ${selectedCell === `cell-${mission.id}-${col}`
+                      ? "outline outline-2 outline-yellow-400 rounded-md"
+                      : ""
+                      }`}
                     id={`cell-${mission.id}-${col}`}
                     data-velt-comment-target={`cell-${mission.id}-${col}`}
                     onClick={() => setSelectedCell(`cell-${mission.id}-${col}`)}
