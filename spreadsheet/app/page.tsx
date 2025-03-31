@@ -17,7 +17,7 @@ interface MissionData {
 export default function SpreadsheetApp() {
   return (
     // [VELT] Initialize the Velt provider
-    <VeltProvider apiKey={process.env.NEXT_PUBLIC_VELT_API_KEY || ""} >
+    <VeltProvider apiKey={process.env.NEXT_PUBLIC_VELT_API_KEY || ""}>
       {/* [VELT] Initialize the Velt collaboration */}
       <VeltCollaboration />
       <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
@@ -32,19 +32,28 @@ export default function SpreadsheetApp() {
         </div>
       </ThemeProvider>
     </VeltProvider>
-
   );
 }
 
-function SidebarItem({ icon, label, active = false }: { icon: React.ReactNode; label: string; active?: boolean; }) {
+function SidebarItem({
+  icon,
+  label,
+  active = false,
+}: {
+  icon: React.ReactNode;
+  label: string;
+  active?: boolean;
+}) {
   return (
     <div
-      className={`flex items-center gap-2 px-3 py-2 rounded-md text-sm ${active ? "bg-muted font-medium" : "text-muted-foreground hover:bg-muted/50"
-        }`}
+      className={`flex items-center gap-2 px-3 py-2 rounded-md text-sm ${
+        active
+          ? "bg-muted font-medium"
+          : "text-muted-foreground hover:bg-muted/50"
+      }`}
     >
       {icon}
       <span>{label}</span>
     </div>
   );
 }
-

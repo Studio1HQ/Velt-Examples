@@ -77,7 +77,7 @@
 }
 
 /* Cell selection styles */
-td[class*='outline'] {
+td[class*="outline"] {
   outline-offset: -1px;
   position: relative;
   z-index: 10;

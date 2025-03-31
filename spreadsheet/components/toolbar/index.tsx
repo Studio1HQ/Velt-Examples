@@ -4,7 +4,8 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
   VeltCommentsSidebar,
-  VeltNotificationsTool, VeltPresence,
+  VeltNotificationsTool,
+  VeltPresence,
   VeltSidebarButton,
 } from "@veltdev/react";
 import {
@@ -23,7 +24,7 @@ import {
   Moon,
   Pencil,
   Strikethrough,
-  Sun
+  Sun,
 } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
@@ -49,7 +50,9 @@ export default function Toolbar() {
   };
 
   const getUserColor = (userId: string) => {
-    return userId === 'user-bread' ? 'var(--bread-color)' : 'var(--felix-color)';
+    return userId === "user-bread"
+      ? "var(--bread-color)"
+      : "var(--felix-color)";
   };
 
   return (
@@ -106,7 +109,7 @@ export default function Toolbar() {
               <VeltPresence
                 // @ts-ignore
                 userAvatars={{
-                  [currentUser.userId]: currentUser.profileUrl
+                  [currentUser.userId]: currentUser.profileUrl,
                 }}
               />
             </div>
@@ -119,8 +122,8 @@ export default function Toolbar() {
                 <AvatarFallback
                   style={{
                     backgroundImage: `url(${currentUser.profileUrl})`,
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center'
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
                   }}
                   className="text-white"
                 />
@@ -128,7 +131,7 @@ export default function Toolbar() {
 
               <ChevronUp
                 size={16}
-                className={`text-gray-600 dark:text-gray-300 transition-transform duration-200 cursor-pointer ${isDropdownOpen ? 'rotate-180' : ''}`}
+                className={`text-gray-600 dark:text-gray-300 transition-transform duration-200 cursor-pointer ${isDropdownOpen ? "rotate-180" : ""}`}
                 onClick={() => setIsDropdownOpen(!isDropdownOpen)}
               />
             </div>
@@ -143,7 +146,10 @@ export default function Toolbar() {
           {isDropdownOpen && (
             <div className="absolute right-0 mt-2 w-48 dark:bg-black/90 bg-white/90 backdrop-blur-sm border border-gray-800 rounded-lg shadow-lg py-1 z-50">
               {users.map((user) => (
-                <div key={user.userId} className="px-3 py-2 hover:bg-black/5 dark:hover:bg-white/5">
+                <div
+                  key={user.userId}
+                  className="px-3 py-2 hover:bg-black/5 dark:hover:bg-white/5"
+                >
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
                       <div className="relative">
@@ -151,22 +157,25 @@ export default function Toolbar() {
                           <AvatarFallback
                             style={{
                               backgroundImage: `url(${user.profileUrl})`,
-                              backgroundSize: 'cover',
-                              backgroundPosition: 'center'
+                              backgroundSize: "cover",
+                              backgroundPosition: "center",
                             }}
                             className="text-white"
                           />
                         </Avatar>
                         <div className="absolute -top-0.5 -right-0.5 w-2 h-2 bg-green-500 rounded-full border-2 border-white dark:border-black z-10" />
                       </div>
-                      <span className="text-sm text-gray-600 dark:text-gray-300">{user.name}</span>
+                      <span className="text-sm text-gray-600 dark:text-gray-300">
+                        {user.name}
+                      </span>
                     </div>
                     <div
                       onClick={() => handleSwitchUser(user)}
-                      className={`flex items-center justify-center w-5 h-5 rounded-full cursor-pointer ${currentUser.userId === user.userId
-                        ? 'text-green-500'
-                        : 'text-gray-400 hover:text-gray-600 dark:hover:text-gray-300'
-                        }`}
+                      className={`flex items-center justify-center w-5 h-5 rounded-full cursor-pointer ${
+                        currentUser.userId === user.userId
+                          ? "text-green-500"
+                          : "text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
+                      }`}
                     >
                       {currentUser.userId === user.userId ? (
                         <CircleDot size={16} />
@@ -185,12 +194,16 @@ export default function Toolbar() {
           {mounted && <VeltNotificationsTool />}
         </div>
         {mounted && (
-          <Button variant="ghost" size="icon" className="h-8 w-8" onClick={toggleTheme}>
+          <Button
+            variant="ghost"
+            size="icon"
+            className="h-8 w-8"
+            onClick={toggleTheme}
+          >
             {theme === "dark" ? <Sun size={16} /> : <Moon size={16} />}
           </Button>
         )}
       </div>
-    </div >
+    </div>
   );
 }
-

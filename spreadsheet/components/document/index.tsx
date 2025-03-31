@@ -1,15 +1,15 @@
-'use client';
+"use client";
 
-import { missionData } from '@/lib/data';
-import type { SpreadsheetData } from '@/lib/types';
+import { missionData } from "@/lib/data";
+import type { SpreadsheetData } from "@/lib/types";
 import {
   VeltCommentBubble,
   VeltCommentTool,
   VeltComments,
   VeltCursor,
-} from '@veltdev/react';
-import { useState } from 'react';
-import VeltInitializeDocument from '../velt/VeltInitializeDocument';
+} from "@veltdev/react";
+import { useState } from "react";
+import VeltInitializeDocument from "../velt/VeltInitializeDocument";
 
 export default function Document() {
   const [missions, setMissions] = useState<SpreadsheetData[]>(missionData);
@@ -57,10 +57,11 @@ export default function Document() {
                   {mission.id}
                 </td>
                 <td
-                  className={`p-2 relative group  border hover:bg-muted/80 ${selectedCell === `cell-${mission.id}-mission`
-                      ? 'outline outline-2 outline-yellow-400 rounded-md'
-                      : ''
-                    }`}
+                  className={`p-2 relative group  border hover:bg-muted/80 ${
+                    selectedCell === `cell-${mission.id}-mission`
+                      ? "outline outline-2 outline-yellow-400 rounded-md"
+                      : ""
+                  }`}
                   id={`cell-${mission.id}-mission`}
                   data-velt-comment-target={`cell-${mission.id}-mission`}
                   onClick={() => setSelectedCell(`cell-${mission.id}-mission`)}
@@ -81,10 +82,11 @@ export default function Document() {
                   </div>
                 </td>
                 <td
-                  className={`p-2 relative group  border hover:bg-muted/80 ${selectedCell === `cell-${mission.id}-destination`
-                      ? 'outline outline-2 outline-yellow-400 rounded-md'
-                      : ''
-                    }`}
+                  className={`p-2 relative group  border hover:bg-muted/80 ${
+                    selectedCell === `cell-${mission.id}-destination`
+                      ? "outline outline-2 outline-yellow-400 rounded-md"
+                      : ""
+                  }`}
                   id={`cell-${mission.id}-destination`}
                   data-velt-comment-target={`cell-${mission.id}-destination`}
                   onClick={() =>
@@ -107,10 +109,11 @@ export default function Document() {
                   </div>
                 </td>
                 <td
-                  className={`p-2 relative group  border hover:bg-muted/80 ${selectedCell === `cell-${mission.id}-type`
-                      ? 'outline outline-2 outline-yellow-400 rounded-md'
-                      : ''
-                    }`}
+                  className={`p-2 relative group  border hover:bg-muted/80 ${
+                    selectedCell === `cell-${mission.id}-type`
+                      ? "outline outline-2 outline-yellow-400 rounded-md"
+                      : ""
+                  }`}
                   id={`cell-${mission.id}-type`}
                   data-velt-comment-target={`cell-${mission.id}-type`}
                   onClick={() => setSelectedCell(`cell-${mission.id}-type`)}
@@ -130,13 +133,14 @@ export default function Document() {
                     </div>
                   </div>
                 </td>
-                {['D', 'E', 'F'].map((col) => (
+                {["D", "E", "F"].map((col) => (
                   <td
                     key={col}
-                    className={`p-2 relative group  border hover:bg-muted/80 ${selectedCell === `cell-${mission.id}-${col}`
-                        ? 'outline outline-2 outline-yellow-400 rounded-md'
-                        : ''
-                      }`}
+                    className={`p-2 relative group  border hover:bg-muted/80 ${
+                      selectedCell === `cell-${mission.id}-${col}`
+                        ? "outline outline-2 outline-yellow-400 rounded-md"
+                        : ""
+                    }`}
                     id={`cell-${mission.id}-${col}`}
                     data-velt-comment-target={`cell-${mission.id}-${col}`}
                     onClick={() => setSelectedCell(`cell-${mission.id}-${col}`)}
