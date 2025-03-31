@@ -28,6 +28,7 @@ import {
 } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
+// [VELT] Initialize user
 import { useVeltUser } from "../velt/VeltInitializeUser";
 
 export default function Toolbar() {
@@ -171,11 +172,10 @@ export default function Toolbar() {
                     </div>
                     <div
                       onClick={() => handleSwitchUser(user)}
-                      className={`flex items-center justify-center w-5 h-5 rounded-full cursor-pointer ${
-                        currentUser.userId === user.userId
+                      className={`flex items-center justify-center w-5 h-5 rounded-full cursor-pointer ${currentUser.userId === user.userId
                           ? "text-green-500"
                           : "text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
-                      }`}
+                        }`}
                     >
                       {currentUser.userId === user.userId ? (
                         <CircleDot size={16} />
