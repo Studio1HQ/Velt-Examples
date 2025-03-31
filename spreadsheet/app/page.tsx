@@ -21,7 +21,7 @@ export default function SpreadsheetApp() {
       {/* [VELT] Initialize the Velt collaboration */}
       <VeltCollaboration />
       <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
-        <div className="flex h-screen w-full flex-col">
+        <div className="flex h-screen w-full flex-col overflow-y-hidden">
           <div className="flex h-screen">
             <Sidebar />
             <div className="flex-1 flex flex-col">
@@ -46,11 +46,10 @@ function SidebarItem({
 }) {
   return (
     <div
-      className={`flex items-center gap-2 px-3 py-2 rounded-md text-sm ${
-        active
-          ? "bg-muted font-medium"
-          : "text-muted-foreground hover:bg-muted/50"
-      }`}
+      className={`flex items-center gap-2 px-3 py-2 rounded-md text-sm ${active
+        ? "bg-muted font-medium"
+        : "text-muted-foreground hover:bg-muted/50"
+        }`}
     >
       {icon}
       <span>{label}</span>
