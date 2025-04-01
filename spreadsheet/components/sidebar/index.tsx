@@ -18,15 +18,15 @@ export default function Sidebar() {
         fixed lg:static inset-y-0 left-0 z-40
         transform ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"}
         lg:translate-x-0 transition-transform duration-200 ease-in-out
-        w-[240px] lg:w-[200px] border-r bg-background flex flex-col h-screen
+        w-[240px] lg:w-[200px] border-r bg-background  flex flex-col h-screen
         ${isSidebarOpen ? "shadow-lg lg:shadow-none" : ""}
       `}
       >
-        <div className="flex items-center p-3 border-b">
+        <div className="flex items-center p-3 ">
           {/* Toggle Button */}
           <button
             onClick={toggleSidebar}
-            className="p-2 rounded-lg transition-all duration-200"
+            className="p-2 rounded-lg transition-all duration-200 lg:hidden"
           >
             <svg
               stroke="currentColor"
@@ -35,9 +35,8 @@ export default function Sidebar() {
               viewBox="0 0 24 24"
               strokeLinecap="round"
               strokeLinejoin="round"
-              className={`h-4 w-4 text-gray-400 transition-transform duration-200 ${
-                !isSidebarOpen ? "rotate-180" : "rotate-0"
-              }`}
+              className={`h-4 w-4 text-gray-400 transition-transform duration-200 ${!isSidebarOpen ? "rotate-180" : "rotate-0"
+                }`}
               height="1em"
               width="1em"
               xmlns="http://www.w3.org/2000/svg"
@@ -79,9 +78,8 @@ export default function Sidebar() {
       {/* Mobile Toggle Button - Only visible when sidebar is closed on mobile */}
       <button
         onClick={toggleSidebar}
-        className={`fixed lg:hidden top-4 left-4 z-50 p-2 rounded-lg transition-all duration-200 ${
-          isSidebarOpen ? "opacity-0" : "opacity-100"
-        }`}
+        className={`fixed lg:hidden top-4 left-4 z-50 p-2 rounded-lg transition-all duration-200 ${isSidebarOpen ? "opacity-0" : "opacity-100"
+          }`}
       >
         <svg
           stroke="currentColor"
@@ -122,11 +120,10 @@ function SidebarItem({
 }) {
   return (
     <div
-      className={`flex items-center px-4 h-10 w-full ${
-        active
-          ? "bg-muted font-medium"
-          : "text-muted-foreground hover:bg-muted/50"
-      }`}
+      className={`flex items-center px-4 h-10 w-full ${active
+        ? "bg-muted font-medium"
+        : "text-muted-foreground hover:bg-muted/50"
+        }`}
     >
       <span className="mr-3">{icon}</span>
       <span className="text-sm whitespace-nowrap">{label}</span>

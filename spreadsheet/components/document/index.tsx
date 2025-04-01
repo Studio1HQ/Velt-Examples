@@ -26,9 +26,9 @@ export default function Document() {
       <VeltCursor />
 
       <div className="flex-1 overflow-auto relative">
-        <table className="w-full border-separate border-spacing-0 ">
+        <table className="w-full border-spacing-0 ">
           <thead>
-            <tr className="text-left ">
+            <tr className="text-left text-foreground">
               <th className="w-12 border-r border-b p-2 bg-background  sticky top-0"></th>
               <th className="p-2 border-r border-b bg-background top-0 min-w-[200px] text-center">
                 A
@@ -52,12 +52,12 @@ export default function Document() {
           </thead>
           <tbody>
             {missions.map((mission) => (
-              <tr key={mission.id} className="border-b ">
-                <td className="border-r p-4 text-center text-muted-foreground bg-background sticky left-0 ">
+              <tr key={mission.id} className="border-b">
+                <td className="text-foreground border-opacity-0 border-r p-4 text-center bg-background sticky left-0 ">
                   {mission.id}
                 </td>
                 <td
-                  className={`p-2 relative group  border hover:bg-muted/80 ${selectedCell === `cell-${mission.id}-mission`
+                  className={`p-2 relative group   hover:bg-muted/80 ${selectedCell === `cell-${mission.id}-mission`
                     ? "outline outline-2 outline-yellow-400 rounded-md"
                     : ""
                     }`}
