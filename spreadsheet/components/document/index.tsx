@@ -26,38 +26,38 @@ export default function Document() {
       <VeltCursor />
 
       <div className="flex-1 overflow-auto relative">
-        <table className="w-full border-separate border-spacing-0 ">
+        <table className="w-full border-spacing-0 ">
           <thead>
-            <tr className="text-left ">
-              <th className="w-12 border-r border-b p-2 bg-background  sticky top-0"></th>
-              <th className="p-2 border-r border-b bg-background top-0 min-w-[200px] text-center">
+            <tr className="text-left text-foreground ">
+              <th className="w-12 border-r border-b p-2 dark:bg-[#141414] bg-[#F8F8F8]  sticky top-0"></th>
+              <th className="p-2 border-r border-b  dark:bg-[#141414] bg-[#F8F8F8] top-0 min-w-[200px] text-center">
                 A
               </th>
-              <th className="p-2 border-r border-b bg-background  min-w-[200px] text-center">
+              <th className="p-2 border-r border-b dark:bg-[#141414] bg-[#F8F8F8]  min-w-[200px] text-center">
                 B
               </th>
-              <th className="p-2 border-r border-b bg-background  min-w-[200px] text-center">
+              <th className="p-2 border-r border-b dark:bg-[#141414] bg-[#F8F8F8]  min-w-[200px] text-center">
                 C
               </th>
-              <th className="p-2 border-r border-b bg-background  min-w-[200px] text-center">
+              <th className="p-2 border-r border-b dark:bg-[#141414]    bg-[#F8F8F8]  min-w-[200px] text-center">
                 D
               </th>
-              <th className="p-2 border-r border-b bg-background  min-w-[200px] text-center">
+              <th className="p-2 border-r border-b dark:bg-[#141414]    bg-[#F8F8F8]  min-w-[200px] text-center">
                 E
               </th>
-              <th className="p-2 border-r border-b bg-background  min-w-[200px] text-center">
+              <th className="p-2 border-r border-b dark:bg-[#141414]    bg-[#F8F8F8]  min-w-[200px] text-center">
                 F
               </th>
             </tr>
           </thead>
           <tbody>
             {missions.map((mission) => (
-              <tr key={mission.id} className="border-b ">
-                <td className="border-r p-4 text-center text-muted-foreground bg-background sticky left-0 ">
+              <tr key={mission.id} className="border-b">
+                <td className="text-foreground border-opacity-0 border-r p-4 text-center sticky left-0 ">
                   {mission.id}
                 </td>
                 <td
-                  className={`p-2 relative group  border hover:bg-muted/80 ${selectedCell === `cell-${mission.id}-mission`
+                  className={`p-2 relative group   hover:bg-muted/80 ${selectedCell === `cell-${mission.id}-mission`
                     ? "outline outline-2 outline-yellow-400 rounded-md"
                     : ""
                     }`}

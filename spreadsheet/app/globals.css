@@ -37,7 +37,8 @@
 
   .dark {
     --background: 0 0% 0%;
-    --foreground: 0 0% 100%;
+    --foreground: 0 0% 78%;
+    --hover: 0 0% 68%;
 
     --card: 0 0% 0%;
     --card-foreground: 0 0% 100%;
@@ -60,7 +61,7 @@
     --destructive: 0 0% 0%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 0 0% 20%;
+    --border: 0 0% 10%;
     --input: 0 0% 20%;
     --ring: 0 0% 100%;
   }
