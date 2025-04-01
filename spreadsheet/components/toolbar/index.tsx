@@ -1,13 +1,13 @@
-"use client";
+'use client';
 
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { Button } from "@/components/ui/button";
+import { Avatar, AvatarFallback } from '@/components/ui/avatar';
+import { Button } from '@/components/ui/button';
 import {
   VeltCommentsSidebar,
   VeltNotificationsTool,
   VeltPresence,
   VeltSidebarButton,
-} from "@veltdev/react";
+} from '@veltdev/react';
 import {
   AlignCenter,
   AlignLeft,
@@ -25,11 +25,11 @@ import {
   Pencil,
   Strikethrough,
   Sun,
-} from "lucide-react";
-import { useTheme } from "next-themes";
-import { useEffect, useState } from "react";
+} from 'lucide-react';
+import { useTheme } from 'next-themes';
+import { useEffect, useState } from 'react';
 // [VELT] Initialize user
-import { useVeltUser } from "../velt/VeltInitializeUser";
+import { useVeltUser } from '../velt/VeltInitializeUser';
 
 export default function Toolbar() {
   const { theme, setTheme } = useTheme();
@@ -42,7 +42,7 @@ export default function Toolbar() {
   }, []);
 
   const toggleTheme = () => {
-    setTheme(theme === "dark" ? "light" : "dark");
+    setTheme(theme === 'dark' ? 'light' : 'dark');
   };
 
   const handleSwitchUser = (user: typeof currentUser) => {
@@ -51,9 +51,9 @@ export default function Toolbar() {
   };
 
   const getUserColor = (userId: string) => {
-    return userId === "user-bread"
-      ? "var(--bread-color)"
-      : "var(--felix-color)";
+    return userId === 'user-bread'
+      ? 'var(--bread-color)'
+      : 'var(--felix-color)';
   };
 
   return (
@@ -123,8 +123,8 @@ export default function Toolbar() {
                 <AvatarFallback
                   style={{
                     backgroundImage: `url(${currentUser.profileUrl})`,
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
                   }}
                   className="text-white"
                 />
@@ -132,15 +132,16 @@ export default function Toolbar() {
 
               <ChevronUp
                 size={16}
-                className={`text-gray-600 dark:text-gray-300 transition-transform duration-200 cursor-pointer ${isDropdownOpen ? "rotate-180" : ""}`}
+                className={`text-gray-600 dark:text-gray-300 transition-transform duration-200 cursor-pointer ${isDropdownOpen ? 'rotate-180' : ''
+                  }`}
                 onClick={() => setIsDropdownOpen(!isDropdownOpen)}
               />
             </div>
 
             {/* [VELT] Sidebar Button */}
-            {mounted && <VeltSidebarButton darkMode={theme === "dark"} />}
+            {mounted && <VeltSidebarButton darkMode={theme === 'dark'} />}
             {/* [VELT] Comments Sidebar */}
-            {mounted && <VeltCommentsSidebar darkMode={theme === "dark"} />}
+            {mounted && <VeltCommentsSidebar darkMode={theme === 'dark'} />}
           </div>
 
           {/* Dropdown Menu */}
@@ -158,8 +159,8 @@ export default function Toolbar() {
                           <AvatarFallback
                             style={{
                               backgroundImage: `url(${user.profileUrl})`,
-                              backgroundSize: "cover",
-                              backgroundPosition: "center",
+                              backgroundSize: 'cover',
+                              backgroundPosition: 'center',
                             }}
                             className="text-white"
                           />
@@ -173,8 +174,8 @@ export default function Toolbar() {
                     <div
                       onClick={() => handleSwitchUser(user)}
                       className={`flex items-center justify-center w-5 h-5 rounded-full cursor-pointer ${currentUser.userId === user.userId
-                          ? "text-green-500"
-                          : "text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
+                        ? 'text-green-500'
+                        : 'text-gray-400 hover:text-gray-600 dark:hover:text-gray-300'
                         }`}
                     >
                       {currentUser.userId === user.userId ? (
@@ -191,7 +192,7 @@ export default function Toolbar() {
         </div>
         <div className="h-8 w-8 flex items-center justify-center">
           {/* [VELT] Notifications Tool */}
-          {mounted && <VeltNotificationsTool />}
+          {mounted && <VeltNotificationsTool darkMode={theme === 'dark'} />}
         </div>
         {mounted && (
           <Button
@@ -200,7 +201,7 @@ export default function Toolbar() {
             className="h-8 w-8"
             onClick={toggleTheme}
           >
-            {theme === "dark" ? <Sun size={16} /> : <Moon size={16} />}
+            {theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
           </Button>
         )}
       </div>
