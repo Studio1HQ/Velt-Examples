@@ -7,7 +7,6 @@ const config = {
     "./components/**/*.{ts,tsx}",
     "./app/**/*.{ts,tsx}",
     "./src/**/*.{ts,tsx}",
-    "*.{js,ts,jsx,tsx,mdx}",
   ],
   prefix: "",
   theme: {
@@ -22,16 +21,33 @@ const config = {
       fontFamily: {
         sans: [
           '"IBM Plex Sans"',
-          '-apple-system',
-          'BlinkMacSystemFont',
+          "-apple-system",
+          "BlinkMacSystemFont",
           '"Segoe UI"',
-          'Roboto',
-          'Oxygen-Sans',
-          'Ubuntu',
-          'Cantarell',
+          "Roboto",
+          "Oxygen-Sans",
+          "Ubuntu",
+          "Cantarell",
           '"Helvetica Neue"',
-          'sans-serif'
+          "sans-serif",
         ],
+        urbanist: [
+          '"Urbanist"',
+          "system-ui",
+          "-apple-system",
+          "BlinkMacSystemFont",
+          '"Segoe UI"',
+          "Roboto",
+          "Oxygen",
+          "Ubuntu",
+          "Cantarell",
+          '"Open Sans"',
+          '"Helvetica Neue"',
+          "sans-serif",
+        ],
+      },
+      transitionDelay: {
+        1500: "1500ms",
       },
       colors: {
         border: "hsl(var(--border))",
