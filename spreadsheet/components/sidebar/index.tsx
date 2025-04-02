@@ -1,3 +1,4 @@
+'use client'
 import Image from "next/image";
 import type React from "react";
 import { useState } from "react";
@@ -5,16 +6,13 @@ import HomeIcon from "@/components/icons/home-icon";
 import SheetIcon from "@/components/icons/sheet-icon";
 import Settings from "@/components/icons/settings-icon";
 import { useSearchParams } from "next/navigation";
-export default function Sidebar() {
+export default function Sidebar({focused}:{focused?:boolean}) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
-  const searchParams = useSearchParams();
 
-  const focused = ( searchParams.get("focused")||"true" )  === "true";
-  console.log(focused);
   return (
     <>
       {/* Sidebar */}
