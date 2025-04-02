@@ -12,8 +12,6 @@ import {
   AlignCenter,
   AlignLeft,
   AlignRight,
-  ArrowLeft,
-  ArrowRight,
   Bold,
   ChevronUp,
   Circle,
@@ -33,9 +31,8 @@ import React, { useEffect, useState } from "react";
 // [VELT] Initialize user
 import { useVeltUser } from "../velt/VeltInitializeUser";
 import { Separator } from "../ui/separator";
-import { useSearchParams } from "next/navigation";
 const toolbar_css = "h-8 w-8 rounded-full hover:dark:bg-[#ffffff14]";
-export default function Toolbar() {
+export default function Toolbar({focused}:{focused?:boolean}) {
   const { theme, setTheme } = useTheme();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
@@ -73,10 +70,6 @@ export default function Toolbar() {
     Link,
     Pencil,
   ];
-  const searchParams = useSearchParams();
-
-  const focused = ( searchParams.get("focused")||"true" ) === "true";
-
   const [title, setTitle] = useState("Planets");
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);

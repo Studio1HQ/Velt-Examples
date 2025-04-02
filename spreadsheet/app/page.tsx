@@ -2,10 +2,12 @@
 
 import Document from "@/components/document";
 import Sidebar from "@/components/sidebar";
+import SuspenseWrapper from "@/components/SuspenseWrapper";
 import { ThemeProvider } from "@/components/theme-provider";
 import Toolbar from "@/components/toolbar";
 import VeltCollaboration from "@/components/velt/VeltCollaboration";
 import { VeltProvider } from "@veltdev/react";
+import { useSearchParams } from "next/navigation";
 import type React from "react";
 interface MissionData {
   id: number;
@@ -15,6 +17,9 @@ interface MissionData {
 }
 
 export default function SpreadsheetApp() {
+  const searchParams = useSearchParams();
+  const focused = ( searchParams.get("focused")||"true" )  === "true";
+  console.log(focused);
   return (
     // [VELT] Initialize the Velt provider
     <VeltProvider apiKey={process.env.NEXT_PUBLIC_VELT_API_KEY || ""}>
@@ -23,11 +28,14 @@ export default function SpreadsheetApp() {
       <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
         <div className="flex h-screen w-full flex-col overflow-y-hidden">
           <div className="flex h-screen">
-            <Sidebar />
+            <SuspenseWrapper>
+
+            <Sidebar focused={focused} />
             <div className="flex-1 flex flex-col">
               <Toolbar />
               <Document />
             </div>
+            </SuspenseWrapper>
           </div>
         </div>
       </ThemeProvider>
