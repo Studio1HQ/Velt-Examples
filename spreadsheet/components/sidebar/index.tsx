@@ -9,7 +9,6 @@ import { useSearchParams } from "next/navigation";
 export default function Sidebar() {
   const searchParams = useSearchParams();
   const focused = (searchParams.get("focused") || "true") === "true";
-  console.log(focused);
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
   const toggleSidebar = () => {

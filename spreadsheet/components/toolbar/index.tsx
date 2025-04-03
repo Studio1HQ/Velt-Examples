@@ -40,7 +40,6 @@ export default function Toolbar() {
   const { currentUser, switchUser, users } = useVeltUser();
   const searchParams = useSearchParams();
   const focused = (searchParams.get("focused") || "true") === "true";
-  console.log(focused);
   useEffect(() => {
     setMounted(true);
   }, []);
@@ -79,7 +78,7 @@ export default function Toolbar() {
   };
   return (
     <div className="p-4 border-b flex items-center justify-between border-[#f5f5f5] dark:border-[#ffffff14]">
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-7">
         <div className="pl-9 flex items-center gap-2">
           {focused && (
             <>
