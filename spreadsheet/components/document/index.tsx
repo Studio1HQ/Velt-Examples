@@ -11,7 +11,7 @@ import {
 import { useState } from "react";
 import VeltInitializeDocument from "../velt/VeltInitializeDocument";
 const native_class_table_header =
-  "p-2 border-r border-b border-[#F8F8F8] dark:border-[#ffffff14] dark:bg-black dark:text-[#cacaca] min-w-[200px] text-[#00000070] ";
+  "p-2 border-r border-b border-[#f5f5f5] dark:border-[#ffffff14] dark:bg-black dark:text-[#cacaca] min-w-[200px] text-[#00000070] ";
 export default function Document() {
   const [missions, setMissions] = useState<SpreadsheetData[]>(missionData);
   const [selectedCell, setSelectedCell] = useState<string | null>(null);
@@ -27,14 +27,16 @@ export default function Document() {
       <VeltCursor />
 
       <div className="flex-1 overflow-auto relative">
-        <table className="w-full border-spacing-0 border-[#F8F8F8] dark:border-[#ffffff14]">
+        <table className="w-full border-spacing-0 border-[#f5f5f5] dark:border-[#ffffff14]">
           <thead>
             <tr className="text-left text-foreground sticky top-0 bg-white z-10 dark:bg-black dark:text-[#cacaca]">
-              <th className="w-12 border-r border-b border-[#F8F8F8] dark:border-[#ffffff14] p-2 sticky top-0"></th>
-              {["A", "B", "C", "D", "E", "F"].map((letter) => (
+              <th className="w-12 border-r border-b border-[#f5f5f5] dark:border-[#ffffff14] p-2 sticky top-0"></th>
+              {["A", "B", "C", "D", "E", "F"].map((letter, index) => (
                 <th
                   key={letter}
-                  className={`${native_class_table_header} top-0`}
+                  className={`${
+                    index >= 3 ? "hidden lg:table-cell" : ""
+                  } ${native_class_table_header} top-0`}
                 >
                   {letter}
                 </th>
@@ -45,9 +47,9 @@ export default function Document() {
             {missions.map((mission) => (
               <tr
                 key={mission.id}
-                className="border-b border-[#F8F8F8] dark:border-[#ffffff14]"
+                className="border-b border-[#f5f5f5] dark:border-[#ffffff14]"
               >
-                <td className="text-foreground border-opacity-0 border-r p-4 sticky left-0 border-[#F8F8F8] dark:border-[#ffffff14] min-w-[70px]">
+                <td className="text-foreground border-opacity-0 border-r p-4 sticky left-0 border-[#f5f5f5] dark:border-[#ffffff14] min-w-[70px]">
                   {mission.id}
                 </td>
                 <td
@@ -76,7 +78,7 @@ export default function Document() {
                   </div>
                 </td>
                 <td
-                  className={`p-2 relative group  border hover:bg-muted/80 border-[#F8F8F8] dark:border-[#ffffff14] ${
+                  className={`p-2 relative group  border hover:bg-muted/80 border-[#f5f5f5] dark:border-[#ffffff14] ${
                     selectedCell === `cell-${mission.id}-destination`
                       ? "outline outline-2 outline-yellow-400 rounded-md"
                       : ""
@@ -103,7 +105,7 @@ export default function Document() {
                   </div>
                 </td>
                 <td
-                  className={`p-2 relative group  border hover:bg-muted/80 border-[#F8F8F8] dark:border-[#ffffff14] ${
+                  className={`p-2 relative group  border hover:bg-muted/80 border-[#f5f5f5] dark:border-[#ffffff14] ${
                     selectedCell === `cell-${mission.id}-type`
                       ? "outline outline-2 outline-yellow-400 rounded-md"
                       : ""
@@ -130,30 +132,13 @@ export default function Document() {
                 {["D", "E", "F"].map((col) => (
                   <td
                     key={col}
-                    className={`p-2 relative group border hover:bg-muted/80 border-[#F8F8F8] dark:border-[#ffffff14] ${
+                    className={`hidden lg:table-cell p-2 relative group border hover:bg-muted/80 border-[#f5f5f5] dark:border-[#ffffff14] ${
                       selectedCell === `cell-${mission.id}-${col}`
                         ? "outline outline-2 outline-yellow-400 rounded-md"
                         : ""
                     }`}
-                    id={`cell-${mission.id}-${col}`}
-                    data-velt-comment-target={`cell-${mission.id}-${col}`}
                     onClick={() => setSelectedCell(`cell-${mission.id}-${col}`)}
-                  >
-                    <div className="flex items-center justify-between">
-                      <span></span>
-                      <div className="opacity-0 group-hover:opacity-100 transition-opacity">
-                        {/* [VELT] Add a comment tool to the cell */}
-                        <VeltCommentTool
-                          targetElementId={`cell-${mission.id}-${col}`}
-                        />
-                        {/* [VELT] Add a comment bubble to the cell */}
-                        <VeltCommentBubble
-                          targetElementId={`cell-${mission.id}-${col}`}
-                          commentCountType="total"
-                        />
-                      </div>
-                    </div>
-                  </td>
+                  ></td>
                 ))}
               </tr>
             ))}

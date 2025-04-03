@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import Image from "next/image";
 import type React from "react";
 import { useState } from "react";
@@ -6,7 +6,10 @@ import HomeIcon from "@/components/icons/home-icon";
 import SheetIcon from "@/components/icons/sheet-icon";
 import Settings from "@/components/icons/settings-icon";
 import { useSearchParams } from "next/navigation";
-export default function Sidebar({focused}:{focused?:boolean}) {
+export default function Sidebar() {
+  const searchParams = useSearchParams();
+  const focused = (searchParams.get("focused") || "true") === "true";
+  console.log(focused);
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
   const toggleSidebar = () => {
@@ -21,7 +24,7 @@ export default function Sidebar({focused}:{focused?:boolean}) {
         fixed lg:static inset-y-0 left-0 z-40 p-1
         transform ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"}
         lg:translate-x-0 transition-transform duration-200 ease-in-out
-        border-r bg-background  flex flex-col h-screen border-[#F8F8F8] dark:border-[#ffffff14]
+        border-r bg-background  flex flex-col h-screen border-[#f5f5f5] dark:border-[#ffffff14]
         ${isSidebarOpen ? "shadow-lg lg:shadow-none" : ""}
         ${focused ? " w-[240px] lg:w-[200px]" : ""}
       `}
@@ -51,7 +54,7 @@ export default function Sidebar({focused}:{focused?:boolean}) {
             </svg>
           </button>
         </div>
-        <div className="flex items-center justify-center p-3 border-b border-[#F8F8F8] dark:border-[#ffffff14]">
+        <div className="flex items-center justify-center p-3 border-b border-[#f5f5f5] dark:border-[#ffffff14]">
           <div className="h-8 w-8 rounded-full flex items-center justify-center text-amber-800 text-xs font-bold overflow-hidden">
             <Image
               src="https://velt-spreadsheet-app-demo.vercel.app/assets/bread_icon.png"
@@ -60,21 +63,25 @@ export default function Sidebar({focused}:{focused?:boolean}) {
               height={24}
             />
           </div>
-          {
-            focused &&
-          <span className="ml-2 text-sm font-urbanist tracking-wide">
-            Bread's Workspace
-          </span>
-          }
+          {focused && (
+            <span className="ml-2 text-sm font-urbanist tracking-wide">
+              Bread's Workspace
+            </span>
+          )}
         </div>
 
-        <div className="flex flex-col flex-1 overflow-y-auto px-3 gap-3">
-          <SidebarItem icon={<HomeIcon />} label="Home" />
-          <SidebarItem icon={<SheetIcon />} label="Sheets" active />
-          <SidebarItem icon={<Settings />} label="Settings" />
+        <div className="flex flex-col flex-1 overflow-y-auto px-3 gap-3 mt-1">
+          <SidebarItem icon={<HomeIcon />} label="Home" focused={focused} />
+          <SidebarItem
+            icon={<SheetIcon />}
+            label="Sheets"
+            active
+            focused={focused}
+          />
+          <SidebarItem icon={<Settings />} label="Settings" focused={focused} />
         </div>
 
-        <div className="p-4 mt-auto border-t border-[#F8F8F8] dark:border-[#ffffff14]">
+        <div className="p-4 mt-auto border-t border-[#f5f5f5] dark:border-[#ffffff14]">
           <span className="text-xs text-gray-500 flex items-center justify-center gap-2">
             <svg
               _ngcontent-ng-c4080216602=""
@@ -177,12 +184,11 @@ export default function Sidebar({focused}:{focused?:boolean}) {
                 d="M3.96738 0.641541L1.80057 2.62005L4.463 1.9974L3.96738 0.641541Z"
               ></path>
             </svg>
-            {
-              focused && 
-            <span className="whitespace-nowrap font-urbanist text-[9.6px] tracking-[0.15rem]">
-              MADE WITH VELT.DEV
-            </span>
-            }
+            {focused && (
+              <span className="whitespace-nowrap font-urbanist text-[9.6px] tracking-[0.15rem]">
+                MADE WITH VELT.DEV
+              </span>
+            )}
           </span>
         </div>
       </div>
@@ -226,25 +232,23 @@ function SidebarItem({
   icon,
   label,
   active = false,
+  focused = false,
 }: {
   icon: React.ReactNode;
   label: string;
   active?: boolean;
+  focused?: boolean;
 }) {
-  const searchParams = useSearchParams();
-
-  const focused = ( searchParams.get("focused")||"true" ) === "true";
-  console.log(focused);
   return (
     <div
-      className={`flex items-center px-4 h-10 w-full font-urbanist text-xs ${
+      className={`flex items-center px-4 h-10 w-full font-urbanist text-xs rounded-xl ${
         active
-          ? "bg-[#0000000a] dark:bg-[#ffffff14] text-[#000000cc] dark:text-[#ffffffcc] rounded-xl"
+          ? "bg-[#0000000a] dark:bg-[#ffffff14] text-[#000000cc] dark:text-[#ffffffcc] "
           : "text-[#00000070] dark:text-[#ffffff70] hover:bg-muted/50"
       }`}
     >
-      <span className="mr-3">{icon}</span>
-      {focused && <span className="text-sm whitespace-nowrap">{label}</span>}
+      <span className="">{icon}</span>
+      {focused && <span className="ps-3 text-sm whitespace-nowrap">{label}</span>}
     </div>
   );
 }
