@@ -31,13 +31,15 @@ import React, { useEffect, useState } from "react";
 // [VELT] Initialize user
 import { useVeltUser } from "../velt/VeltInitializeUser";
 import { Separator } from "../ui/separator";
+import { useSearchParams } from "next/navigation";
 const toolbar_css = "h-8 w-8 rounded-full hover:dark:bg-[#ffffff14]";
-export default function Toolbar({focused}:{focused?:boolean}) {
+export default function Toolbar() {
   const { theme, setTheme } = useTheme();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
   const { currentUser, switchUser, users } = useVeltUser();
-
+  const searchParams = useSearchParams();
+  const focused = (searchParams.get("focused") || "true") === "true";
   useEffect(() => {
     setMounted(true);
   }, []);
@@ -75,20 +77,26 @@ export default function Toolbar({focused}:{focused?:boolean}) {
     setTitle(e.target.value);
   };
   return (
-    <div className="p-4 border-b flex items-center justify-between border-[#F8F8F8] dark:border-[#ffffff14]">
-      <div className="flex items-center gap-2">
+    <div className="p-4 border-b flex items-center justify-between border-[#f5f5f5] dark:border-[#ffffff14]">
+      <div className="flex items-center gap-7">
         <div className="pl-9 flex items-center gap-2">
-          <Button variant="ghost" size="icon" className={`${toolbar_css}`}>
-            <Undo2 size={18} className="mt-0.5 stroke-[#7f7f7f]" />
-          </Button>
-          <Button variant="ghost" size="icon" className={`${toolbar_css}`}>
-            <Undo2 size={18} className="mt-0.5 stroke-[#7f7f7f] scale-x-[-1]" />
-          </Button>
-
-          <Separator
-            orientation="vertical"
-            className="h-[25px] dark:bg-bg-[#ffffff14]"
-          />
+          {focused && (
+            <>
+              <Button variant="ghost" size="icon" className={`${toolbar_css}`}>
+                <Undo2 size={18} className="mt-0.5 stroke-[#7f7f7f]" />
+              </Button>
+              <Button variant="ghost" size="icon" className={`${toolbar_css}`}>
+                <Undo2
+                  size={18}
+                  className="mt-0.5 stroke-[#7f7f7f] scale-x-[-1]"
+                />
+              </Button>
+              <Separator
+                orientation="vertical"
+                className="h-[25px] dark:bg-bg-[#ffffff14]"
+              />
+            </>
+          )}
 
           <div className="ml-1">
             <input
@@ -96,34 +104,33 @@ export default function Toolbar({focused}:{focused?:boolean}) {
               placeholder="Enter Name"
               maxLength={12}
               onChange={onChangeHandler}
-              className="p-2 rounded-md border border-transparent focus:!border-[#FFCD2E] focus:ring-1 focus:!ring-[#FFCD2E]  focus:outline-none"
+              className="p-2 rounded-md border border-transparent focus:!border-[#FFCD2E] focus:ring-1 focus:!ring-[#FFCD2E] focus:outline-none"
             />
           </div>
         </div>
+        {focused && (
+          <div className="items-center gap-5 hidden lg:flex">
+            {toolbarIcons.map((Icon, index) =>
+              Icon === "separator" ? (
+                <Separator
+                  key={index}
+                  orientation="vertical"
+                  className="h-[25px] dark:bg-bg-[#ffffff14]"
+                />
+              ) : (
+                <Button
+                  key={index}
+                  variant="ghost"
+                  size="icon"
+                  className={toolbar_css}
+                >
+                  <Icon size={18} color="#7f7f7f" />
+                </Button>
+              )
+            )}
+          </div>
+        )}
       </div>
-
-      {focused && (
-        <div className="items-center gap-5 hidden lg:flex ">
-          {toolbarIcons.map((Icon, index) =>
-            Icon === "separator" ? (
-              <Separator
-                key={index}
-                orientation="vertical"
-                className="h-[25px] dark:bg-bg-[#ffffff14]"
-              />
-            ) : (
-              <Button
-                key={index}
-                variant="ghost"
-                size="icon"
-                className={toolbar_css}
-              >
-                <Icon size={18} color="#7f7f7f" />
-              </Button>
-            )
-          )}
-        </div>
-      )}
 
       <div className="flex items-center">
         <div className="relative">
@@ -170,7 +177,7 @@ export default function Toolbar({focused}:{focused?:boolean}) {
 
           {/* Dropdown Menu */}
           {isDropdownOpen && (
-            <div className="absolute right-0 mt-2 w-44 dark:bg-black/90 bg-white/90 backdrop-blur-sm border rounded-lg shadow-lg py-1 z-50 border-[#F8F8F8] dark:border-[#ffffff14]">
+            <div className="absolute right-0 mt-2 w-44 dark:bg-black/90 bg-white/90 backdrop-blur-sm border rounded-lg shadow-lg py-1 z-50 border-[#f5f5f5] dark:border-[#ffffff14]">
               {users.map((user) => (
                 <div
                   key={user.userId}
@@ -189,7 +196,7 @@ export default function Toolbar({focused}:{focused?:boolean}) {
                             className="text-white"
                           />
                         </Avatar>
-                        <div className="absolute -top-0.5 -right-0.5 w-2 h-2 bg-green-500 rounded-full border-2 border-[#F8F8F8] dark:border-[#ffffff14] z-10" />
+                        <div className="absolute -top-0.5 -right-0.5 w-2 h-2 bg-green-500 rounded-full border-2 border-[#f5f5f5] dark:border-[#ffffff14] z-10" />
                       </div>
                       <span className="text-sm text-gray-600 dark:text-gray-300">
                         {user.name}

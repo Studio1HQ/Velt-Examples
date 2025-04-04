@@ -103,3 +103,13 @@ td[class*="outline"] {
   bottom: -1px !important;
   right: -1px !important;
 }
+
+table {
+  table-layout: fixed !important;
+}
+
+th, td {
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
