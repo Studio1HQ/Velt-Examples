@@ -1,3 +1,4 @@
+/* [Velt] This component implements the toolbar with Velt collaboration features including presence indicators and comment tools. */
 "use client";
 
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
@@ -28,10 +29,10 @@ import {
 } from "lucide-react";
 import { useTheme } from "next-themes";
 import React, { useEffect, useState } from "react";
-// [VELT] Initialize user
-import { useVeltUser } from "../velt/VeltInitializeUser";
-import { Separator } from "../ui/separator";
+
 import { useSearchParams } from "next/navigation";
+import { Separator } from "../ui/separator";
+import { useVeltUser } from "../velt/VeltInitializeUser";
 const toolbar_css = "h-8 w-8 rounded-full hover:dark:bg-[#ffffff14]";
 export default function Toolbar() {
   const { theme, setTheme } = useTheme();
@@ -134,7 +135,7 @@ export default function Toolbar() {
                 >
                   <Icon size={18} color="#7f7f7f" />
                 </Button>
-              )
+              ),
             )}
           </div>
         )}
@@ -144,7 +145,7 @@ export default function Toolbar() {
         <div className="relative">
           <div className="flex items-center gap-3">
             <div data-user-id={currentUser.userId}>
-              {/* [VELT] Presence for cursor */}
+              {/* [Velt] User presence indicator showing current user's cursor and avatar */}
               <VeltPresence
                 // @ts-ignore
                 userAvatars={{
@@ -177,9 +178,9 @@ export default function Toolbar() {
               />
             </div>
 
-            {/* [VELT] Sidebar Button */}
+            {/* [Velt] Button to toggle the collaboration sidebar */}
             {mounted && <VeltSidebarButton darkMode={theme === "dark"} />}
-            {/* [VELT] Comments Sidebar */}
+            {/* [Velt] Sidebar component for managing comments and collaboration features */}
             {mounted && <VeltCommentsSidebar darkMode={theme === "dark"} />}
           </div>
 
@@ -194,6 +195,7 @@ export default function Toolbar() {
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
                       <div className="relative">
+                        {/* [Velt] User avatar */}
                         <Avatar className="h-6 w-6">
                           <AvatarFallback
                             style={{
@@ -231,7 +233,7 @@ export default function Toolbar() {
           )}
         </div>
         <div className="h-8 w-8 flex items-center justify-center">
-          {/* [VELT] Notifications Tool */}
+          {/* [Velt] Notification system for collaboration events */}
           {mounted && <VeltNotificationsTool darkMode={theme === "dark"} />}
         </div>
         {mounted && (

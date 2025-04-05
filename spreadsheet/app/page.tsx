@@ -1,3 +1,5 @@
+/* [Velt] This is the main application page that sets up the Velt provider and collaboration features. It also initializes the Velt provider and collaboration features. */
+
 "use client";
 
 import Document from "@/components/document";
@@ -23,7 +25,7 @@ export default function SpreadsheetApp() {
               <Sidebar />
               <div className="flex-1 flex flex-col">
                 <Toolbar />
-                <RemoveCommentCountBubble/>
+                <RemoveCommentCountBubble />
                 <Document />
               </div>
             </SuspenseWrapper>

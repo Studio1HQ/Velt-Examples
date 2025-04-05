@@ -1,8 +1,8 @@
+// [Velt] This component manages user authentication and presence in the Velt collaboration system with predefined users.
 import { useVeltClient } from "@veltdev/react";
 import { useEffect, useState } from "react";
 import { User } from "../../lib/types";
 
-// [VELT] Predefined users for the app
 export const USERS: User[] = [
   {
     userId: "user-bread",
@@ -20,7 +20,7 @@ export const USERS: User[] = [
   },
 ];
 
-// [VELT] Initializes the current signed in user in Velt with predefined users
+// [VELT] Initializes the current signed in user
 export default function VeltInitializeUser() {
   const { client } = useVeltClient();
   const [currentUser, setCurrentUser] = useState<User>(USERS[0]);
