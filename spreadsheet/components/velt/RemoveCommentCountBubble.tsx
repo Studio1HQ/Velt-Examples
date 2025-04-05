@@ -1,5 +1,4 @@
-// [Velt] This component removes the comment count bubble from Velt comments for a cleaner UI.
-import { useEffect } from 'react'; // Import the useEffect hook from React
+import { useEffect } from "react";
 
 /**
  * This component removes the comment count bubble from the Velt comments.
@@ -14,8 +13,13 @@ const RemoveCommentCountBubble = () => {
      * if it matches the specified classes.
      * @param {ParentNode} root The root element to start the search from
      */
-    const removeSpecificCommentCountContainer = (root: ParentNode = document) => {
-      const treeWalker = document.createTreeWalker(root, NodeFilter.SHOW_ELEMENT);
+    const removeSpecificCommentCountContainer = (
+      root: ParentNode = document,
+    ) => {
+      const treeWalker = document.createTreeWalker(
+        root,
+        NodeFilter.SHOW_ELEMENT,
+      );
 
       while (treeWalker.nextNode()) {
         const el = treeWalker.currentNode as HTMLElement;
@@ -61,4 +65,3 @@ const RemoveCommentCountBubble = () => {
 };
 
 export default RemoveCommentCountBubble;
-

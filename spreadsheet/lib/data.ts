@@ -1,8 +1,8 @@
 import type { SpreadsheetData } from "./types";
 
 export const missionData: SpreadsheetData[] = [
-  // these are the missions hardcoded data that are currently in the spreadsheet
-
+  /* these are the missions hardcoded data 
+  that are currently in the spreadsheet */
   {
     id: 1,
     mission: "Mission",
