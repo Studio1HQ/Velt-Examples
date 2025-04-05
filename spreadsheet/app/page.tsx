@@ -5,17 +5,11 @@ import Sidebar from "@/components/sidebar";
 import SuspenseWrapper from "@/components/SuspenseWrapper";
 import { ThemeProvider } from "@/components/theme-provider";
 import Toolbar from "@/components/toolbar";
+import RemoveCommentCountBubble from "@/components/velt/RemoveCommentCountBubble";
 import VeltCollaboration from "@/components/velt/VeltCollaboration";
 import { VeltProvider } from "@veltdev/react";
 
 import type React from "react";
-interface MissionData {
-  id: number;
-  mission: string;
-  destination: string;
-  missionType: "Manned" | "Unmanned";
-}
-
 export default function SpreadsheetApp() {
   return (
     // [VELT] Initialize the Velt provider
@@ -29,6 +23,7 @@ export default function SpreadsheetApp() {
               <Sidebar />
               <div className="flex-1 flex flex-col">
                 <Toolbar />
+                <RemoveCommentCountBubble/>
                 <Document />
               </div>
             </SuspenseWrapper>

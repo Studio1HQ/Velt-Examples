@@ -18,6 +18,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"; // ShadCN Table
+//this is being used to style the table columns
 const common_header_style =
   "hidden lg:table-cell w-[35px] min-w-[35px] max-w-[35px] whitespace-nowrap overflow-hidden truncate border border-[#f5f5f5] dark:border-[#ffffff14]  bg-transparent";
 export default function Document() {
@@ -108,7 +109,7 @@ export default function Document() {
                 <TableCell
                   className={`relative group hover:bg-gray-100 dark:hover:bg-gray-800 w-[35px] min-w-[35px] max-w-[35px] whitespace-nowrap overflow-hidden truncate border border-[#f5f5f5] dark:border-[#ffffff14]  ${
                     selectedCell === `cell-${mission.id}-mission`
-                      ? "outline outline-2 outline-yellow-400 rounded-md"
+                      ? "outline outline-2 outline-yellow-400"
                       : ""
                   }`}
                   id={`cell-${mission.id}-mission`}
@@ -133,7 +134,7 @@ export default function Document() {
                 <TableCell
                   className={`relative group hover:bg-gray-100 dark:hover:bg-gray-800 w-[35px] min-w-[35px] max-w-[35px] whitespace-nowrap overflow-hidden truncate border border-[#f5f5f5] dark:border-[#ffffff14]  ${
                     selectedCell === `cell-${mission.id}-destination`
-                      ? "outline outline-2 outline-yellow-400 rounded-md"
+                      ? "outline outline-2 outline-yellow-400"
                       : ""
                   }`}
                   id={`cell-${mission.id}-destination`}
@@ -159,7 +160,7 @@ export default function Document() {
                 <TableCell
                   className={`relative group hover:bg-gray-100 dark:hover:bg-gray-800 w-[35px] min-w-[35px] max-w-[35px] whitespace-nowrap overflow-hidden truncate border border-[#f5f5f5] dark:border-[#ffffff14]  ${
                     selectedCell === `cell-${mission.id}-type`
-                      ? "outline outline-2 outline-yellow-400 rounded-md"
+                      ? "outline outline-2 outline-yellow-400"
                       : ""
                   }`}
                   id={`cell-${mission.id}-type`}

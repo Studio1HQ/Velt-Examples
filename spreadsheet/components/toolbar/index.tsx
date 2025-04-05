@@ -82,10 +82,18 @@ export default function Toolbar() {
         <div className="pl-9 flex items-center gap-2">
           {focused && (
             <>
-              <Button variant="ghost" size="icon" className={`${toolbar_css}`}>
+              <Button
+                variant="ghost"
+                size="icon"
+                className={`${toolbar_css} hidden lg:block`}
+              >
                 <Undo2 size={18} className="mt-0.5 stroke-[#7f7f7f]" />
               </Button>
-              <Button variant="ghost" size="icon" className={`${toolbar_css}`}>
+              <Button
+                variant="ghost"
+                size="icon"
+                className={`${toolbar_css} hidden lg:block`}
+              >
                 <Undo2
                   size={18}
                   className="mt-0.5 stroke-[#7f7f7f] scale-x-[-1]"
@@ -145,7 +153,7 @@ export default function Toolbar() {
               />
             </div>
 
-            <div className="relative flex items-center gap-1 bg-black/10 dark:bg-white/10 rounded-full p-1 pr-2">
+            <div className="hidden lg:flex  relative items-center gap-1 bg-black/10 dark:bg-white/10 rounded-full p-1 pr-2">
               <Avatar
                 className="h-8 w-8 cursor-pointer hover:opacity-80"
                 onClick={() => setIsDropdownOpen(!isDropdownOpen)}
