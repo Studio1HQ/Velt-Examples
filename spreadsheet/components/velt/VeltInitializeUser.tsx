@@ -1,3 +1,4 @@
+// [Velt] This component manages user authentication and presence in the Velt collaboration system.
 import { useVeltClient } from "@veltdev/react";
 import { useEffect, useState } from "react";
 import { User } from "../../lib/types";

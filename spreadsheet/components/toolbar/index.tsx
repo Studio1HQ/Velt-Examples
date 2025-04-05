@@ -1,3 +1,4 @@
+// [Velt] This component implements the toolbar with Velt collaboration features including presence indicators and comment tools.
 "use client";
 
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
@@ -29,9 +30,9 @@ import {
 import { useTheme } from "next-themes";
 import React, { useEffect, useState } from "react";
 // [VELT] Initialize user
-import { useVeltUser } from "../velt/VeltInitializeUser";
-import { Separator } from "../ui/separator";
 import { useSearchParams } from "next/navigation";
+import { Separator } from "../ui/separator";
+import { useVeltUser } from "../velt/VeltInitializeUser";
 const toolbar_css = "h-8 w-8 rounded-full hover:dark:bg-[#ffffff14]";
 export default function Toolbar() {
   const { theme, setTheme } = useTheme();
@@ -170,9 +171,8 @@ export default function Toolbar() {
 
               <ChevronUp
                 size={18}
-                className={`text-gray-600 dark:text-gray-300 transition-transform duration-200 cursor-pointer ${
-                  isDropdownOpen ? "rotate-180" : ""
-                }`}
+                className={`text-gray-600 dark:text-gray-300 transition-transform duration-200 cursor-pointer ${isDropdownOpen ? "rotate-180" : ""
+                  }`}
                 onClick={() => setIsDropdownOpen(!isDropdownOpen)}
               />
             </div>
@@ -212,11 +212,10 @@ export default function Toolbar() {
                     </div>
                     <div
                       onClick={() => handleSwitchUser(user)}
-                      className={`flex items-center justify-center w-5 h-5 rounded-full cursor-pointer ${
-                        currentUser.userId === user.userId
+                      className={`flex items-center justify-center w-5 h-5 rounded-full cursor-pointer ${currentUser.userId === user.userId
                           ? "text-green-500"
                           : "text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
-                      }`}
+                        }`}
                     >
                       {currentUser.userId === user.userId ? (
                         <CircleDot size={18} />

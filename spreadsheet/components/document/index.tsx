@@ -1,5 +1,14 @@
+// [Velt] This component implements the spreadsheet document with Velt collaboration features including comments and cursor tracking.
 "use client";
 
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table"; // ShadCN Table
 import { missionData } from "@/lib/data";
 import type { SpreadsheetData } from "@/lib/types";
 import {
@@ -10,14 +19,6 @@ import {
 } from "@veltdev/react";
 import { useState } from "react";
 import VeltInitializeDocument from "../velt/VeltInitializeDocument";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table"; // ShadCN Table
 //this is being used to style the table columns
 const common_header_style =
   "hidden lg:table-cell w-[35px] min-w-[35px] max-w-[35px] whitespace-nowrap overflow-hidden truncate border border-[#f5f5f5] dark:border-[#ffffff14]  bg-transparent";
@@ -107,11 +108,10 @@ export default function Document() {
 
                 {/* Mission Column */}
                 <TableCell
-                  className={`relative group hover:bg-gray-100 dark:hover:bg-gray-800 w-[35px] min-w-[35px] max-w-[35px] whitespace-nowrap overflow-hidden truncate border border-[#f5f5f5] dark:border-[#ffffff14]  ${
-                    selectedCell === `cell-${mission.id}-mission`
+                  className={`relative group hover:bg-gray-100 dark:hover:bg-gray-800 w-[35px] min-w-[35px] max-w-[35px] whitespace-nowrap overflow-hidden truncate border border-[#f5f5f5] dark:border-[#ffffff14]  ${selectedCell === `cell-${mission.id}-mission`
                       ? "outline outline-2 outline-yellow-400"
                       : ""
-                  }`}
+                    }`}
                   id={`cell-${mission.id}-mission`}
                   data-velt-comment-target={`cell-${mission.id}-mission`}
                   onClick={() => setSelectedCell(`cell-${mission.id}-mission`)}
@@ -132,11 +132,10 @@ export default function Document() {
 
                 {/* Destination Column */}
                 <TableCell
-                  className={`relative group hover:bg-gray-100 dark:hover:bg-gray-800 w-[35px] min-w-[35px] max-w-[35px] whitespace-nowrap overflow-hidden truncate border border-[#f5f5f5] dark:border-[#ffffff14]  ${
-                    selectedCell === `cell-${mission.id}-destination`
+                  className={`relative group hover:bg-gray-100 dark:hover:bg-gray-800 w-[35px] min-w-[35px] max-w-[35px] whitespace-nowrap overflow-hidden truncate border border-[#f5f5f5] dark:border-[#ffffff14]  ${selectedCell === `cell-${mission.id}-destination`
                       ? "outline outline-2 outline-yellow-400"
                       : ""
-                  }`}
+                    }`}
                   id={`cell-${mission.id}-destination`}
                   data-velt-comment-target={`cell-${mission.id}-destination`}
                   onClick={() =>
@@ -158,11 +157,10 @@ export default function Document() {
                 </TableCell>
                 {/* Mission Type Column */}
                 <TableCell
-                  className={`relative group hover:bg-gray-100 dark:hover:bg-gray-800 w-[35px] min-w-[35px] max-w-[35px] whitespace-nowrap overflow-hidden truncate border border-[#f5f5f5] dark:border-[#ffffff14]  ${
-                    selectedCell === `cell-${mission.id}-type`
+                  className={`relative group hover:bg-gray-100 dark:hover:bg-gray-800 w-[35px] min-w-[35px] max-w-[35px] whitespace-nowrap overflow-hidden truncate border border-[#f5f5f5] dark:border-[#ffffff14]  ${selectedCell === `cell-${mission.id}-type`
                       ? "outline outline-2 outline-yellow-400"
                       : ""
-                  }`}
+                    }`}
                   id={`cell-${mission.id}-type`}
                   data-velt-comment-target={`cell-${mission.id}-type`}
                   onClick={() => setSelectedCell(`cell-${mission.id}-type`)}

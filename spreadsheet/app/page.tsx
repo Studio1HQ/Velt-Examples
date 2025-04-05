@@ -1,3 +1,4 @@
+// [Velt] This is the main application page that sets up the Velt provider and collaboration features.
 "use client";
 
 import Document from "@/components/document";
@@ -23,7 +24,7 @@ export default function SpreadsheetApp() {
               <Sidebar />
               <div className="flex-1 flex flex-col">
                 <Toolbar />
-                <RemoveCommentCountBubble/>
+                <RemoveCommentCountBubble />
                 <Document />
               </div>
             </SuspenseWrapper>
@@ -45,11 +46,10 @@ function SidebarItem({
 }) {
   return (
     <div
-      className={`flex items-center gap-2 px-3 py-2 rounded-md text-sm ${
-        active
+      className={`flex items-center gap-2 px-3 py-2 rounded-md text-sm ${active
           ? "bg-muted font-medium"
           : "text-muted-foreground hover:bg-muted/50"
-      }`}
+        }`}
     >
       {icon}
       <span>{label}</span>

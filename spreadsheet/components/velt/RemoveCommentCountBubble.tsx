@@ -1,3 +1,4 @@
+// [Velt] This component removes the comment count bubble from Velt comments for a cleaner UI.
 import { useEffect } from 'react'; // Import the useEffect hook from React
 
 /**

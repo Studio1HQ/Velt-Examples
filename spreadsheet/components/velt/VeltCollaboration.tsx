@@ -1,3 +1,4 @@
+// [Velt] This component initializes and configures the core Velt collaboration features including cursor tracking and comments.
 import { VeltComments, VeltCursor } from "@veltdev/react";
 import VeltInitializeDocument from "./VeltInitializeDocument";
 
