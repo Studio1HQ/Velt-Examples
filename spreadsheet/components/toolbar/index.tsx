@@ -33,8 +33,7 @@ import React, { useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { Separator } from '../ui/separator';
 import { useVeltUser } from '../velt/VeltInitializeUser';
-const toolbar_css =
-  'rounded-full hover:dark:bg-[#ffffff14] grid place-items-center';
+const toolbar_css = 'h-8 w-8 rounded-full hover:dark:bg-[#ffffff14]';
 export default function Toolbar() {
   const { theme, setTheme } = useTheme();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -89,14 +88,17 @@ export default function Toolbar() {
                 size="icon"
                 className={`${toolbar_css} hidden lg:block`}
               >
-                <Undo2 size={18} className="stroke-[#7f7f7f]" />
+                <Undo2 size={18} className="mt-0.5 stroke-[#7f7f7f]" />
               </Button>
               <Button
                 variant="ghost"
                 size="icon"
                 className={`${toolbar_css} hidden lg:block`}
               >
-                <Undo2 size={18} className="stroke-[#7f7f7f] scale-x-[-1]" />
+                <Undo2
+                  size={18}
+                  className="mt-0.5 stroke-[#7f7f7f] scale-x-[-1]"
+                />
               </Button>
               <Separator
                 orientation="vertical"
@@ -154,7 +156,7 @@ export default function Toolbar() {
 
             <div className="hidden lg:flex  relative items-center gap-1 bg-black/10 dark:bg-white/10 rounded-full p-1 pr-2">
               <Avatar
-                className="h-8 w-8 cursor-pointer hover:opacity-80"
+                className="h-6 w-6 cursor-pointer hover:opacity-80"
                 onClick={() => setIsDropdownOpen(!isDropdownOpen)}
               >
                 <AvatarFallback
@@ -176,13 +178,7 @@ export default function Toolbar() {
             </div>
 
             {/* [Velt] Button to toggle the collaboration sidebar */}
-
-            {mounted && (
-              <VeltSidebarButton
-                className="h-6 w-6"
-                darkMode={theme === 'dark'}
-              />
-            )}
+            {mounted && <VeltSidebarButton darkMode={theme === 'dark'} />}
             {/* [Velt] Sidebar component for managing comments and collaboration features */}
             {mounted && <VeltCommentsSidebar darkMode={theme === 'dark'} />}
           </div>
