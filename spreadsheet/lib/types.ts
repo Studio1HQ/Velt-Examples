@@ -1,8 +1,8 @@
-export interface SpreadsheetData {
+export interface SalesData {
   id: number;
-  mission: string;
-  destination: string;
-  missionType: "Manned" | "Unmanned";
+  name: string;
+  department: string;
+  value: number;
 }
 
 export type User = {

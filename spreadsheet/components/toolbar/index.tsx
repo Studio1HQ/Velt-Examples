@@ -214,8 +214,8 @@ export default function Toolbar() {
                     <div
                       onClick={() => handleSwitchUser(user)}
                       className={`flex items-center justify-center w-5 h-5 rounded-full cursor-pointer ${currentUser.userId === user.userId
-                          ? 'text-green-500'
-                          : 'text-gray-400 hover:text-gray-600 dark:hover:text-gray-300'
+                        ? 'text-green-500'
+                        : 'text-gray-400 hover:text-gray-600 dark:hover:text-gray-300'
                         }`}
                     >
                       {currentUser.userId === user.userId ? (
@@ -230,7 +230,7 @@ export default function Toolbar() {
             </div>
           )}
         </div>
-        <div className="h-8 w-8 flex items-center justify-center">
+        <div className=" flex items-center justify-center">
           {/* [Velt] Notification system for collaboration events */}
           {mounted && <VeltNotificationsTool darkMode={theme === 'dark'} />}
         </div>
