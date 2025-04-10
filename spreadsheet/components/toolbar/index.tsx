@@ -33,7 +33,7 @@ import React, { useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { Separator } from '../ui/separator';
 import { useVeltUser } from '../velt/VeltInitializeUser';
-const toolbar_css = 'h-8 w-8 rounded-full hover:dark:bg-[#ffffff14]';
+const toolbar_css = 'h-8 w-8 rounded-full hover:dark:bg-[#ffffff14] grid place-items-center';
 export default function Toolbar() {
   const { theme, setTheme } = useTheme();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
