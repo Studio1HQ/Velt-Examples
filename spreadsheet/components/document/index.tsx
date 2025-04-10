@@ -1,6 +1,6 @@
 /* [Velt] This component implements the spreadsheet document 
   with Velt collaboration features including comments and cursor tracking. */
-"use client";
+'use client';
 
 import {
   Table,
@@ -9,41 +9,42 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
-import { missionData } from "@/lib/data";
-import type { SpreadsheetData } from "@/lib/types";
-import {
-  VeltCommentBubble,
-  VeltCommentTool,
-  VeltComments,
-  VeltCursor,
-} from "@veltdev/react";
-import { useState } from "react";
-import VeltInitializeDocument from "../velt/VeltInitializeDocument";
-
+} from '@/components/ui/table';
+import { missionData } from '@/lib/data';
+import type { SpreadsheetData } from '@/lib/types';
+import { VeltCommentTool, VeltComments, VeltCursor } from '@veltdev/react';
+import { useTheme } from 'next-themes';
+import { useEffect, useState } from 'react';
+import VeltInitializeDocument from '../velt/VeltInitializeDocument';
 const common_header_style =
-  "hidden lg:table-cell w-[35px] min-w-[35px] max-w-[35px] whitespace-nowrap overflow-hidden truncate border border-[#f5f5f5] dark:border-[#ffffff14]  bg-transparent";
+  'hidden lg:table-cell w-[35px] min-w-[35px] max-w-[35px] whitespace-nowrap overflow-hidden truncate border border-[#f5f5f5] dark:border-[#ffffff14]  bg-transparent';
 export default function Document() {
+  const { theme } = useTheme();
+  const [mounted, setMounted] = useState(false);
   const [missions, setMissions] = useState<SpreadsheetData[]>(missionData);
   const [selectedCell, setSelectedCell] = useState<string | null>(null);
   const [sortConfig, setSortConfig] = useState<{
     key: keyof SpreadsheetData | null;
-    direction: "asc" | "desc";
+    direction: 'asc' | 'desc';
   }>({
     key: null,
-    direction: "asc",
+    direction: 'asc',
   });
 
-  const handleSort = (key: keyof SpreadsheetData) => {
-    let direction: "asc" | "desc" = "asc";
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
-    if (sortConfig.key === key && sortConfig.direction === "asc") {
-      direction = "desc";
+  const handleSort = (key: keyof SpreadsheetData) => {
+    let direction: 'asc' | 'desc' = 'asc';
+
+    if (sortConfig.key === key && sortConfig.direction === 'asc') {
+      direction = 'desc';
     }
 
     const sortedData = [...missions].sort((a, b) => {
-      if (a[key] < b[key]) return direction === "asc" ? -1 : 1;
-      if (a[key] > b[key]) return direction === "asc" ? 1 : -1;
+      if (a[key] < b[key]) return direction === 'asc' ? -1 : 1;
+      if (a[key] > b[key]) return direction === 'asc' ? 1 : -1;
       return 0;
     });
 
@@ -55,7 +56,13 @@ export default function Document() {
   return (
     <>
       {/* [Velt] Main comments component for the document */}
-      <VeltComments popoverMode={true} popoverTriangleComponent={true} />
+      {mounted && (
+        <VeltComments
+          popoverMode={true}
+          popoverTriangleComponent={true}
+          darkMode={theme === 'dark'}
+        />
+      )}
       {/* [Velt] Cursor tracking component for real-time collaboration */}
       <VeltCursor />
 
@@ -72,21 +79,21 @@ export default function Document() {
 
               {/* Other Columns (35px Width) */}
               {[
-                { label: "A", key: "mission" },
-                { label: "B", key: "destination" },
-                { label: "C", key: "missionType" },
+                { label: 'A', key: 'mission' },
+                { label: 'B', key: 'destination' },
+                { label: 'C', key: 'missionType' },
               ].map((col) => (
                 <TableHead
                   key={col.key}
                   className="p-2 cursor-pointer w-[35px] min-w-[35px] max-w-[35px] whitespace-nowrap overflow-hidden truncate border border-[#f5f5f5] dark:border-[#ffffff14]  bg-transparent"
                   onClick={() => handleSort(col.key as keyof SpreadsheetData)}
                 >
-                  {col.label}{" "}
+                  {col.label}{' '}
                   {sortConfig.key === col.key
-                    ? sortConfig.direction === "asc"
-                      ? "↑"
-                      : "↓"
-                    : ""}
+                    ? sortConfig.direction === 'asc'
+                      ? '↑'
+                      : '↓'
+                    : ''}
                 </TableHead>
               ))}
               <TableHead className={common_header_style}>D</TableHead>
@@ -109,11 +116,10 @@ export default function Document() {
 
                 {/* Mission Column */}
                 <TableCell
-                  className={`relative group hover:bg-gray-100 dark:hover:bg-gray-800 w-[35px] min-w-[35px] max-w-[35px] whitespace-nowrap overflow-hidden truncate border border-[#f5f5f5] dark:border-[#ffffff14]  ${
-                    selectedCell === `cell-${mission.id}-mission`
-                      ? "outline outline-2 outline-yellow-400"
-                      : ""
-                  }`}
+                  className={`relative group hover:bg-gray-100 dark:hover:bg-gray-800 w-[35px] min-w-[35px] max-w-[35px] whitespace-nowrap overflow-hidden truncate border border-[#f5f5f5] dark:border-[#ffffff14]  ${selectedCell === `cell-${mission.id}-mission`
+                      ? 'outline outline-2 outline-yellow-400'
+                      : ''
+                    }`}
                   id={`cell-${mission.id}-mission`}
                   data-velt-comment-target={`cell-${mission.id}-mission`}
                   onClick={() => setSelectedCell(`cell-${mission.id}-mission`)}
@@ -125,22 +131,16 @@ export default function Document() {
                       <VeltCommentTool
                         targetElementId={`cell-${mission.id}-mission`}
                       />
-                      {/* [Velt] Comment bubble showing number of comments */}
-                      <VeltCommentBubble
-                        targetElementId={`cell-${mission.id}-mission`}
-                        commentCountType="total"
-                      />
                     </div>
                   </div>
                 </TableCell>
 
                 {/* Destination Column */}
                 <TableCell
-                  className={`relative group hover:bg-gray-100 dark:hover:bg-gray-800 w-[35px] min-w-[35px] max-w-[35px] whitespace-nowrap overflow-hidden truncate border border-[#f5f5f5] dark:border-[#ffffff14]  ${
-                    selectedCell === `cell-${mission.id}-destination`
-                      ? "outline outline-2 outline-yellow-400"
-                      : ""
-                  }`}
+                  className={`relative group hover:bg-gray-100 dark:hover:bg-gray-800 w-[35px] min-w-[35px] max-w-[35px] whitespace-nowrap overflow-hidden truncate border border-[#f5f5f5] dark:border-[#ffffff14]  ${selectedCell === `cell-${mission.id}-destination`
+                      ? 'outline outline-2 outline-yellow-400'
+                      : ''
+                    }`}
                   id={`cell-${mission.id}-destination`}
                   data-velt-comment-target={`cell-${mission.id}-destination`}
                   onClick={() =>
@@ -153,20 +153,15 @@ export default function Document() {
                       <VeltCommentTool
                         targetElementId={`cell-${mission.id}-destination`}
                       />
-                      <VeltCommentBubble
-                        targetElementId={`cell-${mission.id}-destination`}
-                        commentCountType="total"
-                      />
                     </div>
                   </div>
                 </TableCell>
                 {/* Mission Type Column */}
                 <TableCell
-                  className={`relative group hover:bg-gray-100 dark:hover:bg-gray-800 w-[35px] min-w-[35px] max-w-[35px] whitespace-nowrap overflow-hidden truncate border border-[#f5f5f5] dark:border-[#ffffff14]  ${
-                    selectedCell === `cell-${mission.id}-type`
-                      ? "outline outline-2 outline-yellow-400"
-                      : ""
-                  }`}
+                  className={`relative group hover:bg-gray-100 dark:hover:bg-gray-800 w-[35px] min-w-[35px] max-w-[35px] whitespace-nowrap overflow-hidden truncate border border-[#f5f5f5] dark:border-[#ffffff14]  ${selectedCell === `cell-${mission.id}-type`
+                      ? 'outline outline-2 outline-yellow-400'
+                      : ''
+                    }`}
                   id={`cell-${mission.id}-type`}
                   data-velt-comment-target={`cell-${mission.id}-type`}
                   onClick={() => setSelectedCell(`cell-${mission.id}-type`)}
@@ -176,10 +171,6 @@ export default function Document() {
                     <div className="opacity-0 group-hover:opacity-100 transition-opacity">
                       <VeltCommentTool
                         targetElementId={`cell-${mission.id}-type`}
-                      />
-                      <VeltCommentBubble
-                        targetElementId={`cell-${mission.id}-type`}
-                        commentCountType="total"
                       />
                     </div>
                   </div>
