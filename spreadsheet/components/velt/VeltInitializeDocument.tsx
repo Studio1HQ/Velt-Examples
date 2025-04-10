@@ -2,8 +2,8 @@
 import { useSetDocument } from "@veltdev/react";
 
 export default function VeltInitializeDocument() {
-  useSetDocument("space-missions-spreadsheet-org", {
-    documentName: "space-missions-spreadsheet-org",
+  useSetDocument("sales-spreadsheet-org", {
+    documentName: "sales-spreadsheet-org",
   });
   return null;
 }

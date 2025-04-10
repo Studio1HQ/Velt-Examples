@@ -3,8 +3,8 @@ import type { Metadata } from "next";
 import type React from "react";
 
 export const metadata: Metadata = {
-  title: "Space Mission Spreadsheet",
-  description: "A spreadsheet application for space mission planning",
+  title: "Sales data Spreadsheet",
+  description: "A spreadsheet application for sales data",
 };
 
 export default function RootLayout({

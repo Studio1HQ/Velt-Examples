@@ -104,7 +104,7 @@ This project uses Velt SDK v4.2.1-beta.7 for real-time collaboration features:
 
 The application uses the following Velt configurations:
 
-- Document ID: "space-missions-spreadsheet-org"
+- Document ID: "sales-spreadsheet-org"
 - User authentication with predefined users
 - Custom comment bubble styling
 - Dark/Light mode support

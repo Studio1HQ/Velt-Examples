@@ -1,6 +1,6 @@
-/* [Velt] This component implements the spreadsheet document 
+/* [Velt] This component implements the salesdata  document 
   with Velt collaboration features including comments and cursor tracking. */
-"use client";
+'use client';
 
 import {
   Table,
@@ -9,84 +9,91 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
-import { missionData } from "@/lib/data";
-import type { SpreadsheetData } from "@/lib/types";
-import {
-  VeltCommentBubble,
-  VeltCommentTool,
-  VeltComments,
-  VeltCursor,
-} from "@veltdev/react";
-import { useState } from "react";
-import VeltInitializeDocument from "../velt/VeltInitializeDocument";
+} from '@/components/ui/table';
+import { missionData as salesData } from '@/lib/data';
+import type { SalesData } from '@/lib/types';
+import { VeltCommentTool, VeltComments, VeltCursor } from '@veltdev/react';
+import { useTheme } from 'next-themes';
+import { useEffect, useState } from 'react';
+import VeltInitializeDocument from '../velt/VeltInitializeDocument';
 
 const common_header_style =
-  "hidden lg:table-cell w-[35px] min-w-[35px] max-w-[35px] whitespace-nowrap overflow-hidden truncate border border-[#f5f5f5] dark:border-[#ffffff14]  bg-transparent";
+  'hidden lg:table-cell w-[35px] min-w-[35px] max-w-[35px] whitespace-nowrap overflow-hidden truncate border border-[#f5f5f5] dark:border-[#ffffff14]  bg-transparent';
+
 export default function Document() {
-  const [missions, setMissions] = useState<SpreadsheetData[]>(missionData);
+  const { theme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+  const [rows, setRows] = useState<SalesData[]>(salesData);
   const [selectedCell, setSelectedCell] = useState<string | null>(null);
   const [sortConfig, setSortConfig] = useState<{
-    key: keyof SpreadsheetData | null;
-    direction: "asc" | "desc";
+    key: keyof SalesData | null;
+    direction: 'asc' | 'desc';
   }>({
     key: null,
-    direction: "asc",
+    direction: 'asc',
   });
 
-  const handleSort = (key: keyof SpreadsheetData) => {
-    let direction: "asc" | "desc" = "asc";
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
-    if (sortConfig.key === key && sortConfig.direction === "asc") {
-      direction = "desc";
+  const handleSort = (key: keyof SalesData) => {
+    let direction: 'asc' | 'desc' = 'asc';
+
+    if (sortConfig.key === key && sortConfig.direction === 'asc') {
+      direction = 'desc';
     }
 
-    const sortedData = [...missions].sort((a, b) => {
-      if (a[key] < b[key]) return direction === "asc" ? -1 : 1;
-      if (a[key] > b[key]) return direction === "asc" ? 1 : -1;
+    const sortedData = [...rows].sort((a, b) => {
+      if (a[key] < b[key]) return direction === 'asc' ? -1 : 1;
+      if (a[key] > b[key]) return direction === 'asc' ? 1 : -1;
       return 0;
     });
 
     setSortConfig({ key, direction });
-    setMissions(sortedData);
+    setRows(sortedData);
   };
+
   /* [VELT] Initialize the document with a unique identifier and metadata. */
   <VeltInitializeDocument />;
+
   return (
     <>
       {/* [Velt] Main comments component for the document */}
-      <VeltComments popoverMode={true} popoverTriangleComponent={true} />
+      {mounted && (
+        <VeltComments
+          popoverMode={true}
+          popoverTriangleComponent={true}
+          darkMode={theme === 'dark'}
+        />
+      )}
       {/* [Velt] Cursor tracking component for real-time collaboration */}
       <VeltCursor />
 
       <div className="flex-1 overflow-auto relative shrink-0">
-        {/* ✅ Enforce `table-fixed` to ensure columns respect width constraints */}
-        <Table className="w-full table-fixed border border-[#f5f5f5] dark:border-[#ffffff14] ">
-          {/* Transparent Header */}
+        <Table className="w-full table-fixed border border-[#f5f5f5] dark:border-[#ffffff14]">
           <TableHeader className="bg-transparent">
             <TableRow>
-              {/* ✅ First Column (Strict 8px Width) */}
               <TableHead className="w-[8px] min-w-[8px] max-w-[8px] !overflow-hidden !truncate border border-[#f5f5f5] dark:border-[#ffffff14] px-0">
                 <div className="w-full overflow-hidden text-ellipsis"></div>
               </TableHead>
 
-              {/* Other Columns (35px Width) */}
               {[
-                { label: "A", key: "mission" },
-                { label: "B", key: "destination" },
-                { label: "C", key: "missionType" },
+                { label: 'Name', key: 'name' },
+                { label: 'Department', key: 'department' },
+                { label: 'Value', key: 'value' },
               ].map((col) => (
                 <TableHead
                   key={col.key}
-                  className="p-2 cursor-pointer w-[35px] min-w-[35px] max-w-[35px] whitespace-nowrap overflow-hidden truncate border border-[#f5f5f5] dark:border-[#ffffff14]  bg-transparent"
-                  onClick={() => handleSort(col.key as keyof SpreadsheetData)}
+                  className="p-2 cursor-pointer w-[35px] min-w-[35px] max-w-[35px] whitespace-nowrap overflow-hidden truncate border border-[#f5f5f5] dark:border-[#ffffff14] bg-transparent"
+                  onClick={() => handleSort(col.key as keyof SalesData)}
                 >
-                  {col.label}{" "}
+                  {col.label}{' '}
                   {sortConfig.key === col.key
-                    ? sortConfig.direction === "asc"
-                      ? "↑"
-                      : "↓"
-                    : ""}
+                    ? sortConfig.direction === 'asc'
+                      ? '↑'
+                      : '↓'
+                    : ''}
                 </TableHead>
               ))}
               <TableHead className={common_header_style}>D</TableHead>
@@ -95,91 +102,71 @@ export default function Document() {
             </TableRow>
           </TableHeader>
 
-          {/* Table Body */}
           <TableBody>
-            {missions.map((mission) => (
+            {rows.map((row) => (
               <TableRow
-                key={mission.id}
+                key={row.id}
                 className="border border-[#f5f5f5] dark:border-[#ffffff14] hover:bg-transparent"
               >
-                {/* ✅ First Column */}
                 <TableCell className="w-[8px] min-w-[8px] max-w-[8px] !overflow-hidden !truncate border border-[#f5f5f5] dark:border-[#ffffff14]">
-                  {mission.id}
+                  {row.id}
                 </TableCell>
 
-                {/* Mission Column */}
+                {/* Name Column */}
                 <TableCell
-                  className={`relative group hover:bg-gray-100 dark:hover:bg-gray-800 w-[35px] min-w-[35px] max-w-[35px] whitespace-nowrap overflow-hidden truncate border border-[#f5f5f5] dark:border-[#ffffff14]  ${
-                    selectedCell === `cell-${mission.id}-mission`
-                      ? "outline outline-2 outline-yellow-400"
-                      : ""
-                  }`}
-                  id={`cell-${mission.id}-mission`}
-                  data-velt-comment-target={`cell-${mission.id}-mission`}
-                  onClick={() => setSelectedCell(`cell-${mission.id}-mission`)}
+                  className={`relative group hover:bg-gray-100 dark:hover:bg-gray-800 w-[35px] min-w-[35px] max-w-[35px] whitespace-nowrap overflow-hidden truncate border border-[#f5f5f5] dark:border-[#ffffff14] ${selectedCell === `cell-${row.id}-name`
+                      ? 'outline outline-2 outline-yellow-400'
+                      : ''
+                    }`}
+                  id={`cell-${row.id}-name`}
+                  data-velt-comment-target={`cell-${row.id}-name`}
+                  onClick={() => setSelectedCell(`cell-${row.id}-name`)}
                 >
                   <div className="flex items-center justify-between">
-                    <span>{mission.mission}</span>
+                    <span>{row.name}</span>
                     <div className="opacity-0 group-hover:opacity-100 transition-opacity">
-                      {/* [Velt] Comment tool for adding comments to this cell */}
                       <VeltCommentTool
-                        targetElementId={`cell-${mission.id}-mission`}
-                      />
-                      {/* [Velt] Comment bubble showing number of comments */}
-                      <VeltCommentBubble
-                        targetElementId={`cell-${mission.id}-mission`}
-                        commentCountType="total"
+                        targetElementId={`cell-${row.id}-name`}
                       />
                     </div>
                   </div>
                 </TableCell>
 
-                {/* Destination Column */}
+                {/* Department Column */}
                 <TableCell
-                  className={`relative group hover:bg-gray-100 dark:hover:bg-gray-800 w-[35px] min-w-[35px] max-w-[35px] whitespace-nowrap overflow-hidden truncate border border-[#f5f5f5] dark:border-[#ffffff14]  ${
-                    selectedCell === `cell-${mission.id}-destination`
-                      ? "outline outline-2 outline-yellow-400"
-                      : ""
-                  }`}
-                  id={`cell-${mission.id}-destination`}
-                  data-velt-comment-target={`cell-${mission.id}-destination`}
-                  onClick={() =>
-                    setSelectedCell(`cell-${mission.id}-destination`)
-                  }
+                  className={`relative group hover:bg-gray-100 dark:hover:bg-gray-800 w-[35px] min-w-[35px] max-w-[35px] whitespace-nowrap overflow-hidden truncate border border-[#f5f5f5] dark:border-[#ffffff14] ${selectedCell === `cell-${row.id}-department`
+                      ? 'outline outline-2 outline-yellow-400'
+                      : ''
+                    }`}
+                  id={`cell-${row.id}-department`}
+                  data-velt-comment-target={`cell-${row.id}-department`}
+                  onClick={() => setSelectedCell(`cell-${row.id}-department`)}
                 >
                   <div className="flex items-center justify-between">
-                    <span>{mission.destination}</span>
+                    <span>{row.department}</span>
                     <div className="opacity-0 group-hover:opacity-100 transition-opacity">
                       <VeltCommentTool
-                        targetElementId={`cell-${mission.id}-destination`}
-                      />
-                      <VeltCommentBubble
-                        targetElementId={`cell-${mission.id}-destination`}
-                        commentCountType="total"
+                        targetElementId={`cell-${row.id}-department`}
                       />
                     </div>
                   </div>
                 </TableCell>
-                {/* Mission Type Column */}
+
+                {/* Value Column */}
                 <TableCell
-                  className={`relative group hover:bg-gray-100 dark:hover:bg-gray-800 w-[35px] min-w-[35px] max-w-[35px] whitespace-nowrap overflow-hidden truncate border border-[#f5f5f5] dark:border-[#ffffff14]  ${
-                    selectedCell === `cell-${mission.id}-type`
-                      ? "outline outline-2 outline-yellow-400"
-                      : ""
-                  }`}
-                  id={`cell-${mission.id}-type`}
-                  data-velt-comment-target={`cell-${mission.id}-type`}
-                  onClick={() => setSelectedCell(`cell-${mission.id}-type`)}
+                  className={`relative group hover:bg-gray-100 dark:hover:bg-gray-800 w-[35px] min-w-[35px] max-w-[35px] whitespace-nowrap overflow-hidden truncate border border-[#f5f5f5] dark:border-[#ffffff14] ${selectedCell === `cell-${row.id}-value`
+                      ? 'outline outline-2 outline-yellow-400'
+                      : ''
+                    }`}
+                  id={`cell-${row.id}-value`}
+                  data-velt-comment-target={`cell-${row.id}-value`}
+                  onClick={() => setSelectedCell(`cell-${row.id}-value`)}
                 >
                   <div className="flex items-center justify-between">
-                    <span>{mission.missionType}</span>
+                    <span>{row.value}</span>
                     <div className="opacity-0 group-hover:opacity-100 transition-opacity">
                       <VeltCommentTool
-                        targetElementId={`cell-${mission.id}-type`}
-                      />
-                      <VeltCommentBubble
-                        targetElementId={`cell-${mission.id}-type`}
-                        commentCountType="total"
+                        targetElementId={`cell-${row.id}-value`}
                       />
                     </div>
                   </div>

@@ -9,14 +9,14 @@ export const USERS: User[] = [
     name: "Bread",
     email: "bread@example.com",
     profileUrl: "https://randomuser.me/api/portraits/men/6.jpg",
-    organizationId: "space-missions-new",
+    organizationId: "sales-new",
   },
   {
     userId: "user-felix",
     name: "Felix",
     email: "felix@example.com",
     profileUrl: "https://randomuser.me/api/portraits/men/62.jpg",
-    organizationId: "space-missions-new",
+    organizationId: "sales-new",
   },
 ];
 

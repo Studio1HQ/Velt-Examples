@@ -1,86 +1,94 @@
-import type { SpreadsheetData } from "./types";
+import type { SalesData } from "./types";
 
-export const missionData: SpreadsheetData[] = [
-  /* these are the missions hardcoded data 
-  that are currently in the spreadsheet */
+export const missionData: SalesData[] = [
   {
     id: 1,
-    mission: "Mission",
-    destination: "Destination",
-    missionType: "Manned",
+    name: "John Smith",
+    department: "Sales",
+    value: 450
   },
   {
     id: 2,
-    mission: "Proxima Probe",
-    destination: "Alpha Centauri",
-    missionType: "Unmanned",
+    name: "Emma Wilson",
+    department: "Marketing",
+    value: 280
   },
-  { id: 3, mission: "Mars Colony", destination: "Mars", missionType: "Manned" },
+  {
+    id: 3,
+    name: "Michael Brown",
+    department: "Support",
+    value: 320
+  },
   {
     id: 4,
-    mission: "Europa Sub",
-    destination: "Jupiter's Moon Europa",
-    missionType: "Manned",
+    name: "Sarah Davis",
+    department: "Dev",
+    value: 390
   },
   {
     id: 5,
-    mission: "Titan Explorer",
-    destination: "Saturn's Moon Titan",
-    missionType: "Manned",
+    name: "James Johnson",
+    department: "HR",
+    value: 210
   },
   {
     id: 6,
-    mission: "Kuiper Survey",
-    destination: "Kuiper Belt",
-    missionType: "Unmanned",
+    name: "Lisa Anderson",
+    department: "Sales",
+    value: 480
   },
-  { id: 7, mission: "Venus City", destination: "Venus", missionType: "Manned" },
+  {
+    id: 7,
+    name: "David Martinez",
+    department: "Marketing",
+    value: 300
+  },
   {
     id: 8,
-    mission: "Enceladus Dive",
-    destination: "Saturn's Enceladus",
-    missionType: "Unmanned",
+    name: "Jennifer Taylor",
+    department: "Support",
+    value: 340
   },
   {
     id: 9,
-    mission: "Asteroid Mining",
-    destination: "Main Asteroid Belt",
-    missionType: "Manned",
+    name: "Robert Wilson",
+    department: "Dev",
+    value: 420
   },
   {
     id: 10,
-    mission: "Io Study",
-    destination: "Jupiter's Moon Io",
-    missionType: "Unmanned",
+    name: "Emily White",
+    department: "HR",
+    value: 250
   },
   {
     id: 11,
-    mission: "Oort Explorer",
-    destination: "Oort Cloud",
-    missionType: "Unmanned",
+    name: "Daniel Lee",
+    department: "Sales",
+    value: 460
   },
   {
     id: 12,
-    mission: "Ganymede Base",
-    destination: "Jupiter's Ganymede",
-    missionType: "Manned",
+    name: "Michelle Garcia",
+    department: "Marketing",
+    value: 290
   },
   {
     id: 13,
-    mission: "Star Voyager",
-    destination: "Interstellar Space",
-    missionType: "Unmanned",
+    name: "Kevin Thompson",
+    department: "Support",
+    value: 330
   },
   {
     id: 14,
-    mission: "Mercury Lander",
-    destination: "Mercury",
-    missionType: "Unmanned",
+    name: "Rachel Adams",
+    department: "Dev",
+    value: 400
   },
   {
     id: 15,
-    mission: "Neptune Orbiter",
-    destination: "Neptune",
-    missionType: "Unmanned",
-  },
+    name: "Thomas Moore",
+    department: "HR",
+    value: 240
+  }
 ];
