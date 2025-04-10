@@ -73,7 +73,7 @@ export default function Toolbar() {
     Link,
     Pencil,
   ];
-  const [title, setTitle] = useState('Planets');
+  const [title, setTitle] = useState('Sales Data');
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
   };
