@@ -1,14 +1,14 @@
 /* [Velt] This component implements the toolbar with Velt collaboration features including presence indicators and comment tools. */
-"use client";
+'use client';
 
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { Button } from "@/components/ui/button";
+import { Avatar, AvatarFallback } from '@/components/ui/avatar';
+import { Button } from '@/components/ui/button';
 import {
   VeltCommentsSidebar,
   VeltNotificationsTool,
   VeltPresence,
   VeltSidebarButton,
-} from "@veltdev/react";
+} from '@veltdev/react';
 import {
   AlignCenter,
   AlignLeft,
@@ -26,27 +26,27 @@ import {
   Sun,
   Underline,
   Undo2,
-} from "lucide-react";
-import { useTheme } from "next-themes";
-import React, { useEffect, useState } from "react";
+} from 'lucide-react';
+import { useTheme } from 'next-themes';
+import React, { useEffect, useState } from 'react';
 
-import { useSearchParams } from "next/navigation";
-import { Separator } from "../ui/separator";
-import { useVeltUser } from "../velt/VeltInitializeUser";
-const toolbar_css = "h-8 w-8 rounded-full hover:dark:bg-[#ffffff14]";
+import { useSearchParams } from 'next/navigation';
+import { Separator } from '../ui/separator';
+import { useVeltUser } from '../velt/VeltInitializeUser';
+const toolbar_css = 'h-8 w-8 rounded-full hover:dark:bg-[#ffffff14]';
 export default function Toolbar() {
   const { theme, setTheme } = useTheme();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
   const { currentUser, switchUser, users } = useVeltUser();
   const searchParams = useSearchParams();
-  const focused = (searchParams.get("focused") || "true") === "true";
+  const focused = (searchParams.get('focused') || 'true') === 'true';
   useEffect(() => {
     setMounted(true);
   }, []);
 
   const toggleTheme = () => {
-    setTheme(theme === "dark" ? "light" : "dark");
+    setTheme(theme === 'dark' ? 'light' : 'dark');
   };
 
   const handleSwitchUser = (user: typeof currentUser) => {
@@ -55,25 +55,25 @@ export default function Toolbar() {
   };
 
   const getUserColor = (userId: string) => {
-    return userId === "user-bread"
-      ? "var(--bread-color)"
-      : "var(--felix-color)";
+    return userId === 'user-bread'
+      ? 'var(--bread-color)'
+      : 'var(--felix-color)';
   };
   const toolbarIcons = [
     Bold,
     Italic,
     Underline,
     Strikethrough,
-    "separator",
+    'separator',
     AlignLeft,
     AlignCenter,
     AlignRight,
-    "separator",
+    'separator',
     ImageIcon,
     Link,
     Pencil,
   ];
-  const [title, setTitle] = useState("Planets");
+  const [title, setTitle] = useState('Planets');
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
   };
@@ -120,7 +120,7 @@ export default function Toolbar() {
         {focused && (
           <div className="items-center gap-5 hidden lg:flex">
             {toolbarIcons.map((Icon, index) =>
-              Icon === "separator" ? (
+              Icon === 'separator' ? (
                 <Separator
                   key={index}
                   orientation="vertical"
@@ -135,7 +135,7 @@ export default function Toolbar() {
                 >
                   <Icon size={18} color="#7f7f7f" />
                 </Button>
-              ),
+              )
             )}
           </div>
         )}
@@ -156,14 +156,14 @@ export default function Toolbar() {
 
             <div className="hidden lg:flex  relative items-center gap-1 bg-black/10 dark:bg-white/10 rounded-full p-1 pr-2">
               <Avatar
-                className="h-8 w-8 cursor-pointer hover:opacity-80"
+                className="h-6 w-6 cursor-pointer hover:opacity-80"
                 onClick={() => setIsDropdownOpen(!isDropdownOpen)}
               >
                 <AvatarFallback
                   style={{
                     backgroundImage: `url(${currentUser.profileUrl})`,
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
                   }}
                   className="text-white"
                 />
@@ -171,17 +171,16 @@ export default function Toolbar() {
 
               <ChevronUp
                 size={18}
-                className={`text-gray-600 dark:text-gray-300 transition-transform duration-200 cursor-pointer ${
-                  isDropdownOpen ? "rotate-180" : ""
-                }`}
+                className={`text-gray-600 dark:text-gray-300 transition-transform duration-200 cursor-pointer ${isDropdownOpen ? 'rotate-180' : ''
+                  }`}
                 onClick={() => setIsDropdownOpen(!isDropdownOpen)}
               />
             </div>
 
             {/* [Velt] Button to toggle the collaboration sidebar */}
-            {mounted && <VeltSidebarButton darkMode={theme === "dark"} />}
+            {mounted && <VeltSidebarButton darkMode={theme === 'dark'} />}
             {/* [Velt] Sidebar component for managing comments and collaboration features */}
-            {mounted && <VeltCommentsSidebar darkMode={theme === "dark"} />}
+            {mounted && <VeltCommentsSidebar darkMode={theme === 'dark'} />}
           </div>
 
           {/* Dropdown Menu */}
@@ -200,8 +199,8 @@ export default function Toolbar() {
                           <AvatarFallback
                             style={{
                               backgroundImage: `url(${user.profileUrl})`,
-                              backgroundSize: "cover",
-                              backgroundPosition: "center",
+                              backgroundSize: 'cover',
+                              backgroundPosition: 'center',
                             }}
                             className="text-white"
                           />
@@ -214,11 +213,10 @@ export default function Toolbar() {
                     </div>
                     <div
                       onClick={() => handleSwitchUser(user)}
-                      className={`flex items-center justify-center w-5 h-5 rounded-full cursor-pointer ${
-                        currentUser.userId === user.userId
-                          ? "text-green-500"
-                          : "text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
-                      }`}
+                      className={`flex items-center justify-center w-5 h-5 rounded-full cursor-pointer ${currentUser.userId === user.userId
+                          ? 'text-green-500'
+                          : 'text-gray-400 hover:text-gray-600 dark:hover:text-gray-300'
+                        }`}
                     >
                       {currentUser.userId === user.userId ? (
                         <CircleDot size={18} />
@@ -234,7 +232,7 @@ export default function Toolbar() {
         </div>
         <div className="h-8 w-8 flex items-center justify-center">
           {/* [Velt] Notification system for collaboration events */}
-          {mounted && <VeltNotificationsTool darkMode={theme === "dark"} />}
+          {mounted && <VeltNotificationsTool darkMode={theme === 'dark'} />}
         </div>
         {mounted && (
           <Button
@@ -243,7 +241,7 @@ export default function Toolbar() {
             className={`${toolbar_css}`}
             onClick={toggleTheme}
           >
-            {theme === "dark" ? <Sun size={20} /> : <Moon size={20} />}
+            {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
           </Button>
         )}
       </div>
