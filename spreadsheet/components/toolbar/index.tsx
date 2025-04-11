@@ -159,7 +159,7 @@ export default function Toolbar() {
             <div className="hidden lg:flex  relative items-center gap-1 bg-black/10 dark:bg-white/10 rounded-full p-1 pr-2">
               <Avatar
 
-                className="h-[31px] w-[31px] cursor-pointer hover:opacity-80"
+                className="h-6 w-6 cursor-pointer hover:opacity-80"
 
                 onClick={() => setIsDropdownOpen(!isDropdownOpen)}
               >
