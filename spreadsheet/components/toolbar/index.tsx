@@ -34,7 +34,8 @@ import { useSearchParams } from 'next/navigation';
 import { Separator } from '../ui/separator';
 import { useVeltUser } from '../velt/VeltInitializeUser';
 
-const toolbar_css = 'h-8 w-8 rounded-full hover:dark:bg-[#ffffff14] grid place-items-center';
+const toolbar_css =
+  'h-8 w-8 rounded-full hover:dark:bg-[#ffffff14] grid place-items-center';
 
 export default function Toolbar() {
   const { theme, setTheme } = useTheme();
@@ -158,9 +159,7 @@ export default function Toolbar() {
 
             <div className="hidden lg:flex  relative items-center gap-1 bg-black/10 dark:bg-white/10 rounded-full p-1 pr-2">
               <Avatar
-
                 className="h-6 w-6 cursor-pointer hover:opacity-80"
-
                 onClick={() => setIsDropdownOpen(!isDropdownOpen)}
               >
                 <AvatarFallback
@@ -183,11 +182,7 @@ export default function Toolbar() {
 
             {/* [Velt] Button to toggle the collaboration sidebar */}
 
-            {mounted && (
-              <VeltSidebarButton
-                darkMode={theme === 'dark'}
-              />
-            )}
+            {mounted && <VeltSidebarButton darkMode={theme === 'dark'} />}
 
             {/* [Velt] Sidebar component for managing comments and collaboration features */}
             {mounted && <VeltCommentsSidebar darkMode={theme === 'dark'} />}
@@ -224,8 +219,8 @@ export default function Toolbar() {
                     <div
                       onClick={() => handleSwitchUser(user)}
                       className={`flex items-center justify-center w-5 h-5 rounded-full cursor-pointer ${currentUser.userId === user.userId
-                        ? 'text-green-500'
-                        : 'text-gray-400 hover:text-gray-600 dark:hover:text-gray-300'
+                          ? 'text-green-500'
+                          : 'text-gray-400 hover:text-gray-600 dark:hover:text-gray-300'
                         }`}
                     >
                       {currentUser.userId === user.userId ? (
@@ -251,7 +246,11 @@ export default function Toolbar() {
             className={`${toolbar_css} ml-1`}
             onClick={toggleTheme}
           >
-            {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} className="text-[#7f7f7f]" />}
+            {theme === 'dark' ? (
+              <Sun size={20} />
+            ) : (
+              <Moon size={20} className="text-[#7f7f7f]" />
+            )}
           </Button>
         )}
       </div>
