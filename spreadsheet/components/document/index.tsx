@@ -12,10 +12,9 @@ import {
 } from '@/components/ui/table';
 import { missionData as salesData } from '@/lib/data';
 import type { SalesData } from '@/lib/types';
-import { VeltCommentTool, VeltComments, VeltCursor } from '@veltdev/react';
+import { VeltCommentTool, VeltComments } from '@veltdev/react';
 import { useTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
-import VeltInitializeDocument from '../velt/VeltInitializeDocument';
 
 const common_header_style =
   'hidden lg:table-cell w-[35px] min-w-[35px] max-w-[35px] whitespace-nowrap overflow-hidden truncate border border-[#f5f5f5] dark:border-[#ffffff14]  bg-transparent';
@@ -54,9 +53,6 @@ export default function Document() {
     setRows(sortedData);
   };
 
-  /* [VELT] Initialize the document with a unique identifier and metadata. */
-  <VeltInitializeDocument />;
-
   return (
     <>
       {/* [Velt] Main comments component for the document */}
@@ -67,8 +63,6 @@ export default function Document() {
           darkMode={theme === 'dark'}
         />
       )}
-      {/* [Velt] Cursor tracking component for real-time collaboration */}
-      <VeltCursor />
 
       <div className="flex-1 overflow-auto relative shrink-0">
         <Table className="w-full table-fixed border border-[#f5f5f5] dark:border-[#ffffff14]">
@@ -125,6 +119,7 @@ export default function Document() {
                   <div className="flex items-center justify-between">
                     <span>{row.name}</span>
                     <div className="opacity-0 group-hover:opacity-100 transition-opacity">
+                      {/* [Velt] Comment tool for the name column */}
                       <VeltCommentTool
                         targetElementId={`cell-${row.id}-name`}
                       />
@@ -145,6 +140,7 @@ export default function Document() {
                   <div className="flex items-center justify-between">
                     <span>{row.department}</span>
                     <div className="opacity-0 group-hover:opacity-100 transition-opacity">
+                      {/* [Velt] Comment tool for the department column */}
                       <VeltCommentTool
                         targetElementId={`cell-${row.id}-department`}
                       />
@@ -165,6 +161,7 @@ export default function Document() {
                   <div className="flex items-center justify-between">
                     <span>{row.value}</span>
                     <div className="opacity-0 group-hover:opacity-100 transition-opacity">
+                      {/* [Velt] Comment tool for the value column */}
                       <VeltCommentTool
                         targetElementId={`cell-${row.id}-value`}
                       />
