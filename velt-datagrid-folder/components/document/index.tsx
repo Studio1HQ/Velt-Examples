@@ -1,0 +1,332 @@
+"use client";
+
+import * as React from "react";
+import { useTheme } from "next-themes";
+import {
+  DataGrid,
+  type GridColDef,
+  type GridRenderCellParams,
+} from "@mui/x-data-grid";
+import {
+  Box,
+  Paper,
+  CssBaseline,
+  createTheme,
+  ThemeProvider,
+} from "@mui/material";
+import { VeltCommentTool, VeltComments } from "@veltdev/react";
+
+interface DessertData {
+  id: number;
+  name: string;
+  calories: number;
+  fat: number;
+  carbs: number;
+  protein: number;
+}
+
+const rows: DessertData[] = [
+  { id: 1, name: "Cupcake", calories: 305, fat: 3.7, carbs: 67, protein: 4.3 },
+  { id: 2, name: "Donut", calories: 452, fat: 25.0, carbs: 51, protein: 4.9 },
+  { id: 3, name: "Eclair", calories: 262, fat: 16.0, carbs: 24, protein: 6.0 },
+  {
+    id: 4,
+    name: "Frozen Yogurt",
+    calories: 159,
+    fat: 6.0,
+    carbs: 24,
+    protein: 4.0,
+  },
+  {
+    id: 5,
+    name: "Gingerbread",
+    calories: 356,
+    fat: 16.0,
+    carbs: 49,
+    protein: 3.9,
+  },
+  {
+    id: 6,
+    name: "Ice Cream Sandwich",
+    calories: 237,
+    fat: 9.0,
+    carbs: 37,
+    protein: 4.3,
+  },
+  {
+    id: 7,
+    name: "Jelly Bean",
+    calories: 375,
+    fat: 0.0,
+    carbs: 94,
+    protein: 0.0,
+  },
+  { id: 8, name: "KitKat", calories: 518, fat: 26.0, carbs: 65, protein: 7.0 },
+  { id: 9, name: "Lollipop", calories: 392, fat: 0.2, carbs: 98, protein: 0.0 },
+  { id: 10, name: "Salt", calories: 0, fat: 0, carbs: 0, protein: 0 },
+  { id: 11, name: "Pepper", calories: 0, fat: 0, carbs: 0, protein: 0 },
+  { id: 12, name: "Lume", calories: 0, fat: 0, carbs: 0, protein: 0 },
+  { id: 13, name: "Cupcake", calories: 305, fat: 3.7, carbs: 67, protein: 4.3 },
+  { id: 14, name: "Donut", calories: 452, fat: 25.0, carbs: 51, protein: 4.9 },
+  { id: 15, name: "Eclair", calories: 262, fat: 16.0, carbs: 24, protein: 6.0 },
+];
+
+export default function DocumentGrid() {
+  const { resolvedTheme, theme } = useTheme();
+  const [mounted, setMounted] = React.useState(false);
+  const [sortedRows, setSortedRows] = React.useState<DessertData[]>(rows);
+
+  React.useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const muiTheme = React.useMemo(
+    () =>
+      createTheme({
+        palette: {
+          mode: resolvedTheme === "dark" ? "dark" : "light",
+        },
+      }),
+    [resolvedTheme],
+  );
+
+  const renderCell = (params: GridRenderCellParams, field: string) => {
+    const cellId = `cell-${params.row.id}-${field}`;
+
+    return (
+      <div
+        className="relative group w-full h-full flex items-center justify-between"
+        id={cellId}
+        data-velt-comment-target={cellId}
+        style={{
+          minHeight: "100%",
+          whiteSpace: "normal",
+          wordWrap: "break-word",
+          overflow: "visible",
+        }}
+      >
+        <div className="flex items-center">
+          <span style={{ whiteSpace: "normal", wordWrap: "break-word" }}>
+            {params.value}
+          </span>
+        </div>
+        <div className="opacity-0 group-hover:opacity-100 transition-opacity absolute top-[0.40rem] right-2">
+          <VeltCommentTool targetElementId={cellId} />
+        </div>
+      </div>
+    );
+  };
+
+  const renderHeader = (params: { field: string; headerName: string }) => {
+    return (
+      <div className="flex items-center justify-between w-full">
+        <div className="flex items-center">
+          <span>{params.headerName}</span>
+        </div>
+      </div>
+    );
+  };
+
+  const columns: GridColDef[] = [
+    {
+      field: "id",
+      headerName: "ID",
+      width: 80,
+      flex: 0,
+      headerAlign: "left",
+      align: "left",
+      renderCell: (params) => renderCell(params, "id"),
+      renderHeader: () => renderHeader({ field: "id", headerName: "ID" }),
+    },
+    {
+      field: "name",
+      headerName: "Dessert",
+      width: 180,
+      flex: 1,
+      minWidth: 120,
+      headerAlign: "left",
+      align: "left",
+      renderCell: (params) => renderCell(params, "name"),
+      renderHeader: () =>
+        renderHeader({ field: "name", headerName: "Dessert" }),
+    },
+    {
+      field: "calories",
+      headerName: "Calories",
+      type: "number",
+      width: 120,
+      flex: 0.8,
+      minWidth: 90,
+      headerAlign: "left",
+      align: "left",
+      renderCell: (params) => renderCell(params, "calories"),
+      renderHeader: () =>
+        renderHeader({ field: "calories", headerName: "Calories" }),
+    },
+    {
+      field: "fat",
+      headerName: "Fat (g)",
+      type: "number",
+      width: 120,
+      flex: 0.7,
+      minWidth: 80,
+      headerAlign: "left",
+      align: "left",
+      renderCell: (params) => renderCell(params, "fat"),
+      renderHeader: () => renderHeader({ field: "fat", headerName: "Fat (g)" }),
+    },
+    {
+      field: "carbs",
+      headerName: "Carbs (g)",
+      type: "number",
+      width: 120,
+      flex: 0.7,
+      minWidth: 80,
+      headerAlign: "left",
+      align: "left",
+      renderCell: (params) => renderCell(params, "carbs"),
+      renderHeader: () =>
+        renderHeader({ field: "carbs", headerName: "Carbs (g)" }),
+    },
+    {
+      field: "protein",
+      headerName: "Protein (g)",
+      type: "number",
+      width: 120,
+      flex: 0.7,
+      minWidth: 80,
+      headerAlign: "left",
+      align: "left",
+      renderCell: (params) => renderCell(params, "protein"),
+      renderHeader: () =>
+        renderHeader({ field: "protein", headerName: "Protein (g)" }),
+    },
+  ];
+
+  if (!mounted) {
+    return null;
+  }
+
+  return (
+    <>
+      <VeltComments
+        popoverMode={true}
+        popoverTriangleComponent={true}
+        darkMode={theme === "dark"}
+      />
+
+      <ThemeProvider theme={muiTheme}>
+        <CssBaseline />
+        <Box
+          sx={{
+            height: "100%",
+            width: "100%",
+            margin: "0",
+            position: "relative",
+          }}
+        >
+          <Paper
+            elevation={0}
+            sx={{
+              height: "100%",
+              width: "100%",
+              display: "flex",
+              flexDirection: "column",
+              minWidth: "920px",
+              borderRight: `1px solid ${
+                resolvedTheme === "dark" ? "#ffffff14" : "#f5f5f5"
+              }`,
+            }}
+          >
+            <Box
+              sx={{
+                height: "100%",
+                width: "100%",
+                display: "flex",
+                flexDirection: "column",
+                "& .MuiDataGrid-root": {
+                  border: "none",
+                  flex: 1,
+                  display: "flex",
+                  flexDirection: "column",
+                  borderRight: `1px solid ${
+                    resolvedTheme === "dark" ? "#ffffff14" : "#f5f5f5"
+                  }`,
+                },
+                "& .MuiDataGrid-main": {
+                  flex: 1,
+                  display: "flex",
+                  flexDirection: "column",
+                },
+                "& .MuiDataGrid-virtualScroller": {
+                  flex: 1,
+                },
+                "& .MuiDataGrid-footerContainer": {
+                  position: "sticky",
+                  bottom: 0,
+                  backgroundColor: "var(--bg-background)",
+                  borderTop: `1px solid ${
+                    resolvedTheme === "dark" ? "#ffffff14" : "#f5f5f5"
+                  }`,
+                },
+              }}
+            >
+              <DataGrid
+                rows={rows}
+                columns={columns}
+                rowHeight={56}
+                columnHeaderHeight={56}
+                disableColumnMenu
+                disableRowSelectionOnClick
+                hideFooter={false}
+                pagination
+                paginationModel={{ page: 0, pageSize: 15 }}
+                pageSizeOptions={[15]}
+                sx={{
+                  height: "100%",
+                  width: "100%",
+                  color: "text.primary",
+                  backgroundColor: "hsl(var(--background))",
+                  borderColor:
+                    resolvedTheme === "dark" ? "#ffffff14" : "#f5f5f5",
+                  "& .MuiDataGrid-cell": {
+                    backgroundColor: "hsl(var(--background))",
+                    padding: "0px",
+                    paddingLeft: "16px",
+                    borderRight: `1px solid ${
+                      resolvedTheme === "dark" ? "#ffffff14" : "#f5f5f5"
+                    }`,
+                    borderBottom: `1px solid ${
+                      resolvedTheme === "dark" ? "#ffffff14" : "#f5f5f5"
+                    }`,
+                    borderTop: "none",
+                    display: "flex",
+                    alignItems: "center",
+                  },
+                  "& .MuiDataGrid-columnHeaders": {
+                    backgroundColor: "hsl(var(--background))",
+                    borderBottom: `1px solid ${
+                      resolvedTheme === "dark" ? "#ffffff14" : "#f5f5f5"
+                    }`,
+                  },
+                  "& .MuiDataGrid-columnHeader": {
+                    backgroundColor: "hsl(var(--background))",
+                    borderRight: `1px solid ${
+                      resolvedTheme === "dark" ? "#ffffff14" : "#f5f5f5"
+                    }`,
+                    padding: "0 16px",
+                  },
+                  "& .MuiDataGrid-footerContainer": {
+                    borderTop: `1px solid ${
+                      resolvedTheme === "dark" ? "#ffffff14" : "#f5f5f5"
+                    }`,
+                  },
+                }}
+              />
+            </Box>
+          </Paper>
+        </Box>
+      </ThemeProvider>
+    </>
+  );
+}
