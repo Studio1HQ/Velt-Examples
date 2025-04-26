@@ -42,6 +42,13 @@ export const metadata: Metadata = {
   },
 };
 
+/**
+ * Root layout component that wraps all pages with theming, data fetching, and datagrid context providers.
+ *
+ * Ensures consistent styling, theme management, and shared state across the application.
+ *
+ * @param children - The page content to be rendered within the layout.
+ */
 export default function RootLayout({
   children,
 }: Readonly<{

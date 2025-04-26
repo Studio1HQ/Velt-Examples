@@ -71,6 +71,13 @@ const rows: DessertData[] = [
   { id: 15, name: "Eclair", calories: 262, fat: 16.0, carbs: 24, protein: 6.0 },
 ];
 
+/**
+ * Renders a themed data grid displaying dessert nutritional information with integrated inline and document-level commenting features.
+ *
+ * The grid adapts its appearance to the current light or dark theme and allows users to select individual cells, each of which supports inline comments via the Velt commenting tools. The component delays rendering until mounted to avoid hydration mismatches in server-side environments.
+ *
+ * @returns The interactive dessert data grid component with commenting capabilities, or `null` if not yet mounted.
+ */
 export default function DocumentGrid() {
   const { resolvedTheme, theme } = useTheme();
   const [mounted, setMounted] = React.useState(false);

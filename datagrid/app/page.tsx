@@ -10,6 +10,13 @@ import Toolbar from "@/components/toolbar";
 import VeltCollaboration from "@/components/velt/VeltCollaboration";
 import { VeltProvider } from "@veltdev/react";
 
+/**
+ * Renders the main application page for the datagrid interface, providing real-time collaboration, theming, and a responsive layout.
+ *
+ * @returns The root React element for the datagrid application page.
+ *
+ * @remark The component is wrapped in a collaboration provider and theme provider, and includes a sidebar, toolbar, and a scrollable content area. The API key for collaboration is sourced from environment variables.
+ */
 export default function DatagridApp() {
   return (
     <VeltProvider apiKey={process.env.NEXT_PUBLIC_VELT_API_KEY || ""}>

@@ -20,7 +20,11 @@ export const USERS: User[] = [
   },
 ];
 
-// [VELT] Initializes the current signed in user
+/**
+ * React component that manages user authentication and presence for the Velt collaboration system using predefined users.
+ *
+ * Initializes the Velt client with the current user's identity and provides a button to toggle between two predefined users.
+ */
 export default function VeltInitializeUser() {
   const { client } = useVeltClient();
   const [currentUser, setCurrentUser] = useState<User>(USERS[0]);
@@ -56,7 +60,13 @@ export default function VeltInitializeUser() {
     </div>
   );
 }
-// [VELT] Custom hook to initialize the current user in Velt
+/**
+ * Provides user state management and identity synchronization with the Velt collaboration client.
+ *
+ * Initializes the current user from a predefined list and updates the Velt client with user details whenever the user changes. Returns the current user, a function to switch users, and the list of available users.
+ *
+ * @returns An object containing the current user, a function to switch users, and the list of predefined users.
+ */
 export function useVeltUser() {
   const { client } = useVeltClient();
   const [currentUser, setCurrentUser] = useState<User>(USERS[0]);

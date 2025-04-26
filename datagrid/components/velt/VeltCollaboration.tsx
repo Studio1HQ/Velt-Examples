@@ -2,6 +2,11 @@
 import { VeltComments, VeltCursor } from "@veltdev/react";
 import VeltInitializeDocument from "./VeltInitializeDocument";
 
+/**
+ * Renders the core Velt collaboration UI, including real-time cursor tracking and a customized commenting interface.
+ *
+ * @returns A fixed-position React element containing collaboration features for cursor presence and commenting.
+ */
 export default function VeltCollaboration() {
   return (
     <div className="fixed bottom-4 right-4 z-50 flex items-center gap-2">
