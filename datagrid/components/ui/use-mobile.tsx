@@ -2,6 +2,13 @@ import * as React from "react";
 
 const MOBILE_BREAKPOINT = 768;
 
+/**
+ * Determines if the current viewport width is considered mobile based on a 768px breakpoint.
+ *
+ * @returns `true` if the viewport width is less than 768 pixels, otherwise `false`.
+ *
+ * @remark Returns `false` on the initial render if the viewport width cannot be determined.
+ */
 export function useIsMobile() {
   const [isMobile, setIsMobile] = React.useState<boolean | undefined>(
     undefined,

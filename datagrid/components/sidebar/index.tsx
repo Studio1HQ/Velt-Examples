@@ -6,6 +6,13 @@ import SheetIcon from "@/components/icons/sheet-icon";
 import Settings from "@/components/icons/settings-icon";
 import { useSearchParams } from "next/navigation";
 
+/**
+ * Renders a responsive vertical sidebar with navigation and branding.
+ *
+ * The sidebar expands or collapses based on the `focused` URL search parameter, defaulting to expanded. It displays a logo, navigation items, and a footer, with labels and additional content shown only when focused. Styling adapts for dark mode and screen size.
+ *
+ * @returns The sidebar React element.
+ */
 export default function Sidebar() {
   const searchParams = useSearchParams();
   const focused = (searchParams.get("focused") || "true") === "true";
@@ -168,6 +175,14 @@ export default function Sidebar() {
   );
 }
 
+/**
+ * Renders a styled sidebar navigation item with an icon and optional label.
+ *
+ * @param icon - The icon to display for the sidebar item.
+ * @param label - The text label for the sidebar item.
+ * @param active - Whether the item is currently active. Applies highlighted styles if true.
+ * @param focused - Whether the sidebar is expanded. If true, the label is shown on large screens.
+ */
 function SidebarItem({
   icon,
   label,

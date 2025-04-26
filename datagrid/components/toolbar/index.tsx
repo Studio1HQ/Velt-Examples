@@ -37,6 +37,13 @@ import { useVeltUser } from "../velt/VeltInitializeUser";
 const toolbar_css =
   "h-8 w-8 rounded-full hover:dark:bg-[#ffffff14] grid place-items-center";
 
+/**
+ * Renders a collaborative toolbar with text formatting controls, user presence, user switching, collaboration tools, and theme toggling.
+ *
+ * The toolbar adapts its features based on the current theme, user, and URL focus state. It integrates Velt collaboration components for real-time presence, comments, and notifications, and allows switching between users and light/dark themes.
+ *
+ * @remark Some toolbar features and collaboration tools are conditionally rendered based on the component's mount state and the "focused" URL parameter.
+ */
 export default function Toolbar() {
   const { theme, setTheme } = useTheme();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
