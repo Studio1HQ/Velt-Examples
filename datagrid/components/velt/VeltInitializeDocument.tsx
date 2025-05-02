@@ -2,8 +2,8 @@
 import { useSetDocument } from "@veltdev/react";
 
 export default function VeltInitializeDocument() {
-  useSetDocument("sales-spreadsheet-org", {
-    documentName: "sales-spreadsheet-org",
+  useSetDocument("Calories-datagrid-org", {
+    documentName: "Calories-datagrid-org",
   });
   return null;
 }
