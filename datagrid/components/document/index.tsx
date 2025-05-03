@@ -1,6 +1,6 @@
 "use client";
 
-import * as React from "react";
+import React, { memo, useState, useEffect, useMemo } from "react";
 import { useTheme } from "next-themes";
 import {
   DataGrid,
@@ -71,30 +71,21 @@ const rows: DessertData[] = [
   { id: 15, name: "Eclair", calories: 262, fat: 16.0, carbs: 24, protein: 6.0 },
 ];
 
-export default function DocumentGrid() {
-  const { resolvedTheme, theme } = useTheme();
-  const [mounted, setMounted] = React.useState(false);
-  const [sortedRows, setSortedRows] = React.useState<DessertData[]>(rows);
-  const [selectedCell, setSelectedCell] = React.useState<string | null>(null);
-
-  React.useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  const muiTheme = React.useMemo(
-    () =>
-      createTheme({
-        palette: {
-          mode: resolvedTheme === "dark" ? "dark" : "light",
-        },
-      }),
-    [resolvedTheme],
-  );
-
-  const renderCell = (params: GridRenderCellParams, field: string) => {
+// Memoized GridCell component to avoid unnecessary re-renders
+const GridCell = memo(
+  ({
+    params,
+    field,
+    selectedCell,
+    onCellClick,
+  }: {
+    params: GridRenderCellParams;
+    field: string;
+    selectedCell: string | null;
+    onCellClick: (cellId: string) => void;
+  }) => {
     const cellId = `cell-${params.row.id}-${field}`;
     const isSelected = selectedCell === cellId;
-
     return (
       <div
         className={`relative group w-full h-full flex items-center justify-between ${
@@ -102,7 +93,7 @@ export default function DocumentGrid() {
         }`}
         id={cellId}
         data-velt-comment-target={cellId}
-        onClick={() => setSelectedCell(cellId)}
+        onClick={() => onCellClick(cellId)}
         style={{
           minHeight: "100%",
           whiteSpace: "normal",
@@ -118,98 +109,170 @@ export default function DocumentGrid() {
           </span>
         </div>
         <div className="opacity-0 group-hover:opacity-100 transition-opacity absolute top-[0.40rem] right-2">
-         {/* [Velt] Comment tool for the department column */}
           <VeltCommentTool targetElementId={cellId} />
         </div>
       </div>
     );
+  },
+);
+GridCell.displayName = "GridCell";
+
+export default function DocumentGrid() {
+  const { resolvedTheme, theme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+  const [sortedRows, setSortedRows] = useState<DessertData[]>(rows);
+  const [selectedCell, setSelectedCell] = useState<string | null>(null);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const muiTheme = useMemo(
+    () =>
+      createTheme({
+        palette: {
+          mode: resolvedTheme === "dark" ? "dark" : "light",
+        },
+      }),
+    [resolvedTheme],
+  );
+
+  const handleCellClick = (cellId: string) => {
+    setSelectedCell(cellId);
   };
 
-  const renderHeader = (params: { field: string; headerName: string }) => {
-    return (
+  const renderHeader = useMemo(
+    () => (params: { field: string; headerName: string }) => (
       <div className="flex items-center justify-between w-full">
         <div className="flex items-center">
           <span>{params.headerName}</span>
         </div>
       </div>
-    );
-  };
+    ),
+    [],
+  );
 
-  const columns: GridColDef[] = [
-    {
-      field: "id",
-      headerName: "ID",
-      width: 80,
-      flex: 0,
-      headerAlign: "left",
-      align: "left",
-      renderCell: (params) => renderCell(params, "id"),
-      renderHeader: () => renderHeader({ field: "id", headerName: "ID" }),
-    },
-    {
-      field: "name",
-      headerName: "Dessert",
-      width: 180,
-      flex: 1,
-      minWidth: 120,
-      headerAlign: "left",
-      align: "left",
-      renderCell: (params) => renderCell(params, "name"),
-      renderHeader: () =>
-        renderHeader({ field: "name", headerName: "Dessert" }),
-    },
-    {
-      field: "calories",
-      headerName: "Calories",
-      type: "number",
-      width: 120,
-      flex: 0.8,
-      minWidth: 90,
-      headerAlign: "left",
-      align: "left",
-      renderCell: (params) => renderCell(params, "calories"),
-      renderHeader: () =>
-        renderHeader({ field: "calories", headerName: "Calories" }),
-    },
-    {
-      field: "fat",
-      headerName: "Fat (g)",
-      type: "number",
-      width: 120,
-      flex: 0.7,
-      minWidth: 80,
-      headerAlign: "left",
-      align: "left",
-      renderCell: (params) => renderCell(params, "fat"),
-      renderHeader: () => renderHeader({ field: "fat", headerName: "Fat (g)" }),
-    },
-    {
-      field: "carbs",
-      headerName: "Carbs (g)",
-      type: "number",
-      width: 120,
-      flex: 0.7,
-      minWidth: 80,
-      headerAlign: "left",
-      align: "left",
-      renderCell: (params) => renderCell(params, "carbs"),
-      renderHeader: () =>
-        renderHeader({ field: "carbs", headerName: "Carbs (g)" }),
-    },
-    {
-      field: "protein",
-      headerName: "Protein (g)",
-      type: "number",
-      width: 120,
-      flex: 0.7,
-      minWidth: 80,
-      headerAlign: "left",
-      align: "left",
-      renderCell: (params) => renderCell(params, "protein"),
-      renderHeader: () =>
-        renderHeader({ field: "protein", headerName: "Protein (g)" }),
-    },
-  ];
+  const columns: GridColDef[] = useMemo(
+    () => [
+      {
+        field: "id",
+        headerName: "ID",
+        width: 80,
+        flex: 0,
+        headerAlign: "left",
+        align: "left",
+        renderCell: (params) => (
+          <GridCell
+            params={params}
+            field="id"
+            selectedCell={selectedCell}
+            onCellClick={handleCellClick}
+          />
+        ),
+        renderHeader: () => renderHeader({ field: "id", headerName: "ID" }),
+      },
+      {
+        field: "name",
+        headerName: "Dessert",
+        width: 180,
+        flex: 1,
+        minWidth: 120,
+        headerAlign: "left",
+        align: "left",
+        renderCell: (params) => (
+          <GridCell
+            params={params}
+            field="name"
+            selectedCell={selectedCell}
+            onCellClick={handleCellClick}
+          />
+        ),
+        renderHeader: () =>
+          renderHeader({ field: "name", headerName: "Dessert" }),
+      },
+      {
+        field: "calories",
+        headerName: "Calories",
+        type: "number",
+        width: 120,
+        flex: 0.8,
+        minWidth: 90,
+        headerAlign: "left",
+        align: "left",
+        renderCell: (params) => (
+          <GridCell
+            params={params}
+            field="calories"
+            selectedCell={selectedCell}
+            onCellClick={handleCellClick}
+          />
+        ),
+        renderHeader: () =>
+          renderHeader({ field: "calories", headerName: "Calories" }),
+      },
+      {
+        field: "fat",
+        headerName: "Fat (g)",
+        type: "number",
+        width: 120,
+        flex: 0.7,
+        minWidth: 80,
+        headerAlign: "left",
+        align: "left",
+        renderCell: (params) => (
+          <GridCell
+            params={params}
+            field="fat"
+            selectedCell={selectedCell}
+            onCellClick={handleCellClick}
+          />
+        ),
+        renderHeader: () =>
+          renderHeader({ field: "fat", headerName: "Fat (g)" }),
+      },
+      {
+        field: "carbs",
+        headerName: "Carbs (g)",
+        type: "number",
+        width: 120,
+        flex: 0.7,
+        minWidth: 80,
+        headerAlign: "left",
+        align: "left",
+        renderCell: (params) => (
+          <GridCell
+            params={params}
+            field="carbs"
+            selectedCell={selectedCell}
+            onCellClick={handleCellClick}
+          />
+        ),
+        renderHeader: () =>
+          renderHeader({ field: "carbs", headerName: "Carbs (g)" }),
+      },
+      {
+        field: "protein",
+        headerName: "Protein (g)",
+        type: "number",
+        width: 120,
+        flex: 0.7,
+        minWidth: 80,
+        headerAlign: "left",
+        align: "left",
+        renderCell: (params) => (
+          <GridCell
+            params={params}
+            field="protein"
+            selectedCell={selectedCell}
+            onCellClick={handleCellClick}
+          />
+        ),
+        renderHeader: () =>
+          renderHeader({ field: "protein", headerName: "Protein (g)" }),
+      },
+    ],
+    [selectedCell, handleCellClick, renderHeader],
+  );
 
   if (!mounted) {
     return null;
