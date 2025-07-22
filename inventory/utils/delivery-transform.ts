@@ -174,12 +174,12 @@ export const transformDeliveryShipmentToRecord = (shipment: DeliveryShipment): S
         ShippedQuantity: shipment.quantities.shipped,
         AvailableStock: shipment.quantities.available,
         TotalOrdered: shipment.quantities.totalOrdered,
-        LastUpdated: shipment.tracking.lastUpdated.toLocaleString(),
+        LastUpdated: shipment.tracking.lastUpdated.toISOString(),
 
         CustomerInfo: shipment.customer.info,
         ShippingAddress: shipment.customer.address,
         TrackingNumber: shipment.tracking.number,
-        EstimatedDeliveryWindow: `${shipment.delivery.originalETA.toDateString()} - ${shipment.delivery.currentETA.toDateString()}`
+        EstimatedDeliveryWindow: `${shipment.delivery.originalETA.toISOString()} - ${shipment.delivery.currentETA.toISOString()}`
     };
 };
 
@@ -192,7 +192,7 @@ export const transformDeliveryShipmentToRecord = (shipment: DeliveryShipment): S
  */
 export const transformInventoryArrayToShipments = (
     inventoryRecords: InventoryRecord[],
-    shipmentIdPrefix: string = 'SHP'
+    shipmentIdPrefix = 'SHP'
 ): ShipmentRecord[] => {
     return inventoryRecords.map((record, index) =>
         transformInventoryToShipment(
@@ -218,7 +218,7 @@ export const transformShipmentArrayToInventory = (
 /**
  * Generates a unique shipment ID
  */
-export const generateShipmentId = (prefix: string = 'SHP'): string => {
+export const generateShipmentId = (prefix = 'SHP') => {
     const timestamp = Date.now();
     const random = Math.floor(Math.random() * 1000);
     return `${prefix}-${timestamp}-${random}`;

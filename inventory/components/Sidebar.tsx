@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styles from './Sidebar.module.css';
 import { Package, AlertTriangle, Settings, Plus, Archive, Clock, Star } from 'lucide-react';
 
@@ -14,7 +14,7 @@ interface SidebarProps {
   user: User;
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ user }) => {
+const Sidebar: React.FC<SidebarProps> = () => {
 
 
   return (

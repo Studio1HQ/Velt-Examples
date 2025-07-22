@@ -91,7 +91,7 @@ export const SHIPMENT_VALIDATION_SCHEMA: DeliveryValidationSchema = {
     },
     TrackingNumber: {
         required: false,
-        pattern: /^[A-Z0-9]{10,30}$/
+        pattern: /^[A-Za-z0-9-]{10,30}$/
     }
 };
 
@@ -424,19 +424,19 @@ export const validateShipmentRecords = (records: ShipmentRecord[]): ValidationRe
  */
 export const isValidDateString = (dateString: string): boolean => {
     const date = new Date(dateString);
-    return !isNaN(date.getTime()) && dateString.match(/^\d{4}-\d{2}-\d{2}$/);
+    return !isNaN(date.getTime()) && !!dateString.match(/^\d{4}-\d{2}-\d{2}$/);
 };
 
 /**
  * Checks if a tracking number format is valid
  */
 export const isValidTrackingNumber = (trackingNumber: string): boolean => {
-    return /^[A-Z0-9]{10,30}$/.test(trackingNumber);
+    return /^[A-Za-z0-9-]{10,30}$/.test(trackingNumber);
 };
 
 /**
  * Sanitizes and validates text input
  */
-export const sanitizeTextInput = (input: string, maxLength: number = 500): string => {
+export const sanitizeTextInput = (input: string, maxLength = 500): string => {
     return input.trim().substring(0, maxLength);
 };

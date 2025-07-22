@@ -8,7 +8,6 @@ import {
     getSortedRowModel,
     flexRender,
     createColumnHelper,
-    ColumnDef,
     SortingState,
 } from '@tanstack/react-table';
 import { VeltCommentTool } from '@veltdev/react';
@@ -54,7 +53,7 @@ export const InventoryTable: React.FC<InventoryTableProps> = ({ data, selectedMe
         setSelectedItem(null);
     };
 
-    const columns = useMemo<ColumnDef<InventoryItem, any>[]>(
+    const columns = useMemo(
         () => [
             columnHelper.accessor('ProductName', {
                 header: 'Product Name',

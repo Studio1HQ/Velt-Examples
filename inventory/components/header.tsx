@@ -1,18 +1,12 @@
 import React, { useState, useMemo, useEffect, useRef } from 'react';
 import styles from './Header.module.css';
 import {
-  Star,
-  Bell,
-  Filter,
-  Download,
-  MoreHorizontal,
-  Search,
   Plus,
   Moon,
   Sun,
   Inbox,
 } from 'lucide-react';
-import { VeltPresence, VeltNotificationsTool, VeltCommentsSidebar, VeltSidebarButton, useVeltClient } from '@veltdev/react';
+import { VeltNotificationsTool, VeltCommentsSidebar, VeltSidebarButton, useVeltClient } from '@veltdev/react';
 import { names, userIds, useUserStore } from "@/helper/userdb";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 

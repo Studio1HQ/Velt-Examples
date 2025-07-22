@@ -52,8 +52,8 @@ This project demonstrates the powerful combination of modern web technologies, e
 ### **📊 Data Management Powerhouse**
 ```json
 {
-  "@tanstack/react-table": "^8.20.5",
-  "@tanstack/react-virtual": "^3.10.8"
+  "@tanstack/react-table": "^8.21.2",
+  "@tanstack/react-virtual": "^3.13.4"
 }
 ```
 - **TanStack Table v8** - Advanced table functionality with sorting, filtering, and pagination
@@ -63,9 +63,9 @@ This project demonstrates the powerful combination of modern web technologies, e
 ### **🎨 UI & Styling Excellence**
 ```json
 {
-  "tailwindcss": "^3.4.1",
-  "lucide-react": "^0.468.0",
-  "@radix-ui/react-*": "^1.0.0"
+  "tailwindcss": "^4",
+  "lucide-react": "^0.479.0",
+  "@radix-ui/react-*": "^1.1.x to ^2.2.x"
 }
 ```
 - **Tailwind CSS** - Utility-first styling with custom design system
@@ -75,8 +75,8 @@ This project demonstrates the powerful combination of modern web technologies, e
 ### **💬 Real-time Collaboration**
 ```json
 {
-  "@veltdev/react": "^1.0.0",
-  "@veltdev/types": "^1.0.0"
+  "@veltdev/react": "^4.1.1",
+  "@veltdev/types": "^4.2.0-beta.4"
 }
 ```
 - **Velt SDK** - Professional-grade collaboration features
@@ -86,7 +86,7 @@ This project demonstrates the powerful combination of modern web technologies, e
 ### **⚡ Development & Build Tools**
 ```json
 {
-  "eslint": "^8",
+  "eslint": "^9",
   "postcss": "^8",
   "@types/node": "^20"
 }
@@ -195,18 +195,30 @@ NEXT_PUBLIC_VELT_API_KEY=your_velt_api_key_here
 ├── app/                    # Next.js App Router
 │   ├── page.tsx           # Main dashboard page
 │   ├── layout.tsx         # Root layout
-│   └── globals.css        # Global styles
+│   ├── globals.css        # Global styles
+│   └── favicon.ico        # App icon
 ├── components/            # React components
 │   ├── InventoryTable.tsx # Main data grid
 │   ├── DetailView.tsx     # Item detail modal
-│   ├── Sidebar.tsx        # Navigation and filters
-│   ├── VeltProvider.tsx   # Collaboration setup
-│   └── MentionsGuide.tsx  # @mention help
+│   ├── Sidebar.tsx        # Navigation sidebar
+│   ├── header.tsx         # Top navigation header
+│   ├── FilterDropdowns.tsx # Filter components
+│   ├── Header.module.css  # Header styles
+│   ├── Sidebar.module.css # Sidebar styles
+│   └── ui/                # Reusable UI components
 ├── helper/               # Utilities
 │   └── userdb.ts         # User management
+├── lib/                  # Shared libraries
+│   └── utils.ts          # Utility functions
 ├── types/                # TypeScript definitions
 │   └── delivery.ts       # Data models
-└── utils/                # Helper functions
+├── utils/                # Helper functions
+│   ├── delivery-transform.ts # Data transformation
+│   └── delivery-validation.ts # Data validation
+├── images/               # Screenshots and assets
+├── docs/                 # Documentation
+│   └── kiro-prompts.md   # AI prompts used
+└── public/               # Static assets
 ```
 
 ---
