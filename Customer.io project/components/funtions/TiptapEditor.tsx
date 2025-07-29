@@ -9,7 +9,7 @@ import {
 import { useCommentAnnotations } from "@veltdev/react";
 import { useEffect } from "react";
 import { StarterKit } from "@tiptap/starter-kit";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 
 const EDITOR_ID = "customer.io-example"; // ✅ Use a consistent, meaningful ID
 
@@ -41,6 +41,7 @@ const TiptapEditor = () => {
       </div>
     `,
     autofocus: true,
+    immediatelyRender: false,
   });
 
   // Get annotations

@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { EmailComposer } from "@/components/EmailComposer";
+import { EmailComposer } from "@/components/funtions/EmailComposer";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import useTheme, { ThemeProvider } from "@/components/useTheme";
+import useTheme from "@/components/funtions/useTheme";
 import { VeltComments } from "@veltdev/react";
 
 const queryClient = new QueryClient();

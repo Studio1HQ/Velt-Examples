@@ -1,6 +1,6 @@
 "use client";
 
-import { ThemeProvider } from "@/components/useTheme";
+import { ThemeProvider } from "@/components/funtions/useTheme";
 import { VeltProvider } from "@veltdev/react";
 
 export default function RootLayout({
