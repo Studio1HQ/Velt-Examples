@@ -73,7 +73,11 @@ const TiptapEditor = () => {
       {editor && (
         <BubbleMenu editor={editor} tippyOptions={{ duration: 100 }}>
           <div className="bubble-menu">
-            <Button variant="outline" onClick={onClickComments}>
+            <Button
+              variant="outline"
+              onClick={onClickComments}
+              className="dark:text-white/70 dark:bg-[#2f3349] dark:border dark:border-white/30 hover:dark:bg-[#444a68] hover:dark:text-white"
+            >
               Add Comment
             </Button>
           </div>
@@ -83,7 +87,7 @@ const TiptapEditor = () => {
       {/* Editor Content */}
       <EditorContent
         editor={editor}
-        className="w-full min-h-56 p-4 border-2 border-dashed border-gray-200 rounded-lg focus-within:border-blue-500 focus-within:bg-blue-50/50"
+        className="w-full min-h-56 p-4 border-2 border-dashed border-white/30 rounded-lg focus-within:border-blue-500 focus-within:bg-blue-50/50 dark:border-[1px] dark:focus-within:bg-[#2f3349] dark:focus-within:border-white text-white"
       />
     </div>
   );

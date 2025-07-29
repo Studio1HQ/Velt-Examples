@@ -1,7 +1,7 @@
 "use client";
 
+import { ThemeProvider } from "@/components/useTheme";
 import { VeltProvider } from "@veltdev/react";
-import { VeltComments } from "@veltdev/react";
 
 export default function RootLayout({
   children,
@@ -10,8 +10,7 @@ export default function RootLayout({
 }) {
   return (
     <VeltProvider apiKey={process.env.NEXT_PUBLIC_VELT_ID || ""}>
-      {children}
-      <VeltComments textMode={false} />
+      <ThemeProvider>{children}</ThemeProvider>
     </VeltProvider>
   );
 }

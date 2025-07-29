@@ -18,18 +18,18 @@ export const EditorArea: React.FC<EditorAreaProps> = ({
   updateEmailData,
 }) => {
   return (
-    <div className="flex-1 bg-white">
-      <div className="p-4 border-b border-gray-200">
+    <div className="flex-1 bg-white dark:bg-[#25293c]">
+      <div className="p-4 border-b border-gray-200 dark:border-white/40">
         <div className="flex items-center space-x-4">
           <div className="flex-1">
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-medium text-gray-700 mb-1 dark:text-white/70">
               To
             </label>
             <Input
               value={emailData.to}
               onChange={(e) => updateEmailData({ to: e.target.value })}
               placeholder="Enter recipient email..."
-              className="w-full"
+              className="w-full dark:bg-[#2f3349] dark:text-white/70 dark:focus:outline-none"
             />
           </div>
         </div>
@@ -44,7 +44,7 @@ export const EditorArea: React.FC<EditorAreaProps> = ({
           <InfoCard title="Journey">
             <TextRow label="Started" value="17 minutes ago" />
             <div className="flex justify-between items-center text-sm text-gray-700">
-              <span>Status</span>
+              <span className="dark:text-white/70">Status</span>
               <StatusPill status="Active" />
             </div>
             <TextRow label="Next Step" value="In 3 days" />

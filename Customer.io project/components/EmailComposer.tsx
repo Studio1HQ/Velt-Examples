@@ -46,11 +46,11 @@ export const EmailComposer: React.FC = () => {
     };
   }, []);
   return (
-    <div className="flex h-screen bg-gray-50">
+    <div className="flex h-screen bg-gray-50 dark:bg-[#25293c]">
       {/* Sidebar */}
       <div
         className={cn(
-          "max-h-screen overflow-y-scroll transition-all duration-300 ease-in-out bg-white border-r border-gray-200 no-scrollbar",
+          "max-h-screen overflow-y-scroll transition-all duration-300 ease-in-out bg-white border-r border-gray-200 no-scrollbar dark:bg-[#25293c]",
           isSidebarOpen ? "w-80" : "w-0 overflow-hidden"
         )}
       >
@@ -58,14 +58,13 @@ export const EmailComposer: React.FC = () => {
           isOpen={isSidebarOpen}
           onClose={() => setIsSidebarOpen(false)}
           onInsertBlock={(blockType) => {
-            // Handle block insertion
             console.log("Insert block:", blockType);
           }}
         />
       </div>
 
       {/* Main Content */}
-      <div className="flex-1 flex flex-col bg-white">
+      <div className="flex-1 flex flex-col bg-white dark:bg-[#25293c]">
         {/* Header */}
         <Header
           emailData={emailData}
