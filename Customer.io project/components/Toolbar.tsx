@@ -72,7 +72,7 @@ export const Toolbar: React.FC<ToolbarProps> = ({ onFormatting }) => {
   ];
 
   return (
-    <div className="bg-white border-b border-gray-200 px-6 py-3">
+    <div className="bg-white border-b border-gray-200 px-6 py-3 dark:bg-[#25293c] dark:border-white/40">
       <div className="flex flex-wrap items-center space-x-1">
         {toolbarSections.map((section, sectionIndex) => (
           <React.Fragment key={section.name}>
@@ -83,10 +83,10 @@ export const Toolbar: React.FC<ToolbarProps> = ({ onFormatting }) => {
                   variant="ghost"
                   size="sm"
                   onClick={() => onFormatting(item.action)}
-                  className="h-8 w-8 p-0 hover:bg-gray-100"
+                  className="h-8 w-8 p-0 hover:bg-gray-100 "
                   title={item.tooltip}
                 >
-                  <item.icon size={16} />
+                  <item.icon size={16} className='hover:dark:text-black'/>
                 </Button>
               ))}
             </div>
