@@ -3,7 +3,7 @@
 import React, { useEffect, useMemo } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Send, Save, Menu, X, User, ChevronDown } from "lucide-react";
+import { Send, Save, Menu, User, ChevronDown } from "lucide-react";
 import { EmailData } from "./EmailComposer";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
@@ -16,7 +16,6 @@ import {
 } from "@/components/ui/dropdown-menu";
 import {
   VeltCommentsSidebar,
-  VeltCommentTool,
   VeltNotificationsTool,
   VeltSidebarButton,
 } from "@veltdev/react";
@@ -82,19 +81,21 @@ export const Header: React.FC<HeaderProps> = ({
   }, [client, user]);
   const theme = useTheme();
   return (
-    <div className="bg-white border-b border-gray-200 px-4 sm:px-6 py-3 sm:py-4 dark:bg-[#25293c] dark:border-white/40">
+    <div className="bg-white border-b border-gray-200 px-4 sm:px-6 py-3 sm:py-4 dark:bg-[#25293c] dark:border-white/40 relative">
       <div className="flex flex-wrap items-center justify-between gap-y-4">
         {/* Left side - Toggle, Subject, From */}
         <div className="flex flex-wrap items-center gap-4">
           {/* Sidebar Toggle */}
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-            className="text-gray-600 hover:text-gray-900 lg:hidden"
-          >
-            {isSidebarOpen ? <X size={20} /> : <Menu size={20} />}
-          </Button>
+          {!isSidebarOpen && (
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+              className="text-gray-600 hover:text-gray-900 lg:hidden fixed top-4 left-4 z-50"
+            >
+              <Menu size={20} />
+            </Button>
+          )}
 
           {/* Subject and From fields */}
           <div className="hidden lg:flex flex-col sm:flex-row gap-4">
@@ -212,7 +213,7 @@ export const Header: React.FC<HeaderProps> = ({
           </Button>
 
           <VeltSidebarButton />
-          <VeltCommentsSidebar/>
+          <VeltCommentsSidebar />
         </div>
       </div>
     </div>

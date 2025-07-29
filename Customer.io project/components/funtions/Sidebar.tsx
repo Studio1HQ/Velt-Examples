@@ -6,16 +6,8 @@ import { Separator } from "@/components/ui/separator";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import {
   X,
-  Type,
-  Image,
-  Square,
-  Layout,
-  Smile,
-  Calendar,
-  Star,
   ChevronDown,
   ChevronRight,
-  Plus,
   LayoutPanelLeft,
   Database,
 } from "lucide-react";
@@ -130,6 +122,14 @@ export const Sidebar: React.FC<SidebarProps> = ({
           <h2 className="font-semibold text-gray-900 dark:text-white">
             Content
           </h2>
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={() => onClose()}
+            className="text-gray-600 hover:text-gray-900"
+          >
+            <X size={20} />
+          </Button>
         </div>
       </div>
 

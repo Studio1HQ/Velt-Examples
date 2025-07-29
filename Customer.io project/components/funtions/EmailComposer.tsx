@@ -2,11 +2,11 @@
 
 import React, { useEffect, useMemo, useState } from "react";
 import { Toolbar } from "./Toolbar";
-import { Sidebar } from "./Sidebar";
 import { EditorArea } from "./EditorArea";
-import { Header } from "./Header";
 import { cn } from "@/lib/utils";
 import { useSetDocument } from "@veltdev/react";
+import { Header } from "./Header";
+import { Sidebar } from "./Sidebar";
 
 export interface EmailData {
   subject: string;
@@ -29,8 +29,7 @@ export const EmailComposer: React.FC = () => {
   const updateEmailData = (updates: Partial<EmailData>) => {
     setEmailData((prev) => ({ ...prev, ...updates }));
   };
-  // useSetDocument("yash-customer.io-presernt", { documentName: "salary sheet" });
-    useSetDocument("sheet-1", { documentName: "salary sheet" });
+    useSetDocument("sheet-1", { documentName: "customer.io" });
   useEffect(() => {
     const mediaQuery = window.matchMedia("(min-width: 1024px)"); // lg breakpoint
 
